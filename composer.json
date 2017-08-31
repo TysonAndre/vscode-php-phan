@@ -2,6 +2,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "phan/phan": "^0.9.4"
+        "etsy/phan": "^0.9.4"
     }
 }
