@@ -1,5 +1,5 @@
 
-import * as path from 'path';
+// import * as path from 'path';
 import { spawn, execFile, ChildProcess } from 'mz/child_process';
 import * as vscode from 'vscode';
 import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
@@ -44,7 +44,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(version, '7.1.0')) {
-        vscode.window.showErrorMessage('Phan 0.9.x needs at least PHP 7.1 installed. Version found: ' + version);
+        vscode.window.showErrorMessage('Phan 0.9.x needs at least PHP 7.1 installed (and php-language-server needs at least 7.0). Version found: ' + version);
         return;
     }
 
@@ -64,12 +64,12 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }
 
     // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
-    const match = stdout.match(/^ext-ast ([^\s]+)/m);
-    if (!match) {
+    const astMatch = stdout.match(/^ext-ast ([^\s]+)/m);
+    if (!astMatch) {
         vscode.window.showErrorMessage('Error parsing PHP version. Please check the output of php --version');
         return;
     }
-    let astVersion = match[1].split('-')[0];
+    let astVersion = astMatch[1].split('-')[0];
     // Convert PHP prerelease format like 7.1.0rc1 to 7.1.0-rc1
     if (!/^\d+.\d+.\d+$/.test(astVersion)) {
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
@@ -98,7 +98,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in PHP
             // FIXME create a real language server module
-            args.unshift('/home/tyson/programming/php-language-server/bin/php-language-server.php')));
+            args.unshift('/home/tyson/programming/php-language-server/bin/php-language-server.php');
             const childProcess = spawn(executablePath, args);
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');

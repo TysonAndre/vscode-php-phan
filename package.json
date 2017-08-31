@@ -1,7 +1,7 @@
 {
   "name": "php-phan-vscode",
   "displayName": "PHP Phan ",
-  "description": "Advanced error detection support for PHP (Based on PHP IntelliSense by felixfbecker. Autocompletion is planned",
+  "description": "Error detection support for PHP (Based on PHP IntelliSense by felixfbecker. Autocompletion is planned",
   "publisher": "Tyson Andre",
   "author": "Tyson Andre <tysonandre775@hotmail.com>",
   "license": "MIT",
