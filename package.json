@@ -1,25 +1,26 @@
 {
-  "name": "php-intellisense",
-  "displayName": "PHP IntelliSense",
-  "description": "Advanced Autocompletion and Refactoring support for PHP",
-  "publisher": "felixfbecker",
-  "author": "Felix Becker <felix.b@outlook.com>",
+  "name": "php-phan-vscode",
+  "displayName": "Phan - PHP Analyzer",
+  "description": "Phan - static analyzer for PHP, minimizing false positives.",
+  "publisher": "TysonAndre",
+  "author": "Tyson Andre <tysonandre775@hotmail.com>",
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "1.5.1",
+  "version": "0.0.1-dev",
   "engines": {
-    "vscode": "^1.13.0"
+    "vscode": "^1.16.0",
+    "os" : [ "darwin", "linux" ]
   },
   "keywords": [
     "php",
-    "intellisense",
-    "autocompletion",
-    "help",
-    "refactor"
+    "phan",
+    "static-analysis",
+    "error-detection"
   ],
   "categories": [
-    "Languages"
+    "Languages",
+    "Linters"
   ],
   "icon": "images/logo.png",
   "galleryBanner": {
@@ -28,10 +29,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/felixfbecker/vscode-php-intellisense.git"
+    "url": "https://github.com/phan/phan.git"
   },
   "bugs": {
-    "url": "https://github.com/felixfbecker/php-language-server/issues"
+    "url": "https://github.com/phan/phan/issues"
   },
   "activationEvents": [
     "onLanguage:php",
@@ -49,34 +50,79 @@
     "@types/mz": "0.0.31",
     "@types/node": "^8.0.24",
     "@types/semver": "^5.3.34",
-    "tslint": "^5.0.0",
-    "typescript": "^2.1.4",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
     "vsce": "^1.8.1",
-    "vscode": "^1.0.0"
+    "vscode": "^1.1.0"
   },
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.3.0",
-    "vscode-languageclient": "^3.0.3"
+    "vscode-languageclient": "^3.4.0"
   },
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "PHP IntelliSense",
+      "title": "PHP - Phan Analyzer",
       "properties": {
-        "php.memoryLimit": {
-          "type": "string",
-          "default": "-1",
-          "description": "The memory limit of the php language server. [Number][K|M|G]. Use '-1' to allow unlimited use of the RAM(default).",
-          "pattern": "^\\d+[KMG]?$"
-        },
-        "php.executablePath": {
+        "phan.phpExecutablePath": {
           "type": [
             "string",
             "null"
           ],
           "default": null,
-          "description": "The path to a PHP 7+ executable."
+          "description": "Optional, defaults to searching for \"php\". The path to a PHP 7.1+ executable to use to execute the Phan server. The PHP 7.1+ installation must include and enable the PHP modules `pcntl`, as well as the third party `ast` (php-ast) module from https://pecl.php.net/ast\nFor best analysis results, install and enable the same PECL extensions that are used by the project being analyzed. (Modifying requires restart)"
+        },
+        "phan.analyzedProjectDirectory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "Required. The path to the only project folder which phan will analyze. `.phan/config.php` must contain the phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
+        },
+        "phan.enableDebugLog": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires restart)"
+        },
+        "phan.analyzedFileExtensions": {
+          "type": [
+            "array"
+          ],
+          "default": ["php"],
+          "description": "A list of file extensions to request phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions' (Modifying requires restart)"
+        },
+        "phan.useFallbackParser": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to make a best effort at analyzing the remaining valid statements of PHP files with syntax errors. (Phan will continue emitting syntax errors). (Modifying requires restart)"
+        },
+        "phan.quick": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to speed up phan analysis without recursing into function calls. Slightly faster. (Modifying requires restart)"
+        },
+        "phan.additionalCLIFlags": {
+          "type": [
+            "array"
+          ],
+          "default": [],
+          "description": "Optional (Advanced). Setting this will provide these additional CLI flags to the Phan server. See https://github.com/phan/phan#usage (e.g. [\"--quick\"]) (Modifying requires restart)"
+        },
+        "phan.phanScriptPath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "Optional (Advanced). If provided, this overrides the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
         }
       }
     }

@@ -1,60 +1,114 @@
-# PHP IntelliSense
+# Phan for Visual Studio Code
 
-[![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/felixfbecker.php-intellisense.svg)](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-intellisense) [![Installs](https://vsmarketplacebadge.apphb.com/installs/felixfbecker.php-intellisense.svg)](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-intellisense) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/felixfbecker.php-intellisense.svg)](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-intellisense) [![Build Status](https://travis-ci.org/felixfbecker/vscode-php-intellisense.svg?branch=master)](https://travis-ci.org/felixfbecker/vscode-php-intellisense) [![Dependency Status](https://gemnasium.com/felixfbecker/vscode-php-intellisense.svg)](https://gemnasium.com/felixfbecker/vscode-php-intellisense) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/felixfbecker/vscode-php-intellisense.svg)](https://gitter.im/felixfbecker/vscode-php-intellisense?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
 
-Advanced PHP IntelliSense for Visual Studio Code.
+Based on [PHP IntelliSense](https://github.com/felixfbecker/vscode-php-intellisense)
 
-**Note: This is just the VS Code extension that spawns the actual language server. The language server itself is implemented purely in PHP [in its own repository](https://github.com/felixfbecker/php-language-server), all features need to be implemented there and all issues should be reported there.**
+This adds improved [static analysis from Phan](https://github.com/phan/phan#features) to Visual Studio Code.
+
+**Supports Unix/Linux.** Doesn't support Windows due to the server having a dependency on the `pcntl` PHP module.
+
+**Note: This is just the VS Code extension that spawns Phan. Phan is implemented purely in PHP [in its own repository](https://github.com/phan/phan), all features need to be implemented there and all issues should be reported there.**
 
 ## Installation
 
-You need at least PHP 7 installed for the extension to work. You can either add it to your PATH or set the `php.executablePath` setting. 
+### Dependencies:
 
-I recommend to disable VS Code's built-in PHP IntelliSense by setting `php.suggest.basic` to `false` to avoid duplicate suggestions.
+1. PHP 7.1+ must be installed.
+   You can either add it to your PATH or set the `phan.executablePath` setting.
+2. Your Operating System must be Unix/Linux
+   (Phan support depends on `pcntl` module being installed, which is only available on those platforms)
+3. [The `php-ast` PECL extension](https://pecl.php.net/package/ast) must be installed and enabled.
+4. Depends on using a checkout of Phan with https://github.com/phan/phan/pull/1144 installed
+
+
+### Installing from source
+
+This extension hasn't been published yet. It can be installed locally with the following method:
+
+```bash
+npm install
+npm run build
+node node_modules/.bin/vsce package
+```
+
+The generated VSIX file can be used locally with the steps from https://stackoverflow.com/a/38866913
+
+### Setup steps
+
+This assumes you have already installed the [dependencies](#dependencies).
+
+Add these entries to your VSCode config (Open the menu at File > Preferences > Settings)
+
+
+```
+{
+    // Currently, this extension is limited to analyzing only a single folder.
+    // The config value must be the root of the project,
+	// and contain a .phan/config.php file with a Phan config for that project
+	// (including files to parse and analyze).
+    "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
+
+    // Path to a php 7.1 binary with the php-ast PECL extension installed and enabled
+    "phan.phpExecutablePath": "/path/to/php7.1",
+
+    // Files which this should analyze
+    "phan.analyzedFileExtensions": ["php"]
+}
+```
 
 ## Features
 
-### Completion
-![Completion search demo](images/completion.gif)
+### Error Detection
 
-### Workspace symbol search
-![Workspace symbol search demo](images/workspaceSymbol.gif)
+![Phan error detection demo](./images/error_detection.png)
 
-### Find all References
-![Find References demo](images/references.png)
+Phan's capabilities are summarized in [Phan's README](https://github.com/phan/phan#features)
 
-### Go to Definition
-![Go To Definition demo](images/definition.gif)
+### Error Tolerant Parsing
 
-### Hover
-![Hover class demo](images/hoverClass.png)
+![Phan error tolerant detection demo](./images/tolerant_parsing.png)
 
-![Hover parameter demo](images/hoverParam.png)
+Optional, enabled by `phan.useFallbackParser`
 
-### Find all symbols
-![Find all symbols demo](images/documentSymbol.gif)
-
-### Format code
-![Format code demo](images/formatDocument.gif)
-
-### Column-accurate error reporting
-![Error reporting demo](images/publishDiagnostics.png)
-
-
-## Todo
- - Rename
- - Signature help
 
 ## Contributing
 
 Clone whole repository and in root directory execute:
+
 ```bash
-composer install 
+composer install
 npm install
-npm run compile
+npm run build
 code .
 ```
-The last command will open the folder in VS Code. Hit `F5` to launch an Extension Development Host with the extension.
-For working on the language server, the easiest way is to replace the language server installation from composer in `vendor/felixfbecker/language-server` with a symlink to your local clone.
 
-**For guidance on how to work on the language server, please see the [language server repository](https://github.com/felixfbecker/php-language-server).**
+The last command will open the folder in VS Code. Hit `F5` to launch an Extension Development Host with the extension.
+For working on the Phan language server, the easiest way is to override your config for the Phan language server installation from composer to point to the phan script within a git checkout of phan (Must set it up with `composer install` inside that checkout.).
+
+First, checkout and setup a phan installation.
+
+```sh
+# Replace the placeholders /path/to/folder and phan_git_checkout with the folders you plan to use.
+
+cd /path/to/folder/
+git clone git@github.com:phan/phan phan_git_checkout
+# Optionally, check out the branch being developed
+# git checkout master
+cd /path/to/folder/phan_git_checkout
+composer install
+```
+
+And then point to that phan installation:
+
+```json
+{
+	"phan.phanScriptPath": "/path/to/folder/phan_git_checkout/phan"
+}
+```
+
+**For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
+
+## Source
+
+[github.com/TysonAndre/vscode-php-phan](https://github.com/TysonAndre/vscode-php-phan)
