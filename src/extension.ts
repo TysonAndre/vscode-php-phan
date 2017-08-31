@@ -12,19 +12,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const conf = vscode.workspace.getConfiguration('php');
     const executablePath = conf.get<string>('executablePath') || 'php';
 
-    const memoryLimit = conf.get<string>('memoryLimit') || '-1';
-
-    if (memoryLimit !== '-1' && !/^\d+[KMG]?$/.exec(memoryLimit)) {
-        const selected = await vscode.window.showErrorMessage(
-            'The memory limit you\'d provided is not numeric, nor "-1" nor valid php shorthand notation!',
-            'Open settings'
-        );
-        if (selected === 'Open settings') {
-            await vscode.commands.executeCommand('workbench.action.openGlobalSettings');
-        }
-        return;
-    }
-
     // Check path (if PHP is available and version is ^7.0.0)
     let stdout: string;
     try {
@@ -45,27 +32,73 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         return;
     }
 
-    // Parse version and discard OS info like 7.0.8--0ubuntu0.16.04.2
+    // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
     const match = stdout.match(/^PHP ([^\s]+)/m);
     if (!match) {
         vscode.window.showErrorMessage('Error parsing PHP version. Please check the output of php --version');
         return;
     }
     let version = match[1].split('-')[0];
-    // Convert PHP prerelease format like 7.0.0rc1 to 7.0.0-rc1
+    // Convert PHP prerelease format like 7.1.0rc1 to 7.1.0-rc1
     if (!/^\d+.\d+.\d+$/.test(version)) {
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
-    if (semver.lt(version, '7.0.0')) {
-        vscode.window.showErrorMessage('The language server needs at least PHP 7 installed. Version found: ' + version);
+    if (semver.lt(version, '7.1.0')) {
+        vscode.window.showErrorMessage('Phan 0.9.x needs at least PHP 7.1 installed. Version found: ' + version);
+        return;
+    }
+
+    // Check if php-ast is installed
+    stdout = ''
+    try {
+        [stdout] = await execFile(executablePath, ['-r', 'if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }']);
+    } catch (err) {
+          vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message);
+          console.error(err);
+        return;
+    }
+
+    if (stdout.match(/^None/)) {
+        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 0.1.4 or newer must be installed');
+        return;
+    }
+
+    // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
+    const match = stdout.match(/^ext-ast ([^\s]+)/m);
+    if (!match) {
+        vscode.window.showErrorMessage('Error parsing PHP version. Please check the output of php --version');
+        return;
+    }
+    let astVersion = match[1].split('-')[0];
+    // Convert PHP prerelease format like 7.1.0rc1 to 7.1.0-rc1
+    if (!/^\d+.\d+.\d+$/.test(astVersion)) {
+        astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
+    }
+    if (semver.lt(astVersion, '0.1.4')) {
+        vscode.window.showErrorMessage('Phan 0.9.x needs at least ext-ast 0.1.4 installed. Version found: ' + astVersion);
+        return;
+    }
+
+    // Check if pcntl is installed
+    stdout = ''
+    try {
+        [stdout] = await execFile(executablePath, ['-r', 'var_export(extension_loaded("pcntl"));']);
+    } catch (err) {
+          vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message);
+          console.error(err);
+        return;
+    }
+
+    if (!stdout.match(/^true/)) {
+        vscode.window.showErrorMessage('pcntl(PHP module) is not installed or not enabled (also, pcntl can\'t be installed on Windows)');
         return;
     }
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in PHP
-            args.unshift(context.asAbsolutePath(path.join('vendor', 'felixfbecker', 'language-server', 'bin', 'php-language-server.php')));
-            args.push('--memory-limit=' + memoryLimit);
+            // FIXME create a real language server module
+            args.unshift('/home/tyson/programming/php-language-server/bin/php-language-server.php')));
             const childProcess = spawn(executablePath, args);
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
@@ -75,6 +108,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             });
             return childProcess;
         }
+        // Not going to work on win32, unless we use linux subsystem (Haven't tried) or docker
         if (process.platform === 'win32') {
             // Use a TCP socket on Windows because of blocking STDIO
             const server = net.createServer(socket => {

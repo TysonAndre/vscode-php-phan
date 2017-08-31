@@ -1,22 +1,19 @@
 {
-  "name": "php-intellisense",
-  "displayName": "PHP IntelliSense",
-  "description": "Advanced Autocompletion and Refactoring support for PHP",
-  "publisher": "felixfbecker",
-  "author": "Felix Becker <felix.b@outlook.com>",
+  "name": "php-phan-vscode",
+  "displayName": "PHP Phan ",
+  "description": "Advanced error detection support for PHP (Based on PHP IntelliSense by felixfbecker. Autocompletion is planned",
+  "publisher": "Tyson Andre",
+  "author": "Tyson Andre <tysonandre775@hotmail.com>",
   "license": "MIT",
   "private": true,
   "preview": false,
   "version": "1.5.1",
   "engines": {
-    "vscode": "^1.13.0"
+    "vscode": "^1.15.0"
   },
   "keywords": [
     "php",
-    "intellisense",
-    "autocompletion",
-    "help",
-    "refactor"
+    "error-detection"
   ],
   "categories": [
     "Languages"
@@ -28,10 +25,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/felixfbecker/vscode-php-intellisense.git"
+    "url": "https://github.com/phan/phan.git"
   },
   "bugs": {
-    "url": "https://github.com/felixfbecker/php-language-server/issues"
+    "url": "https://github.com/phan/phan/issues"
   },
   "activationEvents": [
     "onLanguage:php",
@@ -57,26 +54,20 @@
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.3.0",
-    "vscode-languageclient": "^3.0.3"
+    "vscode-languageclient": "^3.3.0"
   },
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "PHP IntelliSense",
+      "title": "PHP Phan Integration",
       "properties": {
-        "php.memoryLimit": {
-          "type": "string",
-          "default": "-1",
-          "description": "The memory limit of the php language server. [Number][K|M|G]. Use '-1' to allow unlimited use of the RAM(default).",
-          "pattern": "^\\d+[KMG]?$"
-        },
         "php.executablePath": {
           "type": [
             "string",
             "null"
           ],
           "default": null,
-          "description": "The path to a PHP 7+ executable."
+          "description": "The path to a PHP 7.1+ executable."
         }
       }
     }
