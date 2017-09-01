@@ -98,7 +98,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in PHP
             // FIXME create a real language server module
-            args.unshift('/home/tyson/programming/php-language-server/bin/php-language-server.php');
+            // FIXME install in vendor?
+            args.unshift('/home/tyson/programming/phan/phan');
+            console.log('starting server', args);
             const childProcess = spawn(executablePath, args);
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
@@ -122,11 +124,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             });
             // Listen on random port
             server.listen(0, '127.0.0.1', () => {
-                spawnServer('--tcp=127.0.0.1:' + server.address().port);
+                spawnServer('--language-server-tcp-server=127.0.0.1:' + server.address().port);
             });
         } else {
             // Use STDIO on Linux / Mac
-            resolve(spawnServer());
+            resolve(spawnServer('--language-server-on-stdin'));
         }
     });
 
