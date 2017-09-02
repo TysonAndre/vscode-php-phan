@@ -61,13 +61,21 @@
       "type": "object",
       "title": "PHP Phan Integration",
       "properties": {
-        "php.executablePath": {
+        "phan.phpExecutablePath": {
           "type": [
             "string",
             "null"
           ],
           "default": null,
-          "description": "The path to a PHP 7.1+ executable."
+          "description": "The path to a PHP 7.1+ executable to use for Phan."
+        },
+        "phan.phanScriptPath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "The path to the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/vendor/etsy/phan/phan"
         }
       }
     }
