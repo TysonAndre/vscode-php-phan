@@ -98,7 +98,7 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
-    const conf = vscode.workspace.getConfiguration('phan');
+    const conf = vscode.workspace.getConfiguration('php');
     const phpExecutablePath = conf.get<string>('phpExecutablePath') || 'php';
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
@@ -125,7 +125,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             // FIXME install in vendor?
             args.unshift('/home/tyson/programming/phan/phan');
             console.log('starting Phan Language Server', phpExecutablePath, args);
-            const childProcess = spawn(phpExecutablePath, args);
+            // TODO: determine path from current working directory
+            const childProcess = spawn(phpExecutablePath, args, {cwd: '/home/tyson/programming/phan'});
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
             });
