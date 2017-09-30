@@ -26,13 +26,11 @@ Clone whole repository and in root directory execute:
 ```bash
 composer install
 npm install
-npm run compile
+npm run build
 code .
 ```
 
 The last command will open the folder in VS Code. Hit `F5` to launch an Extension Development Host with the extension.
 For working on the language server, the easiest way is to replace the language server installation from composer in `vendor/felixfbecker/language-server` with a symlink to your local clone.
-
-**For guidance on how to work on the language server, please see the [language server repository](https://github.com/felixfbecker/php-language-server).**
 
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
