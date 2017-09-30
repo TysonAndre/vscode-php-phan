@@ -1,15 +1,15 @@
 {
   "name": "php-phan-vscode",
   "displayName": "PHP Phan ",
-  "description": "Error detection support for PHP (Based on PHP IntelliSense by felixfbecker. Autocompletion is planned",
+  "description": "Error detection support for PHP (Based on PHP IntelliSense by felixfbecker)",
   "publisher": "Tyson Andre",
   "author": "Tyson Andre <tysonandre775@hotmail.com>",
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "1.5.1",
+  "version": "0.0.1-dev",
   "engines": {
-    "vscode": "^1.15.0"
+    "vscode": "^1.16.0"
   },
   "keywords": [
     "php",
@@ -54,14 +54,14 @@
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.3.0",
-    "vscode-languageclient": "^3.3.0"
+    "vscode-languageclient": "^3.4.0"
   },
   "contributes": {
     "configuration": {
       "type": "object",
       "title": "PHP Phan Integration",
       "properties": {
-        "phan.phpExecutablePath": {
+        "php.phan.phpExecutablePath": {
           "type": [
             "string",
             "null"
@@ -69,13 +69,13 @@
           "default": null,
           "description": "The path to a PHP 7.1+ executable to use for Phan."
         },
-        "phan.phanScriptPath": {
+        "php.phan.phanPath": {
           "type": [
             "string",
             "null"
           ],
           "default": null,
-          "description": "The path to the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/vendor/etsy/phan/phan"
+          "description": "The path to the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/vendor/phan/phan/phan. In the future, this will be optional."
         }
       }
     }
