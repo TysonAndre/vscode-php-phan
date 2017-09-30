@@ -6,6 +6,17 @@ import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-langua
 import * as semver from 'semver';
 import * as net from 'net';
 import * as url from 'url';
+import * as fs from 'fs'
+
+async function showOpenSettingsPrompt(errorMessage: string) : Promise<void> {
+	const selected = await vscode.window.showErrorMessage(
+		errorMessage,
+		'Open settings'
+	);
+	if (selected === 'Open settings') {
+		await vscode.commands.executeCommand('workbench.action.openGlobalSettings');
+	}
+}
 
 // Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
 async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string) : Promise<boolean> {
@@ -15,13 +26,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         [stdout] = await execFile(phpExecutablePath, ['--version']);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            const selected = await vscode.window.showErrorMessage(
-                'PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath,
-                'Open settings'
-            );
-            if (selected === 'Open settings') {
-                await vscode.commands.executeCommand('workbench.action.openGlobalSettings');
-            }
+			await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
             vscode.window.showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
@@ -58,7 +63,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     }
 
     if (stdout.match(/^None/)) {
-        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 0.1.4 or newer must be installed. PHP Path: ' + phpExecutablePath);
+        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 0.1.5 or newer must be installed. PHP Path: ' + phpExecutablePath);
         return false;
     }
 
@@ -96,10 +101,42 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
     return true;
 }
 
+// Returns true if phan.phanScriptPath supports the language server protocol.
+async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext, phpExecutablePath: string, phanScriptPath: string) : Promise<boolean> {
+	let exists = false;
+	try {
+		let stat = fs.statSync(phanScriptPath);
+		exists = stat.isFile();
+	} catch (e) {}
+
+	if (!exists) {
+		await showOpenSettingsPrompt('The setting php.phan.phanScriptPath refers to a path that does not exist. path: ' + phanScriptPath);
+		return false;
+	}
+
+	let stdout = '';
+    try {
+        [stdout] = await execFile(phpExecutablePath, [phanScriptPath, '--extended-help']);
+    } catch (err) {
+		vscode.window.showErrorMessage('Error spawning Phan to check for language server support: ' + err.message);
+		console.error(err);
+        return false;
+    }
+
+    // Check if phan --help indicates language server support
+    const match = stdout.match(/language-server/m);
+    if (!match) {
+		vscode.window.showErrorMessage('Language server support was not detected. Please check the output of /path/to/phan --help. phan path: ' + phanScriptPath);
+        return false;
+    }
+    return true;
+}
+
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
-    const conf = vscode.workspace.getConfiguration('php');
-    const phpExecutablePath = conf.get<string>('phpExecutablePath') || 'php';
+    const conf = vscode.workspace.getConfiguration('php.phan');
+	const phpExecutablePath = conf.get<string>('phpExecutablePath') || conf.get<string>('php.phpExecutablePath') || 'php';
+	const phanScriptPath = conf.get<string>('phanScriptPath');
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
     if (!isValidPHPVersion) {
@@ -118,12 +155,26 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         return;
     }
 
+	// Check if the phanScriptPath setting was provided.
+	if (!phanScriptPath) {
+		await showOpenSettingsPrompt('The setting php.phan.phanScriptPath must be provided (e.g. /path/to/vendor/phan/phan/phan)');
+		return;
+	}
+	console.log('validating phan');
+    // Check if phan is installed and supports the language server protocol.
+    const isValidPhanVersion: boolean = await checkPhanSupportsLanguageServer(context, phpExecutablePath, phanScriptPath);
+    if (!isValidPhanVersion) {
+        return;
+    }
+	console.log('validated');
+	const phanScriptPathValidated = phanScriptPath;  // work around typescript complaint.
+
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in PHP
             // FIXME create a real language server module
             // FIXME install in vendor?
-            args.unshift('/home/tyson/programming/phan/phan');
+            args.unshift(phanScriptPathValidated);
             console.log('starting Phan Language Server', phpExecutablePath, args);
             // TODO: determine path from current working directory
             const childProcess = spawn(phpExecutablePath, args, {cwd: '/home/tyson/programming/phan'});
@@ -175,8 +226,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     };
 
+	console.log('starting PHP Phan language server');
     // Create the language client and start the client.
-    const disposable = new LanguageClient('PHP Language Server', serverOptions, clientOptions).start();
+    const disposable = new LanguageClient('Phan Language Server', serverOptions, clientOptions).start();
 
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation

@@ -69,7 +69,7 @@
           "default": null,
           "description": "The path to a PHP 7.1+ executable to use for Phan."
         },
-        "php.phan.phanPath": {
+        "php.phan.phanScriptPath": {
           "type": [
             "string",
             "null"
