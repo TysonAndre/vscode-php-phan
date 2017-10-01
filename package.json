@@ -76,6 +76,21 @@
           ],
           "default": null,
           "description": "The path to the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/vendor/phan/phan/phan. In the future, this will be optional."
+        },
+        "php.phan.analyzedProjectDirectory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "The path to the project folder which phan will analyze. `.phan` must be a folder within that directory. (In the future, this VS Code extension may support analyzing more than one project)"
+        },
+        "php.phan.enableDebugLog": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Set this to true to print messages to the debug console when developing or debugging this VS Code extension."
         }
       }
     }

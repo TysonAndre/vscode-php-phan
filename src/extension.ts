@@ -1,5 +1,4 @@
-
-// import * as path from 'path';
+import * as path from 'path';
 import { spawn, execFile, ChildProcess } from 'mz/child_process';
 import * as vscode from 'vscode';
 import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
@@ -9,13 +8,13 @@ import * as url from 'url';
 import * as fs from 'fs'
 
 async function showOpenSettingsPrompt(errorMessage: string) : Promise<void> {
-	const selected = await vscode.window.showErrorMessage(
-		errorMessage,
-		'Open settings'
-	);
-	if (selected === 'Open settings') {
-		await vscode.commands.executeCommand('workbench.action.openGlobalSettings');
-	}
+    const selected = await vscode.window.showErrorMessage(
+        errorMessage,
+        'Open settings'
+    );
+    if (selected === 'Open settings') {
+        await vscode.commands.executeCommand('workbench.action.openGlobalSettings');
+    }
 }
 
 // Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
@@ -26,7 +25,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         [stdout] = await execFile(phpExecutablePath, ['--version']);
     } catch (err) {
         if (err.code === 'ENOENT') {
-			await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
+            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
             vscode.window.showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
@@ -101,32 +100,65 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
     return true;
 }
 
+function isFile(path: string) : boolean {
+    try {
+        let stat = fs.statSync(path);
+        return stat.isFile();
+    } catch (e) {
+        return false;
+    }
+}
+
+function isDirectory(path: string) : boolean {
+    try {
+        let stat = fs.statSync(path);
+        return stat.isDirectory();
+    } catch (e) {
+        return false;
+    }
+}
+
 // Returns true if phan.phanScriptPath supports the language server protocol.
 async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext, phpExecutablePath: string, phanScriptPath: string) : Promise<boolean> {
-	let exists = false;
-	try {
-		let stat = fs.statSync(phanScriptPath);
-		exists = stat.isFile();
-	} catch (e) {}
+    const exists : boolean = isFile(phanScriptPath);
 
-	if (!exists) {
-		await showOpenSettingsPrompt('The setting php.phan.phanScriptPath refers to a path that does not exist. path: ' + phanScriptPath);
-		return false;
-	}
+    if (!exists) {
+        await showOpenSettingsPrompt('The setting php.phan.phanScriptPath refers to a path that does not exist. path: ' + phanScriptPath);
+        return false;
+    }
 
-	let stdout = '';
+    let stdout = '';
     try {
         [stdout] = await execFile(phpExecutablePath, [phanScriptPath, '--extended-help']);
     } catch (err) {
-		vscode.window.showErrorMessage('Error spawning Phan to check for language server support: ' + err.message);
-		console.error(err);
+        vscode.window.showErrorMessage('Error spawning Phan to check for language server support: ' + err.message);
+        console.error(err);
         return false;
     }
 
     // Check if phan --help indicates language server support
     const match = stdout.match(/language-server/m);
     if (!match) {
-		vscode.window.showErrorMessage('Language server support was not detected. Please check the output of /path/to/phan --help. phan path: ' + phanScriptPath);
+        vscode.window.showErrorMessage('Language server support was not detected. Please check the output of /path/to/phan --help. phan path: ' + phanScriptPath);
+        return false;
+    }
+    return true;
+}
+
+// Returns true if phan.phanScriptPath supports the language server protocol.
+async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionContext, analyzedProjectDirectory: string) : Promise<boolean> {
+    const exists : boolean = isDirectory(analyzedProjectDirectory);
+
+    if (!exists) {
+        await showOpenSettingsPrompt('The setting php.phan.analyzedProjectDirectory refers to a directory that does not exist. directory: ' + analyzedProjectDirectory);
+        return false;
+    }
+
+    const phanConfigPath = path.join(analyzedProjectDirectory, '.phan', 'config.php');
+    const phanConfigExists : boolean = isFile(phanConfigPath);
+
+    if (!phanConfigExists) {
+        await showOpenSettingsPrompt('The setting php.phan.analyzedProjectDirectory refers to a directory that does not contain .phan/config.php. Check that it is the root of a project set up for phan. directory: ' + analyzedProjectDirectory);
         return false;
     }
     return true;
@@ -135,8 +167,12 @@ async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext,
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
     const conf = vscode.workspace.getConfiguration('php.phan');
-	const phpExecutablePath = conf.get<string>('phpExecutablePath') || conf.get<string>('php.phpExecutablePath') || 'php';
-	const phanScriptPath = conf.get<string>('phanScriptPath');
+    const phpExecutablePath = conf.get<string>('phpExecutablePath') || conf.get<string>('php.phpExecutablePath') || 'php';
+    const phanScriptPath = conf.get<string>('phanScriptPath');
+    // TODO: Support analyzing more than one project.
+    // TODO: Figure out how to stop the language server when a different project is opened.
+    const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory');
+    const enableDebugLog = conf.get<boolean>('enableDebugLog');
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
     if (!isValidPHPVersion) {
@@ -155,22 +191,35 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         return;
     }
 
-	// Check if the phanScriptPath setting was provided.
-	if (!phanScriptPath) {
-		await showOpenSettingsPrompt('The setting php.phan.phanScriptPath must be provided (e.g. /path/to/vendor/phan/phan/phan)');
-		return;
-	}
-	console.log('validating phan');
+    // Check if the phanScriptPath setting was provided.
+    if (!phanScriptPath) {
+        await showOpenSettingsPrompt('The setting php.phan.phanScriptPath must be provided (e.g. /path/to/vendor/phan/phan/phan)');
+        return;
+    }
     // Check if phan is installed and supports the language server protocol.
     const isValidPhanVersion: boolean = await checkPhanSupportsLanguageServer(context, phpExecutablePath, phanScriptPath);
     if (!isValidPhanVersion) {
         return;
     }
-	console.log('validated');
-	const phanScriptPathValidated = phanScriptPath;  // work around typescript complaint.
+    const phanScriptPathValidated = phanScriptPath;  // work around typescript complaint.
+
+    // Check if the analyzedProjectDirectory setting was provided.
+    if (!analyzedProjectDirectory) {
+        await showOpenSettingsPrompt('The setting php.phan.analyzedProjectDirectory must be provided (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
+        return;
+    }
+
+    const isValidProjectDirectory: boolean = await checkValidAnalyzedProjectDirectory(context, analyzedProjectDirectory);
+    if (!isValidProjectDirectory) {
+        return;
+    }
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
+            if (enableDebugLog) {
+                // php phan --language-server-verbose [args]
+                args.unshift('--language-server-verbose');
+            }
             // The server is implemented in PHP
             // FIXME create a real language server module
             // FIXME install in vendor?
@@ -181,9 +230,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
             });
-            childProcess.stdout.on('data', (chunk: Buffer) => {
-                console.log(chunk + '');
-            });
+            if (enableDebugLog) {
+                childProcess.stdout.on('data', (chunk: Buffer) => {
+                    console.log(chunk + '');
+                });
+            }
             return childProcess;
         }
         // Not going to work on win32, unless we use linux subsystem (Haven't tried) or docker
@@ -226,7 +277,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     };
 
-	console.log('starting PHP Phan language server');
+    console.log('starting PHP Phan language server');
     // Create the language client and start the client.
     const disposable = new LanguageClient('Phan Language Server', serverOptions, clientOptions).start();
 
