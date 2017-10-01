@@ -65,11 +65,11 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 
 Phan's capabilities are summarized in [Phan's README](https://github.com/phan/phan#features)
 
-### Error Tolerant Parsing
+### Error Detection (Tolerating Syntax Errors)
 
 ![Phan error tolerant detection demo](images/tolerant_parsing.png)
 
-Optional, enabled by `phan.useFallbackParser`
+Optional, enabled by the setting `phan.useFallbackParser`
 
 
 ## Contributing
