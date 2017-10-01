@@ -1,6 +1,6 @@
 # Phan for Visual Studio Code
 
-[![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
+[![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=%207.1-8892BF.svg)](https://php.net/)
 
 Based on [PHP IntelliSense](https://github.com/felixfbecker/vscode-php-intellisense)
 
@@ -61,13 +61,13 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 
 ### Error Detection
 
-![Phan error detection demo](./images/error_detection.png)
+![Phan error detection demo](images/error_detection.png)
 
 Phan's capabilities are summarized in [Phan's README](https://github.com/phan/phan#features)
 
 ### Error Tolerant Parsing
 
-![Phan error tolerant detection demo](./images/tolerant_parsing.png)
+![Phan error tolerant detection demo](images/tolerant_parsing.png)
 
 Optional, enabled by `phan.useFallbackParser`
 
