@@ -2,7 +2,7 @@
 
 Based on [PHP IntelliSense](https://github.com/felixfbecker/vscode-php-intellisense)
 
-This adds error detection from phan to Visual Studio Code.
+This adds error detection from Phan to Visual Studio Code.
 
 **Note: This is just the VS Code extension that spawns Phan. Phan is implemented purely in PHP [in its own repository](https://github.com/phan/phan), all features need to be implemented there and all issues should be reported there.**
 
@@ -12,7 +12,8 @@ This adds error detection from phan to Visual Studio Code.
 
 1. PHP 7.1+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
-2. Unix/Linux (Depends on `pcntl` module being installed, which is only available on those platforms)
+2. Your Operating System must be Unix/Linux
+   (Phan support depends on `pcntl` module being installed, which is only available on those platforms)
 3. [The `php-ast` PECL extension](https://pecl.php.net/package/ast) must be installed and enabled.
 4. Depends on using a checkout of Phan with https://github.com/phan/phan/pull/1144 installed
 
@@ -39,7 +40,9 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 ```
 {
     // Currently, this extension is limited to analyzing only a single folder.
-    // The config value must be the root of the project, and contain a .phan/config.php file with a Phan config for that project (including files to parse and analyze).
+    // The config value must be the root of the project,
+	// and contain a .phan/config.php file with a Phan config for that project
+	// (including files to parse and analyze).
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Path to a php 7.1 binary with the php-ast PECL extension installed and enabled
@@ -56,7 +59,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 ## Features
 
 ### Error Detection
+
 ![Phan error detection demo](./images/error_detection.png)
+
+Phan's capabilities are summarized in [Phan's README](https://github.com/phan/phan#features)
 
 ## Contributing
 
