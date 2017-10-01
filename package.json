@@ -1,6 +1,6 @@
 {
-  "name": "php-phan-vscode",
-  "displayName": "Phan - PHP Analyzer",
+  "name": "php-phan",
+  "displayName": "PHP Phan (Analyzer)",
   "description": "Phan - static analyzer for PHP, minimizing false positives.",
   "publisher": "TysonAndre",
   "author": "Tyson Andre <tysonandre775@hotmail.com>",
