@@ -5,9 +5,9 @@ import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-langua
 import * as semver from 'semver';
 import * as net from 'net';
 import * as url from 'url';
-import * as fs from 'fs'
+import * as fs from 'fs';
 
-async function showOpenSettingsPrompt(errorMessage: string) : Promise<void> {
+async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
     const selected = await vscode.window.showErrorMessage(
         errorMessage,
         'Open settings'
@@ -18,7 +18,7 @@ async function showOpenSettingsPrompt(errorMessage: string) : Promise<void> {
 }
 
 // Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
-async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string) : Promise<boolean> {
+async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
     // Check path (if PHP is available and version is ^7.1.0)
     let stdout: string;
     try {
@@ -45,18 +45,18 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(version, '7.1.0')) {
-        vscode.window.showErrorMessage('Phan 0.10.x needs at least PHP 7.1 installed (and php-language-server needs at least 7.0). Version found: ' + version + " PHP Path: " + phpExecutablePath);
+        vscode.window.showErrorMessage('Phan 0.10.x needs at least PHP 7.1 installed (and php-language-server needs at least 7.0). Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
 }
 
-async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext, phpExecutablePath: string) : Promise<boolean> {
-    let stdout = ''
+async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
+    let stdout = '';
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + " PHP Path: " + phpExecutablePath);
+        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + ' PHP Path: ' + phpExecutablePath);
         console.error(err);
         return false;
     }
@@ -69,7 +69,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
     const astMatch = stdout.match(/^ext-ast ([^\s]+)/m);
     if (!astMatch) {
-        vscode.window.showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`.' + " PHP Path: " + phpExecutablePath);
+        vscode.window.showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`. PHP Path: ' + phpExecutablePath);
         return false;
     }
     let astVersion = astMatch[1].split('-')[0];
@@ -78,17 +78,17 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(astVersion, '0.1.5')) {
-        vscode.window.showErrorMessage('Phan 0.10.x needs at least ext-ast 0.1.5 installed. Version found: ' + astVersion + " PHP Path: " + phpExecutablePath);
+        vscode.window.showErrorMessage('Phan 0.10.x needs at least ext-ast 0.1.5 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
-    return true
+    return true;
 }
-async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecutablePath: string) : Promise<boolean> {
-    let stdout = ''
+async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
+    let stdout = '';
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'var_export(extension_loaded("pcntl"));']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + " PHP path: " + phpExecutablePath);
+        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + ' PHP path: ' + phpExecutablePath);
         console.error(err);
         return false;
     }
@@ -100,7 +100,7 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
     return true;
 }
 
-function isFile(path: string) : boolean {
+function isFile(path: string): boolean {
     try {
         let stat = fs.statSync(path);
         return stat.isFile();
@@ -109,7 +109,7 @@ function isFile(path: string) : boolean {
     }
 }
 
-function isDirectory(path: string) : boolean {
+function isDirectory(path: string): boolean {
     try {
         let stat = fs.statSync(path);
         return stat.isDirectory();
@@ -119,8 +119,8 @@ function isDirectory(path: string) : boolean {
 }
 
 // Returns true if phan.phanScriptPath supports the language server protocol.
-async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext, phpExecutablePath: string, phanScriptPath: string) : Promise<boolean> {
-    const exists : boolean = isFile(phanScriptPath);
+async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext, phpExecutablePath: string, phanScriptPath: string): Promise<boolean> {
+    const exists: boolean = isFile(phanScriptPath);
 
     if (!exists) {
         await showOpenSettingsPrompt('The setting phan.phanScriptPath refers to a path that does not exist. path: ' + phanScriptPath);
@@ -146,8 +146,8 @@ async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext,
 }
 
 // Returns true if phan.phanScriptPath supports the language server protocol.
-async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionContext, analyzedProjectDirectory: string) : Promise<boolean> {
-    const exists : boolean = isDirectory(analyzedProjectDirectory);
+async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionContext, analyzedProjectDirectory: string): Promise<boolean> {
+    const exists: boolean = isDirectory(analyzedProjectDirectory);
 
     if (!exists) {
         await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not exist. directory: ' + analyzedProjectDirectory);
@@ -155,7 +155,7 @@ async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionConte
     }
 
     const phanConfigPath = path.join(analyzedProjectDirectory, '.phan', 'config.php');
-    const phanConfigExists : boolean = isFile(phanConfigPath);
+    const phanConfigExists: boolean = isFile(phanConfigPath);
 
     if (!phanConfigExists) {
         await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not contain .phan/config.php. Check that it is the root of a project set up for phan. directory: ' + analyzedProjectDirectory);
