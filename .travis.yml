@@ -35,3 +35,10 @@ deploy:
   on:
     repo: felixfbecker/vscode-php-intellisense
     tags: true
+
+branches:
+  only:
+    - master
+
+notifications:
+ email: false

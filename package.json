@@ -1,13 +1,13 @@
 {
   "name": "php-phan-vscode",
   "displayName": "PHP Phan",
-  "description": "Enhanced error detection support for PHP (Based on PHP IntelliSense by felixfbecker)",
+  "description": "Phan - static analyzer for PHP minimizing false positives",
   "publisher": "TysonAndre",
   "author": "Tyson Andre <tysonandre775@hotmail.com>",
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.1-dev",
+  "version": "0.0.1",
   "engines": {
     "vscode": "^1.16.0"
   },
@@ -46,10 +46,10 @@
     "@types/mz": "0.0.31",
     "@types/node": "^8.0.24",
     "@types/semver": "^5.3.34",
-    "tslint": "^5.0.0",
-    "typescript": "^2.1.4",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2",
     "vsce": "^1.8.1",
-    "vscode": "^1.0.0"
+    "vscode": "^1.1.0"
   },
   "dependencies": {
     "mz": "^2.4.0",
