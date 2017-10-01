@@ -61,7 +61,7 @@
       "type": "object",
       "title": "PHP Phan Integration",
       "properties": {
-        "php.phan.phpExecutablePath": {
+        "phan.phpExecutablePath": {
           "type": [
             "string",
             "null"
@@ -69,7 +69,7 @@
           "default": null,
           "description": "The path to a PHP 7.1+ executable to use for Phan."
         },
-        "php.phan.phanScriptPath": {
+        "phan.phanScriptPath": {
           "type": [
             "string",
             "null"
@@ -77,7 +77,7 @@
           "default": null,
           "description": "The path to the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/vendor/phan/phan/phan. In the future, this will be optional."
         },
-        "php.phan.analyzedProjectDirectory": {
+        "phan.analyzedProjectDirectory": {
           "type": [
             "string",
             "null"
@@ -85,12 +85,19 @@
           "default": null,
           "description": "The path to the project folder which phan will analyze. `.phan` must be a folder within that directory. (In the future, this VS Code extension may support analyzing more than one project)"
         },
-        "php.phan.enableDebugLog": {
+        "phan.enableDebugLog": {
           "type": [
             "boolean"
           ],
           "default": false,
           "description": "Set this to true to print messages to the debug console when developing or debugging this VS Code extension."
+        },
+        "phan.analyzedFileExtensions": {
+          "type": [
+            "array"
+          ],
+          "default": ["php"],
+          "description": "A list of file extensions to request phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions'"
         }
       }
     }
