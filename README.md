@@ -54,8 +54,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 {
     // Currently, this extension is limited to analyzing only a single folder.
     // The config value must be the root of the project,
-	// and contain a .phan/config.php file with a Phan config for that project
-	// (including files to parse and analyze).
+    // and contain a .phan/config.php file with a Phan config for that project
+    // (including files to parse and analyze).
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Path to a php 7.1 binary with the php-ast PECL extension installed and enabled
@@ -114,7 +114,7 @@ And then point to that phan installation:
 
 ```json
 {
-	"phan.phanScriptPath": "/path/to/folder/phan_git_checkout/phan"
+    "phan.phanScriptPath": "/path/to/folder/phan_git_checkout/phan"
 }
 ```
 
