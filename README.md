@@ -66,17 +66,19 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 }
 ```
 
+**After adding these entries, close and re-open Visual Studio Code in order for Phan to pick up the new settings.**
+
 ## Examples
 
 ### Error Detection
 
-![Phan error detection demo](images/error_detection.png)
+![Phan error detection demo](https://raw.githubusercontent.com/TysonAndre/vscode-php-phan/master/images/error_detection.png)
 
 Phan's capabilities are summarized in [Phan's README](https://github.com/phan/phan#features)
 
 ### Error Detection (Tolerating Syntax Errors)
 
-![Phan error tolerant detection demo](images/tolerant_parsing.png)
+![Phan error tolerant detection demo](https://raw.githubusercontent.com/TysonAndre/vscode-php-phan/master/images/tolerant_parsing.png)
 
 Optional, enabled by the setting `phan.useFallbackParser`
 

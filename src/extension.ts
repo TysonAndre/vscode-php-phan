@@ -172,7 +172,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const phanScriptPath = conf.get<string>('phanScriptPath') || defaultPhanScriptPath;
     // TODO: Support analyzing more than one project.
     // TODO: Figure out how to stop the language server when a different project is opened.
-    const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory');
+    const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory') || '';
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
@@ -236,6 +236,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 // php phan --language-server-verbose [args]
                 args.unshift('--quick');
             }
+
             // The server is implemented in PHP
             // FIXME create a real language server module
             // FIXME install in vendor?

@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.2-dev",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.16.0",
     "os" : [ "darwin", "linux" ]
