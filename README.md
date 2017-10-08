@@ -120,6 +120,20 @@ And then point to that phan installation:
 
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
+## Release History
+
+### 0.0.4
+
+- Bump Phan version in composer.lock. Support new Phan plugin types. Include History in README.md
+
+### 0.0.3
+
+- Improve documentation. Mention that Visual Studio Code must be restarted in order to pick up any changes to this editor's phan settings.
+
+### 0.0.2
+
+- Reword README, rename extension to php-phan
+
 ## Credits
 
 This VS Code extension and many parts of the language server protocol implementation are based on [PHP IntelliSense](https://github.com/felixfbecker/vscode-php-intellisense)
