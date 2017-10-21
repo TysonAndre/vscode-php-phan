@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.16.0",
     "os" : [ "darwin", "linux" ]
@@ -79,7 +79,7 @@
             "null"
           ],
           "default": null,
-          "description": "Required. The path to the only project folder which phan will analyze. `.phan/config.php` must contain the phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
+          "description": "Required. The path to the only project folder which Phan will analyze. `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
         },
         "phan.enableDebugLog": {
           "type": [
@@ -93,7 +93,7 @@
             "array"
           ],
           "default": ["php"],
-          "description": "A list of file extensions to request phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions' (Modifying requires restart)"
+          "description": "A list of file extensions to request Phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions' (Modifying requires restart)"
         },
         "phan.useFallbackParser": {
           "type": [
@@ -109,6 +109,12 @@
           "default": false,
           "description": "Enable this to speed up phan analysis without recursing into function calls. Slightly faster. (Modifying requires restart)"
         },
+        "phan.memoryLimit": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "The memory limit of Phan (the php language server) in bytes. Format: Number[K|M|G] (e.g. \"1G\" or \"200M\"). Set to null for no memory limit (default). (Modifying requires restart)",
+          "pattern": "^\\d+[KMG]?$"
+        },
         "phan.additionalCLIFlags": {
           "type": [
             "array"
@@ -122,7 +128,7 @@
             "null"
           ],
           "default": null,
-          "description": "Optional (Advanced). If provided, this overrides the phan script to use (using a phan branch supporting the Language Server Protocol). e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
+          "description": "Optional (Advanced). If provided, this overrides the Phan script to use (using a Phan branch supporting the Language Server Protocol). e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
         }
       }
     }

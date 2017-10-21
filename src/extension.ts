@@ -175,6 +175,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory') || '';
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
+    const memoryLimit = conf.get<string>('memoryLimit') || null;
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
     const quick = conf.get<boolean>('quick');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
@@ -223,6 +224,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         function spawnServer(...args: string[]): ChildProcess {
             if (additionalCLIFlags.length > 0) {
                 args.unshift(...additionalCLIFlags);
+            }
+            if (memoryLimit && memoryLimit.length > 0) {
+                args.unshift('--memory-limit', memoryLimit);
             }
             if (useFallbackParser) {
                 // php phan --use-fallback-parser [args]

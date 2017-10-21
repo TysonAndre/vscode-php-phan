@@ -122,6 +122,12 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.0.5
+
+- Bump Phan version in composer.lock from 0.10.1-dev to 0.10.1.
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/0.10.1/NEWS) for more details.
+- Support `phan.memoryLimit` setting to limit Phan's memory usage.
+
 ### 0.0.4
 
 - Bump Phan version in composer.lock. Support new Phan plugin types. Include History in README.md

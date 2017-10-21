@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad6d5f0e6384ed6a2e3aba7a53aa5140",
+    "content-hash": "aa5d662ed6a41099ecd85c37ea74a1db",
     "packages": [
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -142,16 +142,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "dev-master",
+            "version": "0.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "bb5c503b43bab231bb3340abee787da70cf6f33b"
+                "reference": "2085277ba7b96a00e1351c52012ffc9b103ec769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/bb5c503b43bab231bb3340abee787da70cf6f33b",
-                "reference": "bb5c503b43bab231bb3340abee787da70cf6f33b",
+                "url": "https://api.github.com/repos/phan/phan/zipball/2085277ba7b96a00e1351c52012ffc9b103ec769",
+                "reference": "2085277ba7b96a00e1351c52012ffc9b103ec769",
                 "shasum": ""
             },
             "require": {
@@ -197,7 +197,7 @@
                 "php",
                 "static"
             ],
-            "time": "2017-10-08T19:31:46+00:00"
+            "time": "2017-10-21T01:57:26+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -397,12 +397,12 @@
             "version": "5.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fruux/sabre-event.git",
+                "url": "https://github.com/sabre-io/event.git",
                 "reference": "3cb619803d5e3e38ed7c309250da5589676aedc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fruux/sabre-event/zipball/3cb619803d5e3e38ed7c309250da5589676aedc8",
+                "url": "https://api.github.com/repos/sabre-io/event/zipball/3cb619803d5e3e38ed7c309250da5589676aedc8",
                 "reference": "3cb619803d5e3e38ed7c309250da5589676aedc8",
                 "shasum": ""
             },
@@ -578,16 +578,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
                 "shasum": ""
             },
             "require": {
@@ -599,7 +599,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -633,7 +633,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-10-11T12:05:26+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -689,9 +689,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phan/phan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
