@@ -122,6 +122,15 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.0.6
+
+- Bump Phan version in composer.lock from 0.10.1 to 0.10.2-dev
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/b9d02d97fd1d18e007b25a4ab17f9b7fdc4ba403/NEWS) for more details.
+
+  - Reduce memory usage on small projects.
+  - Support less ambiguous `?(T[])` and `(?T)[]` in phpdoc.
+  - Improved analysis of callables.
+
 ### 0.0.5
 
 - Bump Phan version in composer.lock from 0.10.1-dev to 0.10.1.
