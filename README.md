@@ -122,6 +122,16 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.0.7 (2017-11-19)
+
+- Bump Phan version in composer.lock from 0.10.2-dev to 0.10.3-dev
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/7f51effeec2ef1a947b02708f8f6f6993ce33514/NEWS) for more details.
+
+  - Reduce latency of analysis.
+  - Do a better job of analyzing statements in code with syntax errors.
+    Switch to [tolerant-php-parser](https://github.com/Microsoft/tolerant-php-parser)
+    as a dependency of the fallback parsing implementation.
+
 ### 0.0.6
 
 - Bump Phan version in composer.lock from 0.10.1 to 0.10.2-dev
