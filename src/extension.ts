@@ -242,8 +242,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             }
 
             // The server is implemented in PHP
-            // FIXME create a real language server module
-            // FIXME install in vendor?
             args.unshift(phanScriptPathValidated);
             console.log('starting Phan Language Server', phpExecutablePath, args);
             // TODO: determine path from current working directory
@@ -293,8 +291,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         synchronize: {
             // Synchronize the setting section 'phan' to the server (TODO: server side support)
             configurationSection: 'phan',
-            // Notify the server about changes to PHP files in the workspace
-            // TODO: Extend this to html, htm, inc?
             fileEvents: vscode.workspace.createFileSystemWatcher('**/.phan/config.php')
         }
     };
