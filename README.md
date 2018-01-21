@@ -122,9 +122,13 @@ And then point to that phan installation:
 
 ## Release History
 
-### 0.0.8 (dev)
+### 0.0.8 (2018-01-20)
 
-Bump Phan version in composer.lock from 0.10.3-dev to 0.10.3
+- Bump Phan version in composer.lock from 0.10.3-dev to 0.10.3
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/0.10.3/NEWS) for more details.
+
+  - Upgrade the library used for the language server implementation.
+  - Don't warn when passing `?T` (PHPDoc or real) where the PHPDoc type was `T|null`.
 
 ### 0.0.7 (2017-11-19)
 
