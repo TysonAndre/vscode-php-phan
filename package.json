@@ -10,7 +10,10 @@
   "version": "0.0.8-dev",
   "engines": {
     "vscode": "^1.16.0",
-    "os" : [ "darwin", "linux" ]
+    "os": [
+      "darwin",
+      "linux"
+    ]
   },
   "keywords": [
     "php",
@@ -92,7 +95,9 @@
           "type": [
             "array"
           ],
-          "default": ["php"],
+          "default": [
+            "php"
+          ],
           "description": "A list of file extensions to request Phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions' (Modifying requires restart)"
         },
         "phan.useFallbackParser": {
@@ -110,7 +115,10 @@
           "description": "Enable this to speed up phan analysis without recursing into function calls. Slightly faster. (Modifying requires restart)"
         },
         "phan.memoryLimit": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "default": null,
           "description": "The memory limit of Phan (the php language server) in bytes. Format: Number[K|M|G] (e.g. \"1G\" or \"200M\"). Set to null for no memory limit (default). (Modifying requires restart)",
           "pattern": "^\\d+[KMG]?$"

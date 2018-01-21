@@ -122,6 +122,10 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.0.8 (dev)
+
+Bump Phan version in composer.lock from 0.10.3-dev to 0.10.3
+
 ### 0.0.7 (2017-11-19)
 
 - Bump Phan version in composer.lock from 0.10.2-dev to 0.10.3-dev

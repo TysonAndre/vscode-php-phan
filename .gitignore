@@ -3,4 +3,3 @@ node_modules/
 vendor/
 typings/
 .DS_Store
-package-lock.json

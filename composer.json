@@ -2,6 +2,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "phan/phan": "master"
+        "phan/phan": "0.10.3"
     }
 }
