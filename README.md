@@ -122,6 +122,18 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.0.8 (2018-02-04)
+
+- Bump Phan version in composer.lock from 0.10.3 to 0.10.4-dev
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/fbb3be4fd6953fa9a56eb765e5c6d07d538640cb/NEWS) for more details
+
+  - Phan supports analyzing `array<int,T>` and `array<string,T>` syntax in PHPDoc and in Phan's internal type system. 
+    (Previously, Phan would internally represent generic arrays as `T[]` (i.e. wouldn't track key types))
+  - Various improvements and bug fixes.
+- Add a new VSCode configuration option `phan.analyzeOnlyOnSave` (off by default). (#6)
+  If you set this to true, Phan will analyze the file only when you open/save the file (And not while editing or typing).
+  This is useful on large projects or PHP files.
+
 ### 0.0.8 (2018-01-20)
 
 - Bump Phan version in composer.lock from 0.10.3-dev to 0.10.3

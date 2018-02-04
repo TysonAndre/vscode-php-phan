@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b31c5c8614c1ae16b57d4f6dca596056",
+    "content-hash": "ad6d5f0e6384ed6a2e3aba7a53aa5140",
     "packages": [
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -183,16 +183,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "0.10.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "c39ac07622ff18ed13eb4ee0e53087c59f83ed5e"
+                "reference": "2cc968402081f09326369a98af4a80f2d57f07fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/c39ac07622ff18ed13eb4ee0e53087c59f83ed5e",
-                "reference": "c39ac07622ff18ed13eb4ee0e53087c59f83ed5e",
+                "url": "https://api.github.com/repos/phan/phan/zipball/2cc968402081f09326369a98af4a80f2d57f07fb",
+                "reference": "2cc968402081f09326369a98af4a80f2d57f07fb",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-01-20T21:28:42+00:00"
+            "time": "2018-02-04T23:25:38+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -634,7 +634,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "phan/phan": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
