@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.8",
+  "version": "0.0.9",
   "engines": {
     "vscode": "^1.16.0",
     "os": [
@@ -49,19 +49,19 @@
     "lint": "tslint -c tslint.json \"src/**/*.ts\""
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.42",
+    "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
     "@types/node": "^8.0.24",
-    "@types/semver": "^5.3.34",
+    "@types/semver": "^5.5.0",
     "tslint": "^5.7.0",
-    "typescript": "^2.5.2",
-    "vsce": "^1.8.1",
+    "typescript": "^2.7.1",
+    "vsce": "^1.36.1",
     "vscode": "^1.1.0"
   },
   "dependencies": {
     "mz": "^2.4.0",
-    "semver": "^5.3.0",
-    "vscode-languageclient": "^3.4.0"
+    "semver": "^5.5.0",
+    "vscode-languageclient": "^3.5.0"
   },
   "contributes": {
     "configuration": {
@@ -106,6 +106,13 @@
           ],
           "default": false,
           "description": "Enable this to make a best effort at analyzing the remaining valid statements of PHP files with syntax errors. (Phan will continue emitting syntax errors). (Modifying requires restart)"
+        },
+        "phan.analyzeOnlyOnSave": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to run Phan analysis only on file save (Not while editing the file). This greatly reduces CPU usage, but you don't learn about potential issues as promptly."
         },
         "phan.quick": {
           "type": [

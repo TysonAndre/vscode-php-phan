@@ -175,6 +175,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory') || '';
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
+    const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
     const memoryLimit = conf.get<string>('memoryLimit') || null;
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
     const quick = conf.get<boolean>('quick');
@@ -221,10 +222,29 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
-        function spawnServer(...args: string[]): ChildProcess {
+        // NOTE: Phan isn't going to work on win32, unless we use linux subsystem (Haven't tried) or docker
+
+        // Use a TCP socket because of problems with blocking STDIO
+        // stdio locks up for large responses
+        // (based on https://github.com/felixfbecker/vscode-php-intellisense/commit/ddddf2a178e4e9bf3d52efb07cd05820ce109f43)
+        const server = net.createServer(socket => {
+            // 'connection' listener
+            console.log('PHP process connected');
+            socket.on('end', () => {
+                console.log('PHP process disconnected');
+            });
+            server.close();
+            resolve({ reader: socket, writer: socket });
+        });
+        // Listen on random port
+        server.listen(0, '127.0.0.1', () => {
+            const args = [];
             if (additionalCLIFlags.length > 0) {
                 args.unshift(...additionalCLIFlags);
             }
+            // Start the language server and connect to the client listening on <addr> (e.g. 127.0.0.1:<port>)
+            args.unshift('--language-server-tcp-connect=127.0.0.1:' + server.address().port);
+            // Aside: Max setting is 4095M
             if (memoryLimit && memoryLimit.length > 0) {
                 args.unshift('--memory-limit', memoryLimit);
             }
@@ -232,12 +252,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 // php phan --use-fallback-parser [args]
                 args.unshift('--use-fallback-parser');
             }
+            if (analyzeOnlyOnSave) {
+                // php phan --language-server-analyze-only-on-save [args]
+                args.unshift('--language-server-analyze-only-on-save');
+            }
             if (enableDebugLog) {
                 // php phan --language-server-verbose [args]
                 args.unshift('--language-server-verbose');
             }
             if (quick) {
-                // php phan --language-server-verbose [args]
+                // php phan --quick [args]
                 args.unshift('--quick');
             }
 
@@ -255,27 +279,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 });
             }
             return childProcess;
-        }
-        // Not going to work on win32, unless we use linux subsystem (Haven't tried) or docker
-        if (process.platform === 'win32') {
-            // Use a TCP socket on Windows because of blocking STDIO
-            const server = net.createServer(socket => {
-                // 'connection' listener
-                console.log('PHP process connected');
-                socket.on('end', () => {
-                    console.log('PHP process disconnected');
-                });
-                server.close();
-                resolve({ reader: socket, writer: socket });
-            });
-            // Listen on random port
-            server.listen(0, '127.0.0.1', () => {
-                spawnServer('--language-server-tcp-server=127.0.0.1:' + server.address().port);
-            });
-        } else {
-            // Use STDIO on Linux / Mac
-            resolve(spawnServer('--language-server-on-stdin'));
-        }
+        });
     });
 
     // Options to control the language client
