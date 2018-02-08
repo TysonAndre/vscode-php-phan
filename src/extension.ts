@@ -177,6 +177,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
     const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
     const memoryLimit = conf.get<string>('memoryLimit') || null;
+    const connectToServerWithStdio = conf.get<boolean>('connectToServerWithStdio');
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
     const quick = conf.get<boolean>('quick');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
@@ -222,28 +223,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
-        // NOTE: Phan isn't going to work on win32, unless we use linux subsystem (Haven't tried) or docker
-
-        // Use a TCP socket because of problems with blocking STDIO
-        // stdio locks up for large responses
-        // (based on https://github.com/felixfbecker/vscode-php-intellisense/commit/ddddf2a178e4e9bf3d52efb07cd05820ce109f43)
-        const server = net.createServer(socket => {
-            // 'connection' listener
-            console.log('PHP process connected');
-            socket.on('end', () => {
-                console.log('PHP process disconnected');
-            });
-            server.close();
-            resolve({ reader: socket, writer: socket });
-        });
         // Listen on random port
-        server.listen(0, '127.0.0.1', () => {
-            const args = [];
+        const spawnServer = (...args: string[]): ChildProcess => {
             if (additionalCLIFlags.length > 0) {
                 args.unshift(...additionalCLIFlags);
             }
-            // Start the language server and connect to the client listening on <addr> (e.g. 127.0.0.1:<port>)
-            args.unshift('--language-server-tcp-connect=127.0.0.1:' + server.address().port);
             // Aside: Max setting is 4095M
             if (memoryLimit && memoryLimit.length > 0) {
                 args.unshift('--memory-limit', memoryLimit);
@@ -279,7 +263,30 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 });
             }
             return childProcess;
-        });
+        };
+        // NOTE: Phan isn't going to work on win32, unless we use linux subsystem (Haven't tried) or docker... and if docker is used, you'd have to use stdin.
+
+        // Use a TCP socket on Windows because of problems with blocking STDIO
+        // stdio locks up for large responses
+        // (based on https://github.com/felixfbecker/vscode-php-intellisense/commit/ddddf2a178e4e9bf3d52efb07cd05820ce109f43)
+        if (!connectToServerWithStdio || process.platform === 'win32') {
+            const server = net.createServer(socket => {
+                // 'connection' listener
+                console.log('PHP process connected');
+                socket.on('end', () => {
+                    console.log('PHP process disconnected');
+                });
+                server.close();
+                resolve({ reader: socket, writer: socket });
+            });
+            server.listen(0, '127.0.0.1', () => {
+                // Start the language server and make the language server connect to the client listening on <addr> (e.g. 127.0.0.1:<port>)
+                spawnServer('--language-server-tcp-connect=127.0.0.1:' + server.address().port);
+            });
+        } else {
+            // Use STDIO on Linux / Mac if the user set the override `connectToServerWithStdio: true` in their config
+            resolve(spawnServer('--language-server-on-stdin'));
+        }
     });
 
     // Options to control the language client

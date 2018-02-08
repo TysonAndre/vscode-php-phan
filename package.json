@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.9",
+  "version": "0.0.10",
   "engines": {
     "vscode": "^1.16.0",
     "os": [
@@ -51,11 +51,11 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.0.24",
+    "@types/node": "^8.9.0",
     "@types/semver": "^5.5.0",
     "tslint": "^5.7.0",
     "typescript": "^2.7.1",
-    "vsce": "^1.36.1",
+    "vsce": "^1.36.2",
     "vscode": "^1.1.0"
   },
   "dependencies": {
@@ -129,6 +129,14 @@
           "default": null,
           "description": "The memory limit of Phan (the php language server) in bytes. Format: Number[K|M|G] (e.g. \"1G\" or \"200M\"). Set to null for no memory limit (default). (Modifying requires restart)",
           "pattern": "^\\d+[KMG]?$"
+        },
+        "phan.connectToServerWithStdio": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": false,
+          "description": "If this is set to true, this VSCode extension will use stdio instead of the default of TCP to communicate with the Phan server. Enabling this may help if you have issues getting Phan to analyze your project. (Modifying requires restart)"
         },
         "phan.additionalCLIFlags": {
           "type": [

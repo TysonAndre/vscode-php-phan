@@ -122,17 +122,27 @@ And then point to that phan installation:
 
 ## Release History
 
-### 0.0.8 (2018-02-04)
+### 0.0.10 (2018-02-07)
+
+- Add an option  `phan.connectToServerWithStdio` to allow clients to continue to use stdio to communicate with the Phan language server. ([Issue #8](https://github.com/TysonAndre/vscode-php-phan/issues/8))
+- Update Phan.
+
+  Fix an edge case where the forked language server analysis worker might read a request
+  intended for the main process of the Phan language server (this could happen if multiple requests were sent before Phan could respond)
+
+### 0.0.9 (2018-02-04)
 
 - Bump Phan version in composer.lock from 0.10.3 to 0.10.4-dev
   See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/fbb3be4fd6953fa9a56eb765e5c6d07d538640cb/NEWS) for more details
 
-  - Phan supports analyzing `array<int,T>` and `array<string,T>` syntax in PHPDoc and in Phan's internal type system. 
+  - Phan supports analyzing `array<int,T>` and `array<string,T>` syntax in PHPDoc and in Phan's internal type system.
     (Previously, Phan would internally represent generic arrays as `T[]` (i.e. wouldn't track key types))
   - Various improvements and bug fixes.
 - Add a new VSCode configuration option `phan.analyzeOnlyOnSave` (off by default). (#6)
   If you set this to true, Phan will analyze the file only when you open/save the file (And not while editing or typing).
   This is useful on large projects or PHP files.
+- Change the default transport for communicating with the Phan language server from stdio to TCP.
+  (Stdio may block when large requests/responses are sent)
 
 ### 0.0.8 (2018-01-20)
 
