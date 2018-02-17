@@ -51,7 +51,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
     return true;
 }
 
-async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
+async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext, phpExecutablePath: string, allowPolyfillParser: boolean): Promise<boolean> {
     let stdout = '';
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }']);
@@ -62,11 +62,15 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     }
 
     if (stdout.match(/^None/)) {
+        if (allowPolyfillParser) {
+            // Phan will probably use the polyfill parser based on tolerant-php-parser.
+            return true;
+        }
         vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 0.1.5 or newer must be installed. PHP Path: ' + phpExecutablePath);
         return false;
     }
 
-    // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
+    // Parse version and discard OS info like 7.1.14--0ubuntu0.16.04.2
     const astMatch = stdout.match(/^ext-ast ([^\s]+)/m);
     if (!astMatch) {
         vscode.window.showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`. PHP Path: ' + phpExecutablePath);
@@ -176,6 +180,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
     const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
+    const allowPolyfillParser = conf.get<boolean>('allowPolyfillParser') || false;
     const memoryLimit = conf.get<string>('memoryLimit') || null;
     const connectToServerWithStdio = conf.get<boolean>('connectToServerWithStdio');
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
@@ -188,7 +193,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }
 
     // Check if php-ast is installed
-    const isPHPASTInstalled: boolean = await checkPHPAstInstalledAndSupported(context, phpExecutablePath);
+    const isPHPASTInstalled: boolean = await checkPHPAstInstalledAndSupported(context, phpExecutablePath, allowPolyfillParser);
     if (!isPHPASTInstalled) {
         return;
     }
@@ -239,6 +244,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (analyzeOnlyOnSave) {
                 // php phan --language-server-analyze-only-on-save [args]
                 args.unshift('--language-server-analyze-only-on-save');
+            }
+            if (allowPolyfillParser) {
+                // php phan --allow-polyfill-parser [args]
+                args.unshift('--allow-polyfill-parser');
             }
             if (enableDebugLog) {
                 // php phan --language-server-verbose [args]

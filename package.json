@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.0.10",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.16.0",
     "os": [
@@ -51,10 +51,10 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.9.0",
+    "@types/node": "^8.9.4",
     "@types/semver": "^5.5.0",
     "tslint": "^5.7.0",
-    "typescript": "^2.7.1",
+    "typescript": "^2.7.2",
     "vsce": "^1.36.2",
     "vscode": "^1.1.0"
   },
@@ -152,6 +152,13 @@
           ],
           "default": null,
           "description": "Optional (Advanced). If provided, this overrides the Phan script to use (using a Phan branch supporting the Language Server Protocol). e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
+        },
+        "phan.allowPolyfillParser": {
+          "type": [
+            "boolean"
+          ],
+          "default": true,
+          "description": "If set to true, this extension will run even if php-ast is not installed. Installing php-ast is strongly recommended for performance reasons and for consistency with full Phan analysis."
         }
       }
     }
