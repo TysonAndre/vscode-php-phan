@@ -49,16 +49,16 @@
         },
         {
             "name": "microsoft/tolerant-php-parser",
-            "version": "v0.0.8",
+            "version": "v0.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Microsoft/tolerant-php-parser.git",
-                "reference": "10e901a6086826376c6256954dc8903ef0ec6c9e"
+                "reference": "59351ce2a6b32c6cafc667dc20a48da36f38a482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Microsoft/tolerant-php-parser/zipball/10e901a6086826376c6256954dc8903ef0ec6c9e",
-                "reference": "10e901a6086826376c6256954dc8903ef0ec6c9e",
+                "url": "https://api.github.com/repos/Microsoft/tolerant-php-parser/zipball/59351ce2a6b32c6cafc667dc20a48da36f38a482",
+                "reference": "59351ce2a6b32c6cafc667dc20a48da36f38a482",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 }
             ],
             "description": "Tolerant PHP-to-AST parser designed for IDE usage scenarios",
-            "time": "2017-11-17T17:06:43+00:00"
+            "time": "2018-02-14T18:39:41+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -187,18 +187,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "2cc968402081f09326369a98af4a80f2d57f07fb"
+                "reference": "c13eca421be0d8b91644687d475bfa3c1185ce6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/2cc968402081f09326369a98af4a80f2d57f07fb",
-                "reference": "2cc968402081f09326369a98af4a80f2d57f07fb",
+                "url": "https://api.github.com/repos/phan/phan/zipball/c13eca421be0d8b91644687d475bfa3c1185ce6d",
+                "reference": "c13eca421be0d8b91644687d475bfa3c1185ce6d",
                 "shasum": ""
             },
             "require": {
                 "ext-ast": "^0.1.5",
                 "felixfbecker/advanced-json-rpc": "^3.0",
-                "microsoft/tolerant-php-parser": "0.0.8",
+                "microsoft/tolerant-php-parser": "0.0.9",
                 "nikic/php-parser": "~3.1.1",
                 "php": "~7.1.0 || ~7.2.0",
                 "sabre/event": "^5.0",
@@ -239,7 +239,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-02-04T23:25:38+00:00"
+            "time": "2018-02-16T20:50:59+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

@@ -24,24 +24,11 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
 1. PHP 7.1+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
 2. Your Operating System must be Unix/Linux
-   (Phan support depends on `pcntl` module being installed, which is only available on those platforms)
+   (Phan's Language Server Protocol support depends on `pcntl` module being installed, which is only available on those platforms)
 
    A future release may support Windows, but it won't be as fast.
-3. [The `php-ast` PECL extension](https://pecl.php.net/package/ast) must be installed and enabled.
-4. Depends on using a checkout of Phan with https://github.com/phan/phan/pull/1144 installed
-
-
-### Installing from source
-
-This extension hasn't been published yet. It can be installed locally with the following method:
-
-```bash
-npm install
-npm run build
-node node_modules/.bin/vsce package
-```
-
-The generated VSIX file can be used locally with the steps from https://stackoverflow.com/a/38866913
+3. (Optional) For optimal performance and accuracy of analysis,
+   [the `php-ast` PECL extension](https://pecl.php.net/package/ast) should be installed and enabled.
 
 ### Setup steps
 
@@ -122,6 +109,24 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.1.0 (2018-02-16)
+
+- By default, allow running this extension without `php-ast` installed.
+  Note that the polyfill has bugs in a few edge cases (e.g. getting phpdoc for closures, successfully parsing uncommon PHP syntax).
+  This polyfill is based on `tolerant-php-parser`.
+
+  To make this extension refuse to start if `php-ast` is not installed, set `phan.allowPolyfillParser` to false.
+- Fix a bug where Phan would fail to parse and analyze files that were added to the project after startup.
+- Analyze all PHP files that are in other **open** tabs or split windows.
+  Previously, Phan would analyze only the most recently changed file.
+- If file change notifications are being sent to Phan faster than Phan can re-analyze the open files,
+  make Phan batch the file change notifications before parsing and analyzing the project. (batched along with file open/close/delete notifications)
+
+  This change to Phan should help improve Phan's responsiveness (e.g. if editing large files).
+- Update Phan.
+
+  See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/34ca3b7b079291e1a634afbdc71a3453dbb3118c/NEWS.md) for more details
+
 ### 0.0.10 (2018-02-07)
 
 - Add an option  `phan.connectToServerWithStdio` to allow clients to continue to use stdio to communicate with the Phan language server. ([Issue #8](https://github.com/TysonAndre/vscode-php-phan/issues/8))
@@ -188,6 +193,18 @@ And then point to that phan installation:
 ### 0.0.2
 
 - Reword README, rename extension to php-phan
+
+## Installing from source
+
+This can be installed locally with the following method:
+
+```bash
+npm install
+npm run build
+node node_modules/.bin/vsce package
+```
+
+The generated VSIX file can be used locally with the steps from https://stackoverflow.com/a/38866913
 
 ## Credits
 
