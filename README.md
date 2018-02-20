@@ -38,15 +38,17 @@ This assumes you have already installed the [dependencies](#dependencies).
 Add these entries to your VSCode config (Open the menu at File > Preferences > Settings)
 
 
-```
+```javascript
 {
     // Currently, this extension is limited to analyzing only a single folder.
     // The config value must be the root of the project,
     // and contain a .phan/config.php file with a Phan config for that project
     // (including files to parse and analyze).
+    // On windows, this would be a path such as "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
-    // Path to a php 7.1 binary with the php-ast PECL extension installed and enabled
+    // Path to a php 7.1+ binary (preferably with the php-ast PECL extension installed and enabled)
+    // On windows, this would be "C:\\path\\to\\php-7.1-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
     // Files which this should analyze
@@ -55,6 +57,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 ```
 
 **After adding these entries, close and re-open Visual Studio Code in order for Phan to pick up the new settings.**
+
+If you have issues, see the [Troubleshooting section](#troubleshooting)
 
 ## Examples
 
@@ -73,7 +77,7 @@ Optional, enabled by the setting `phan.useFallbackParser`
 
 ## Contributing
 
-Clone whole repository and in root directory execute:
+Clone this whole repository and in the root directory execute:
 
 ```bash
 composer install
@@ -100,13 +104,25 @@ composer install
 
 And then point to that phan installation:
 
-```json
+```javascript
 {
     "phan.phanScriptPath": "/path/to/folder/phan_git_checkout/phan"
 }
 ```
 
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
+
+## Troubleshooting
+
+General troubleshooting advice:
+
+- By setting `phan.enableDebugLog` to true (and restarting Phan), you can get extra debug output.
+  Enabling debug output will slow down this extension.
+
+- After any changes to the phan settings, the language server must be restarted.
+
+- VSCode has a built in debugger at "Help" > "Toggle Developer Tools" ( "Console" tab)
+  This will let you see this extension's Phan's debug output.
 
 ## Release History
 
