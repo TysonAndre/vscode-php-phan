@@ -2,7 +2,7 @@
 
 [![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.1-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Supports Unix/Linux.**
+**Supports Unix/Linux.** As of version 0.2.0, this has experimental support for Windows (Not as fast or well tested).
 
 ## Features
 
@@ -13,7 +13,7 @@
 ## Issue Tracker
 
 **Note: This is just the [VS Code extension that spawns Phan](https://github.com/TysonAndre/vscode-php-phan). Phan is implemented purely in PHP [in its own repository](https://github.com/phan/phan),
-bugs in Phan analysis need to be implemented there and all issues should be reported [there](https://github.com/phan/phan/issues).**
+bugs in Phan analysis need to be fixed there and all issues should be reported [there](https://github.com/phan/phan/issues).**
 
 However, bugs in this VS code extension (crashes, etc) or related to the language server protocol should be reported [in this extension's issue tracker](https://github.com/TysonAndre/vscode-php-phan/issues)
 
@@ -23,10 +23,11 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
 
 1. PHP 7.1+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
-2. Your Operating System must be Unix/Linux
+2. `pcntl` is recommended. (Available on Unix/Linux)
    (Phan's Language Server Protocol support depends on `pcntl` module being installed, which is only available on those platforms)
 
-   A future release may support Windows, but it won't be as fast.
+   0.2.0 has experimental support for running the Phan server without `pcntl`
+   (It manually backs up, analyzes the requested files, then restores the server's state instead of forking to analyze)
 3. (Optional) For optimal performance and accuracy of analysis,
    [the `php-ast` PECL extension](https://pecl.php.net/package/ast) should be installed and enabled.
 
@@ -108,6 +109,16 @@ And then point to that phan installation:
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
 ## Release History
+
+### 0.2.0 (2018-02-18)
+
+- Allow running this extension without `pcntl` installed. (`pcntl` was not available for Windows)
+  Previously, `pcntl` was required to allow Phan to fork and run analysis in a thread that did not affect the main thread. (This is no longer mandatory)
+
+  To make this extension refuse to start if `pcntl` is not installed, set `phan.allowMissingPcntl` to false.
+- Add initial support for array shapes and allow using array shapes in phpdoc.
+  (E.g. `['x']` is now inferred as `array{0:string}` instead of `array<int,string>`)
+- See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/e8abea1ee1cd0650b492ed262a9e3f81ac7a5790/NEWS.md) for more details.
 
 ### 0.1.0 (2018-02-16)
 

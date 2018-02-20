@@ -159,6 +159,20 @@
           ],
           "default": true,
           "description": "If set to true, this extension will run even if php-ast is not installed. Installing php-ast is strongly recommended for performance reasons and for consistency with full Phan analysis."
+        },
+        "phan.allowMissingPcntl": {
+          "type": [
+            "boolean"
+          ],
+          "default": true,
+          "description": "If set to true, this extension will use a substitute for pcntl if pcntl is not installed (New and experimental). This must be set to true on Windows."
+        },
+        "phan.forceMissingPcntl": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Useful for debugging. Forces Phan to manually save and restore the analyzed project's state instead of using pcntl"
         }
       }
     }

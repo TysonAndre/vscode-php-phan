@@ -87,22 +87,24 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     }
     return true;
 }
+
 async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
     let stdout = '';
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'var_export(extension_loaded("pcntl"));']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + ' PHP path: ' + phpExecutablePath);
+        vscode.window.showErrorMessage('Error spawning PHP to determine if pcntl is installed: ' + err.message + ' PHP path: ' + phpExecutablePath);
         console.error(err);
         return false;
     }
 
     if (!stdout.match(/^true/)) {
-        vscode.window.showErrorMessage('pcntl(PHP module) is not installed or not enabled (also, pcntl can\'t be installed on Windows). PHP Path: ' + phpExecutablePath);
+        vscode.window.showErrorMessage('pcntl(PHP module) is not installed or not enabled. Either install and enable pcntl (impossible on Windows), or enable phan.allowMissingPcntl. PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
 }
+
 
 function isFile(path: string): boolean {
     try {
@@ -184,6 +186,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const memoryLimit = conf.get<string>('memoryLimit') || null;
     const connectToServerWithStdio = conf.get<boolean>('connectToServerWithStdio');
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
+    const forceMissingPcntl = conf.get<boolean>('forceMissingPcntl') || false;
+    const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
 
@@ -198,10 +202,12 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         return;
     }
 
-    // Check if pcntl is installed
-    const isPHPPcntlInstalled: boolean = await checkPHPPcntlInstalled(context, phpExecutablePath);
-    if (!isPHPPcntlInstalled) {
-        return;
+    if (!(allowMissingPcntl || forceMissingPcntl)) {
+        // Check if pcntl is installed
+        const isPHPPcntlInstalled: boolean = await checkPHPPcntlInstalled(context, phpExecutablePath);
+        if (!isPHPPcntlInstalled) {
+            return;
+        }
     }
 
     // Check if the phanScriptPath setting was provided.
@@ -248,6 +254,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (allowPolyfillParser) {
                 // php phan --allow-polyfill-parser [args]
                 args.unshift('--allow-polyfill-parser');
+            }
+            if (forceMissingPcntl) {
+                args.unshift('--language-server-force-missing-pcntl');
+            } else if (allowMissingPcntl) {
+                args.unshift('--language-server-allow-missing-pcntl');
             }
             if (enableDebugLog) {
                 // php phan --language-server-verbose [args]
