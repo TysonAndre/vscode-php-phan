@@ -131,75 +131,23 @@
             "time": "2017-11-28T21:30:01+00:00"
         },
         {
-            "name": "nikic/php-parser",
-            "version": "v3.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/e57b3a09784f846411aa7ed664eedb73e3399078",
-                "reference": "e57b3a09784f846411aa7ed664eedb73e3399078",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0|~5.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2018-01-25T21:31:33+00:00"
-        },
-        {
             "name": "phan/phan",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "c13eca421be0d8b91644687d475bfa3c1185ce6d"
+                "reference": "b784c6e6a28e7e3fc2188ac9d210abbcad46e94f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/c13eca421be0d8b91644687d475bfa3c1185ce6d",
-                "reference": "c13eca421be0d8b91644687d475bfa3c1185ce6d",
+                "url": "https://api.github.com/repos/phan/phan/zipball/b784c6e6a28e7e3fc2188ac9d210abbcad46e94f",
+                "reference": "b784c6e6a28e7e3fc2188ac9d210abbcad46e94f",
                 "shasum": ""
             },
             "require": {
                 "ext-ast": "^0.1.5",
                 "felixfbecker/advanced-json-rpc": "^3.0",
                 "microsoft/tolerant-php-parser": "0.0.9",
-                "nikic/php-parser": "~3.1.1",
                 "php": "~7.1.0 || ~7.2.0",
                 "sabre/event": "^5.0",
                 "symfony/console": "^2.3|^3.0|~4.0"
@@ -239,7 +187,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-02-16T20:50:59+00:00"
+            "time": "2018-02-20T00:40:37+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
