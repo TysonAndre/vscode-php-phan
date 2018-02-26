@@ -105,7 +105,6 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
     return true;
 }
 
-
 function isFile(path: string): boolean {
     try {
         let stat = fs.statSync(path);

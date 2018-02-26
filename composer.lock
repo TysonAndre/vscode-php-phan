@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad6d5f0e6384ed6a2e3aba7a53aa5140",
+    "content-hash": "2c862df5e4fbcbdebcd0fbdec278e4fc",
     "packages": [
+        {
+            "name": "composer/semver",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/semver.git",
+                "reference": "c7cb9a2095a074d131b65a8a0cd294479d785573"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c7cb9a2095a074d131b65a8a0cd294479d785573",
+                "reference": "c7cb9a2095a074d131b65a8a0cd294479d785573",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.2 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5 || ^5.0.5",
+                "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\Semver\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                },
+                {
+                    "name": "Rob Bast",
+                    "email": "rob.bast@gmail.com",
+                    "homepage": "http://robbast.nl"
+                }
+            ],
+            "description": "Semver library that offers utilities, version constraint parsing and validation.",
+            "keywords": [
+                "semantic",
+                "semver",
+                "validation",
+                "versioning"
+            ],
+            "time": "2016-08-30T16:08:34+00:00"
+        },
         {
             "name": "felixfbecker/advanced-json-rpc",
             "version": "v3.0.1",
@@ -132,23 +194,24 @@
         },
         {
             "name": "phan/phan",
-            "version": "dev-master",
+            "version": "0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "b784c6e6a28e7e3fc2188ac9d210abbcad46e94f"
+                "reference": "a19241bf2ff9c94fad665afade533ca815b251dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/b784c6e6a28e7e3fc2188ac9d210abbcad46e94f",
-                "reference": "b784c6e6a28e7e3fc2188ac9d210abbcad46e94f",
+                "url": "https://api.github.com/repos/phan/phan/zipball/a19241bf2ff9c94fad665afade533ca815b251dd",
+                "reference": "a19241bf2ff9c94fad665afade533ca815b251dd",
                 "shasum": ""
             },
             "require": {
+                "composer/semver": "^1.4",
                 "ext-ast": "^0.1.5",
                 "felixfbecker/advanced-json-rpc": "^3.0",
                 "microsoft/tolerant-php-parser": "0.0.9",
-                "php": "~7.1.0 || ~7.2.0",
+                "php": "^7.0.0",
                 "sabre/event": "^5.0",
                 "symfony/console": "^2.3|^3.0|~4.0"
             },
@@ -187,7 +250,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-02-20T00:40:37+00:00"
+            "time": "2018-02-26T00:28:37+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -582,9 +645,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phan/phan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
