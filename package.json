@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "engines": {
     "vscode": "^1.16.0",
     "os": [

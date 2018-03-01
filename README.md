@@ -128,6 +128,11 @@ General troubleshooting advice:
 
 ## Release History
 
+### 0.3.1 (2018-02-28)
+
+- Upgrade Phan from 0.12.0 to 0.12.1
+- See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/0.12.1/NEWS.md) for more details.
+
 ### 0.3.0 (2018-02-18)
 
 - Add initial support for analyzing code for different php minor versions (PHP 7.0, 7.1, and 7.2).

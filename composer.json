@@ -1,7 +1,13 @@
 {
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.0.24"
+        }
+    },
     "require": {
-        "phan/phan": "0.12.0"
+        "php": "^7.0.0",
+        "phan/phan": "0.12.1"
     }
 }
