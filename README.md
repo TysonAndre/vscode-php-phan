@@ -48,8 +48,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Path to a php 7.0+ binary (preferably with the php-ast PECL extension installed and enabled)
-    // This should be as similar as possible as the php installation used to run Phan 
-	// (Same php minor version, same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
+    // This should be as similar as possible as the php installation used to run Phan
+    // (Same php minor version, same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
     // On windows, this would be "C:\\path\\to\\php-7.0-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
@@ -127,6 +127,11 @@ General troubleshooting advice:
   This will let you see this extension's Phan's debug output.
 
 ## Release History
+
+### 0.3.2 (2018-02-28)
+
+- Upgrade Phan from 0.12.1 to 0.12.3
+- See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/0.12.3/NEWS.md) for more details.
 
 ### 0.3.1 (2018-02-28)
 
