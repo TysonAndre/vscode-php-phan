@@ -128,6 +128,11 @@ General troubleshooting advice:
 
 ## Release History
 
+### 0.3.3 (2018-02-28)
+
+- Upgrade Phan from 0.12.3 to 0.12.7(dev)
+- See [Phan's NEWS](https://raw.githubusercontent.com/phan/phan/10ce2af0ed1956e6b4e92a121be1c4b6d3fae45b/NEWS.md) for more details.
+
 ### 0.3.2 (2018-02-28)
 
 - Upgrade Phan from 0.12.1 to 0.12.3
