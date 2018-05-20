@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.3.4",
+  "version": "0.3.5",
   "engines": {
-    "vscode": "^1.16.0",
+    "vscode": "^1.17.0",
     "os": [
       "darwin",
       "linux"
@@ -51,7 +51,7 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.14",
+    "@types/node": "^8.10.17",
     "@types/semver": "^5.5.0",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3",
@@ -61,7 +61,7 @@
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.5.0",
-    "vscode-languageclient": "^3.5.1"
+    "vscode-languageclient": "^4.1.4"
   },
   "contributes": {
     "configuration": {
@@ -90,6 +90,13 @@
           ],
           "default": false,
           "description": "Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires restart)"
+        },
+        "phan.enableGoToDefinition": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to make Phan support \"Go To Definition\" requests. This is disabled by default, since this is experimental and overlaps with \"PHP IntelliSense\"."
         },
         "phan.analyzedFileExtensions": {
           "type": [

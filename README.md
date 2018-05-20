@@ -7,6 +7,8 @@
 ## Features
 
 + Adds improved [error detection from Phan](https://github.com/phan/phan#features) to Visual Studio Code.
++ Supports "Go to definition" and "Go to type definition" (requires `"phan.enableGoToDefinition": true`).
+  (Has some bugs when `pcntl` is unavailable)
 + Analyze code while you're typing.
 + Optionally analyze code with syntax errors.
 
@@ -53,6 +55,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // On windows, this would be "C:\\path\\to\\php-7.0-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
+    // Useful if you aren't already using another extension. Off by default.
+    // for "Go To Definition" and "Go To Type Definition"
+    "phan.enableGoToDefinition": true,
+
     // Files which this should analyze
     "phan.analyzedFileExtensions": ["php"]
 }
@@ -76,6 +82,12 @@ Phan's capabilities are summarized in [Phan's README](https://github.com/phan/ph
 
 Optional, enabled by the setting `phan.useFallbackParser`
 
+### Go To Definition
+
++ Support "Go to definition" for properties, classes, global/class constants, and methods/global functions
++ Support "Go to type definition" for variables, properties, classes, and methods/global functions
+
+This is disabled by default. You must set `"phan.enableGoToDefinition": true` in your `config.json` settings to enable this.
 
 ## Contributing
 
@@ -127,6 +139,12 @@ General troubleshooting advice:
   This will let you see this extension's Phan's debug output.
 
 ## Release History
+
+### 0.3.5 (2018-05-20)
+
+- Support "Go To Definition" and "Go to Type Definition"
+- Upgrade Phan from 0.12.8 to 0.12.9(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/66442c287b894854b0630a018e4a06525493e2c3/NEWS.md) for more details.
 
 ### 0.3.4 (2018-05-12)
 
