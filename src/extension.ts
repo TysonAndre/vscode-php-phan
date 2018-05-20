@@ -186,6 +186,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const connectToServerWithStdio = conf.get<boolean>('connectToServerWithStdio');
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
     const forceMissingPcntl = conf.get<boolean>('forceMissingPcntl') || false;
+    const enableGoToDefinition = conf.get<boolean>('enableGoToDefinition') || false;
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
@@ -243,15 +244,19 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 args.unshift('--memory-limit', memoryLimit);
             }
             if (useFallbackParser) {
-                // php phan --use-fallback-parser [args]
+                // php phan --use-fallback-parser ...
                 args.unshift('--use-fallback-parser');
             }
             if (analyzeOnlyOnSave) {
-                // php phan --language-server-analyze-only-on-save [args]
+                // php phan --language-server-analyze-only-on-save ...
                 args.unshift('--language-server-analyze-only-on-save');
             }
+            if (enableGoToDefinition) {
+                // php phan --language-server-enable-go-to-definition
+                args.unshift('--language-server-enable-go-to-definition');
+            }
             if (allowPolyfillParser) {
-                // php phan --allow-polyfill-parser [args]
+                // php phan --allow-polyfill-parser ...
                 args.unshift('--allow-polyfill-parser');
             }
             if (forceMissingPcntl) {
