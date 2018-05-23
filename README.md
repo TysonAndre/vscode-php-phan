@@ -140,6 +140,15 @@ General troubleshooting advice:
 
 ## Release History
 
+### 0.3.6 (2018-05-22)
+
+- Add `@phan-suppress-current-line` and `@phan-suppress-next-line` to suppress issues on individual lines of a file.
+- Allow `@phan-file-suppress` to occur anywhere as a comment or doc comment
+- Make all of Phan's suppression annotations accept comma separated lists of 1 or more issues, instead of just one list.
+  (E.g. for when a group of issues have the same cause).
+- Upgrade Phan from 0.12.9(dev) to 0.12.9
+- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.9/NEWS.md) for more details.
+
 ### 0.3.5 (2018-05-20)
 
 - Support "Go To Definition" and "Go to Type Definition"
