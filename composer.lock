@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "be4b0e4c56359a3aea7b98240a76364b",
+    "content-hash": "03f424a2707d5f50bdc6c1189503bf66",
     "packages": [
         {
             "name": "composer/semver",
@@ -238,16 +238,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "0.12.9",
+            "version": "0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "fa7099363165e07e526e2dd4b7480b80c6fb1c42"
+                "reference": "f209e2c10e187eb7e27ed067c867432fec0df5a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/fa7099363165e07e526e2dd4b7480b80c6fb1c42",
-                "reference": "fa7099363165e07e526e2dd4b7480b80c6fb1c42",
+                "url": "https://api.github.com/repos/phan/phan/zipball/f209e2c10e187eb7e27ed067c867432fec0df5a6",
+                "reference": "f209e2c10e187eb7e27ed067c867432fec0df5a6",
                 "shasum": ""
             },
             "require": {
@@ -295,7 +295,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-05-23T04:04:32+00:00"
+            "time": "2018-05-27T19:45:14+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -558,7 +558,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.10",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -627,7 +627,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.10",
+            "version": "v3.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",

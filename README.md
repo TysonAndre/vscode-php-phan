@@ -59,6 +59,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // for "Go To Definition" and "Go To Type Definition"
     "phan.enableGoToDefinition": true,
 
+    // Enable unused variable detection
+	// (off by default. This can also be enabled in `.phan/config.php` by `"unused_variable_detection" => true,`)
+    "phan.unusedVariableDetection": true,
+
     // Files which this should analyze
     "phan.analyzedFileExtensions": ["php"]
 }
@@ -139,6 +143,12 @@ General troubleshooting advice:
   This will let you see this extension's Phan's debug output.
 
 ## Release History
+
+### 0.3.7 (2018-05-27)
+
+- Support unused variable detection. (Disabled by default. This can be enabled by `phan.unusedVariableDetection`)
+- Upgrade Phan from 0.12.9 to 0.12.10.
+- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.9/NEWS.md) for more details.
 
 ### 0.3.6 (2018-05-22)
 

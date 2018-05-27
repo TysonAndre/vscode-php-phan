@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.3.6",
+  "version": "0.3.7",
   "engines": {
     "vscode": "^1.17.0",
     "os": [
@@ -56,7 +56,7 @@
     "tslint": "^5.10.0",
     "typescript": "^2.8.3",
     "vsce": "^1.40.0",
-    "vscode": "^1.1.17"
+    "vscode": "^1.1.18"
   },
   "dependencies": {
     "mz": "^2.4.0",
@@ -127,6 +127,13 @@
           ],
           "default": false,
           "description": "Enable this to speed up phan analysis without recursing into function calls. Slightly faster. (Modifying requires restart)"
+        },
+        "phan.unusedVariableDetection": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to enable unused variable and parameter detection (analyzes the implementations of functions, methods, and closures)"
         },
         "phan.memoryLimit": {
           "type": [

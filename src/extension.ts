@@ -189,6 +189,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const enableGoToDefinition = conf.get<boolean>('enableGoToDefinition') || false;
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
+    const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
@@ -265,12 +266,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 args.unshift('--language-server-allow-missing-pcntl');
             }
             if (enableDebugLog) {
-                // php phan --language-server-verbose [args]
+                // php phan --language-server-verbose ...
                 args.unshift('--language-server-verbose');
             }
             if (quick) {
-                // php phan --quick [args]
+                // php phan --quick ...
                 args.unshift('--quick');
+            }
+            if (unusedVariableDetection) {
+                // php phan ----unused-variable-detection ...
+                args.unshift('--unused-variable-detection');
             }
 
             // The server is implemented in PHP
