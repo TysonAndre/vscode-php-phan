@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "03f424a2707d5f50bdc6c1189503bf66",
+    "content-hash": "1bcdd07d19bdaa486d14522e6a386888",
     "packages": [
         {
             "name": "composer/semver",
@@ -238,16 +238,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "0.12.10",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "f209e2c10e187eb7e27ed067c867432fec0df5a6"
+                "reference": "2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/f209e2c10e187eb7e27ed067c867432fec0df5a6",
-                "reference": "f209e2c10e187eb7e27ed067c867432fec0df5a6",
+                "url": "https://api.github.com/repos/phan/phan/zipball/2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997",
+                "reference": "2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997",
                 "shasum": ""
             },
             "require": {
@@ -295,7 +295,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-05-27T19:45:14+00:00"
+            "time": "2018-05-28T20:03:09+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -794,7 +794,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "phan/phan": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

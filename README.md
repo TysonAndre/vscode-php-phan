@@ -2,7 +2,7 @@
 
 [![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.0-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Supports Unix/Linux.** As of version 0.2.0, this has experimental support for Windows (Not as fast or well tested).
+**Supports Unix/Linux, and Windows(experimental).** As of version 0.3.8, the experimental support for Windows was improved.
 
 ## Features
 
@@ -144,11 +144,16 @@ General troubleshooting advice:
 
 ## Release History
 
+### 0.3.8 (2018-05-29)
+
+- Improve reliability of this extension when `pcntl` is unavailable (e.g. on Windows)
+- Upgrade Phan from 0.12.10 to 0.12.11(dev)
+
 ### 0.3.7 (2018-05-27)
 
 - Support unused variable detection. (Disabled by default. This can be enabled by `phan.unusedVariableDetection`)
 - Upgrade Phan from 0.12.9 to 0.12.10.
-- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.9/NEWS.md) for more details.
+- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.10/NEWS.md) for more details.
 
 ### 0.3.6 (2018-05-22)
 
