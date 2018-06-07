@@ -3,3 +3,4 @@ node_modules/
 vendor/
 typings/
 .DS_Store
+*.vsix
