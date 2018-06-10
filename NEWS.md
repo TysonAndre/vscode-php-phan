@@ -1,6 +1,12 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.3.9 (2018-06-10)
+
+- Upgrade Phan from 0.12.11(dev) to 0.12.13(dev)
+- Fix some crashes when parsing invalid ASTs, detect a few more issue types
+- See [Phan's NEWS](https://github.com/phan/phan/blob/358d5641e26af21c00180fdd9d7d202913e831ca/NEWS.md) for more details.
+
 ### 0.3.8 (2018-05-29)
 
 - Improve reliability of this extension when `pcntl` is unavailable (e.g. on Windows)

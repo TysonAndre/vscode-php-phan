@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "1bcdd07d19bdaa486d14522e6a386888",
@@ -242,12 +242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997"
+                "reference": "358d5641e26af21c00180fdd9d7d202913e831ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997",
-                "reference": "2b2fc8b5cdc8f296ad9ce394bc20963d53c7d997",
+                "url": "https://api.github.com/repos/phan/phan/zipball/358d5641e26af21c00180fdd9d7d202913e831ca",
+                "reference": "358d5641e26af21c00180fdd9d7d202913e831ca",
                 "shasum": ""
             },
             "require": {
@@ -262,6 +262,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.3.0"
+            },
+            "suggest": {
+                "ext-tokenizer": "Needed for non-AST support and file/line-based suppressions"
             },
             "bin": [
                 "phan",
@@ -295,7 +298,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-05-28T20:03:09+00:00"
+            "time": "2018-06-10T21:06:39+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
