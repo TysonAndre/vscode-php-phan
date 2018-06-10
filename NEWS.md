@@ -1,6 +1,11 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.4.0 (2018-06-10)
+
+- Support passing an array of project paths to `phan.analyzedProjectDirectory` to run multiple independent language servers.
+- Increase minimum vscode version to 1.20.0 to fix `npm run build` issue (typescript warning)
+
 ### 0.3.9 (2018-06-10)
 
 - Upgrade Phan from 0.12.11(dev) to 0.12.13(dev)

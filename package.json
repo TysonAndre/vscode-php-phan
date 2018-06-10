@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.3.9",
+  "version": "0.4.0",
   "engines": {
-    "vscode": "^1.17.0",
+    "vscode": "^1.20.0",
     "os": [
       "darwin",
       "linux"
@@ -79,10 +79,14 @@
         "phan.analyzedProjectDirectory": {
           "type": [
             "string",
+            "array",
             "null"
           ],
+          "items": {
+            "type": "string"
+          },
           "default": null,
-          "description": "Required. The path to the only project folder which Phan will analyze. `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
+          "description": "Required. The path to a project folder which Phan will analyze (or an array of 1 or more folders to independently analyze). `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
         },
         "phan.enableDebugLog": {
           "type": [
