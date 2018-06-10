@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.3.8",
+  "version": "0.3.9",
   "engines": {
     "vscode": "^1.17.0",
     "os": [
@@ -51,17 +51,17 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.17",
+    "@types/node": "^8.10.19",
     "@types/semver": "^5.5.0",
     "tslint": "^5.10.0",
-    "typescript": "^2.8.3",
-    "vsce": "^1.41.0",
+    "typescript": "^2.9.1",
+    "vsce": "^1.42.0",
     "vscode": "^1.1.18"
   },
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.5.0",
-    "vscode-languageclient": "^4.1.4"
+    "vscode-languageclient": "^4.2.1"
   },
   "contributes": {
     "configuration": {
@@ -74,7 +74,7 @@
             "null"
           ],
           "default": null,
-          "description": "Optional, defaults to searching for \"php\". The path to a PHP 7.1+ executable to use to execute the Phan server. The PHP 7.1+ installation must include and enable the PHP modules `pcntl`, as well as the third party `ast` (php-ast) module from https://pecl.php.net/ast\nFor best analysis results, install and enable the same PECL extensions that are used by the project being analyzed. (Modifying requires restart)"
+          "description": "Optional, defaults to searching for \"php\". The path to a PHP 7.0+ executable to use to execute the Phan server. The PHP 7.0+ installation should preferably include and enable the PHP modules `pcntl`, as well as the third party `ast` (php-ast) module from https://pecl.php.net/ast\nFor the best analysis results, install and enable the same PECL extensions that are used by the project being analyzed. (Modifying requires restart)"
         },
         "phan.analyzedProjectDirectory": {
           "type": [
@@ -126,7 +126,7 @@
             "boolean"
           ],
           "default": false,
-          "description": "Enable this to speed up phan analysis without recursing into function calls. Slightly faster. (Modifying requires restart)"
+          "description": "Enable this to speed up phan analysis by not recursing into function calls. Slightly faster. (Modifying requires restart)"
         },
         "phan.unusedVariableDetection": {
           "type": [
@@ -165,7 +165,7 @@
             "null"
           ],
           "default": null,
-          "description": "Optional (Advanced). If provided, this overrides the Phan script to use (using a Phan branch supporting the Language Server Protocol). e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
+          "description": "Optional (Advanced). If provided, this overrides the Phan script to use, e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
         },
         "phan.allowPolyfillParser": {
           "type": [

@@ -51,7 +51,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 
     // Path to a php 7.0+ binary (preferably with the php-ast PECL extension installed and enabled)
     // This should be as similar as possible as the php installation used to run Phan
-    // (Same php minor version, same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
+    // (Same php minor version,
+    //  same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
     // On windows, this would be "C:\\path\\to\\php-7.0-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
@@ -60,7 +61,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     "phan.enableGoToDefinition": true,
 
     // Enable unused variable detection
-    // (off by default. This can also be enabled in `.phan/config.php` by `"unused_variable_detection" => true,`)
+    // (off by default. This can also be enabled in `.phan/config.php`
+    // by `"unused_variable_detection" => true,`)
     "phan.unusedVariableDetection": true,
 
     // Files which this should analyze
@@ -130,19 +132,13 @@ And then point to that phan installation:
 
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
-## Troubleshooting
-
-General troubleshooting advice:
-
-- By setting `phan.enableDebugLog` to true (and restarting Phan), you can get extra debug output.
-  Enabling debug output will slow down this extension.
-
-- After any changes to the phan settings, the language server must be restarted.
-
-- VSCode has a built in debugger at "Help" > "Toggle Developer Tools" ( "Console" tab)
-  This will let you see this extension's Phan's debug output.
-
 ## Release History
+
+### 0.3.9 (2018-06-10)
+
+- Upgrade Phan from 0.12.11(dev) to 0.12.13(dev)
+- Fix some crashes when parsing invalid ASTs, detect a few more issue types
+- See [Phan's NEWS](https://github.com/phan/phan/blob/358d5641e26af21c00180fdd9d7d202913e831ca/NEWS.md) for more details.
 
 ### 0.3.8 (2018-05-29)
 
@@ -156,6 +152,18 @@ General troubleshooting advice:
 - See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.10/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
+
+## Troubleshooting
+
+General troubleshooting advice:
+
+- By setting `phan.enableDebugLog` to true (and restarting Phan), you can get extra debug output.
+  Enabling debug output will slow down this extension.
+
+- After any changes to the phan settings, the language server must be restarted.
+
+- VSCode has a built in debugger at "Help" > "Toggle Developer Tools" ( "Console" tab)
+  This will let you see this extension's Phan's debug output.
 
 ## Installing from source
 
