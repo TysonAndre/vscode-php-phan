@@ -42,11 +42,12 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 
 ```javascript
 {
-    // Currently, this extension is limited to analyzing only a single folder.
-    // The config value must be the root of the project,
-    // and contain a .phan/config.php file with a Phan config for that project
+    // The path to a project folder which Phan will analyze
+    // (or an array of 1 or more folders to independently analyze).
+    // Each project folder must be the root of a Phan project,
+    // and contain a .phan/config.php file with a Phan config for that project.
     // (including files to parse and analyze).
-    // On windows, this would be a path such as "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
+    // On windows, a project folder would be a path such as "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Path to a php 7.0+ binary (preferably with the php-ast PECL extension installed and enabled)
@@ -133,6 +134,11 @@ And then point to that phan installation:
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
 ## Release History
+
+### 0.4.0 (2018-06-10)
+
+- Support passing an array of project paths to `phan.analyzedProjectDirectory` to run multiple independent language servers.
+- Increase minimum vscode version to 1.20.0 to fix `npm run build` issue (typescript warning)
 
 ### 0.3.9 (2018-06-10)
 

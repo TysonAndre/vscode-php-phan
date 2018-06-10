@@ -169,15 +169,25 @@ async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionConte
     return true;
 }
 
+function normalizeDirsToAnalyze(conf: string|string[]|undefined): string[] {
+    if (!conf) {
+        return [];
+    }
+    if (conf instanceof Array) {
+        return conf;
+    }
+    return [conf];
+}
+
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
     const conf = vscode.workspace.getConfiguration('phan');
     const phpExecutablePath = conf.get<string>('phpExecutablePath') || 'php';
     const defaultPhanScriptPath = context.asAbsolutePath(path.join('vendor', 'phan', 'phan', 'phan'));
     const phanScriptPath = conf.get<string>('phanScriptPath') || defaultPhanScriptPath;
-    // TODO: Support analyzing more than one project.
-    // TODO: Figure out how to stop the language server when a different project is opened.
-    const analyzedProjectDirectory = conf.get<string>('analyzedProjectDirectory') || '';
+    // Support analyzing more than one project the simplest way (always start every server).
+    const originalAnalyzedProjectDirectories = conf.get<string|string[]>('analyzedProjectDirectory');
+    const analyzedProjectDirectories = normalizeDirsToAnalyze(originalAnalyzedProjectDirectories);
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const useFallbackParser = conf.get<boolean>('useFallbackParser');
     const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
@@ -223,18 +233,27 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }
     const phanScriptPathValidated = phanScriptPath;  // work around typescript complaint.
 
-    // Check if the analyzedProjectDirectory setting was provided.
-    if (!analyzedProjectDirectory) {
-        await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory must be provided (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
+    // Check if the analyzedProjectDirectories setting was provided.
+    if (!analyzedProjectDirectories) {
+        if (originalAnalyzedProjectDirectories instanceof Array) {
+            await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectories must be a path or a non-empty array of paths (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
+        } else {
+            await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectories must be provided (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
+        }
         return;
     }
 
-    const isValidProjectDirectory: boolean = await checkValidAnalyzedProjectDirectory(context, analyzedProjectDirectory);
-    if (!isValidProjectDirectory) {
-        return;
+    for (const dir of analyzedProjectDirectories) {
+        const isValidProjectDirectory: boolean = await checkValidAnalyzedProjectDirectory(
+            context,
+            dir
+        );
+        if (!isValidProjectDirectory) {
+            return;
+        }
     }
 
-    const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
+    const serverOptionsCallbackForDirectory = (dirToAnalyze: string) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         // Listen on random port
         const spawnServer = (...args: string[]): ChildProcess => {
             if (additionalCLIFlags.length > 0) {
@@ -281,8 +300,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             // The server is implemented in PHP
             args.unshift(phanScriptPathValidated);
             console.log('starting Phan Language Server', phpExecutablePath, args);
-            // TODO: determine path from current working directory
-            const childProcess = spawn(phpExecutablePath, args, {cwd: analyzedProjectDirectory});
+            // Phan searches for .phan/config.php within dirToAnalyze,
+            // and bases the settings on that.
+            // TODO: add mode which will determine path from current working directory
+            const childProcess = spawn(phpExecutablePath, args, {cwd: dirToAnalyze});
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
             });
@@ -313,10 +334,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 spawnServer('--language-server-tcp-connect=127.0.0.1:' + server.address().port);
             });
         } else {
-            // Use STDIO on Linux / Mac if the user set the override `connectToServerWithStdio: true` in their config
+            // Use STDIO on Linux / Mac if the user set
+            // the override `"phan.connectToServerWithStdio": true` in their config.
             resolve(spawnServer('--language-server-on-stdin'));
         }
-    });
+    }));
 
     // Options to control the language client
     const clientOptions: LanguageClientOptions = {
@@ -337,9 +359,15 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
     console.log('starting PHP Phan language server');
     // Create the language client and start the client.
-    const disposable = new LanguageClient('Phan Language Server', serverOptions, clientOptions).start();
+    for (const dirToAnalyze of analyzedProjectDirectories) {
+        const disposable = new LanguageClient(
+            'Phan Language Server',
+            serverOptionsCallbackForDirectory(dirToAnalyze),
+            clientOptions
+        ).start();
 
-    // Push the disposable to the context's subscriptions so that the
-    // client can be deactivated on extension deactivation
-    context.subscriptions.push(disposable);
+        // Push the disposable to the context's subscriptions so that the
+        // client can be deactivated on extension deactivation
+        context.subscriptions.push(disposable);
+    }
 }
