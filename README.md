@@ -135,6 +135,13 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.4.1 (2018-06-17)
+
+- Update Phan from 0.12.13(dev) to 0.12.14(dev)
+- Add support for int/string literal union types (in phpdoc and Phan's internal representation)
+- Fix more crashes when parsing invalid ASTs, detect a few more issue types.
+- See [Phan's NEWS](https://github.com/phan/phan/blob/c70efbe41ba9d5eae9e51bab01e13120b0c3f3c4/NEWS.md) for more details.
+
 ### 0.4.0 (2018-06-10)
 
 - Support passing an array of project paths to `phan.analyzedProjectDirectory` to run multiple independent language servers.
