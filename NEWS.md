@@ -1,6 +1,12 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.4.2 (2018-07-08)
+
+- Update Phan from 0.12.14(dev) to 0.12.14
+- Add new features and bug fixes. See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.14/NEWS.md) for more details.
+- Support "go to definition" for class names within code comments.
+
 ### 0.4.1 (2018-06-17)
 
 - Update Phan from 0.12.13(dev) to 0.12.14(dev)

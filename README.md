@@ -135,6 +135,12 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.4.2 (2018-07-08)
+
+- Update Phan from 0.12.14(dev) to 0.12.14
+- Add new features and bug fixes. See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.14/NEWS.md) for more details.
+- Support "go to definition" for class names within code comments.
+
 ### 0.4.1 (2018-06-17)
 
 - Update Phan from 0.12.13(dev) to 0.12.14(dev)
@@ -152,17 +158,6 @@ And then point to that phan installation:
 - Upgrade Phan from 0.12.11(dev) to 0.12.13(dev)
 - Fix some crashes when parsing invalid ASTs, detect a few more issue types
 - See [Phan's NEWS](https://github.com/phan/phan/blob/358d5641e26af21c00180fdd9d7d202913e831ca/NEWS.md) for more details.
-
-### 0.3.8 (2018-05-29)
-
-- Improve reliability of this extension when `pcntl` is unavailable (e.g. on Windows)
-- Upgrade Phan from 0.12.10 to 0.12.11(dev)
-
-### 0.3.7 (2018-05-27)
-
-- Support unused variable detection. (Disabled by default. This can be enabled by `phan.unusedVariableDetection`)
-- Upgrade Phan from 0.12.9 to 0.12.10.
-- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.10/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
