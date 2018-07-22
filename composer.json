@@ -8,6 +8,6 @@
     },
     "require": {
         "php": "^7.0.0",
-        "phan/phan": "0.12.15"
+        "phan/phan": "dev-master"
     }
 }

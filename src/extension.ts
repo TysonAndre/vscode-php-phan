@@ -45,7 +45,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(version, '7.0.0')) {
-        vscode.window.showErrorMessage('Phan 0.12.x needs at least PHP 7.0 installed (and php-language-server needs at least 7.0). Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
+        vscode.window.showErrorMessage('Phan 1.x needs at least PHP 7.0 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;

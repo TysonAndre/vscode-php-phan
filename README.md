@@ -135,36 +135,17 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.5.0 (2018-08-14)
+
+- Update Phan from 0.12.15 to 1.0.1(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/a4e9af8116f822a5efac1f729cfce8ba92b29e1e/NEWS.md) for more details.
+
 ### 0.4.3 (2018-07-21)
 
 - Update Phan from 0.12.14 to 0.12.15
 - Add `phan.enableHover` (disabled by default, may be slow)
 - PHP 7.3.0alpha4 compatibility fixes
 - See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.15/NEWS.md) for more details.
-
-### 0.4.2 (2018-07-08)
-
-- Update Phan from 0.12.14(dev) to 0.12.14
-- Add new features and bug fixes. See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.14/NEWS.md) for more details.
-- Support "go to definition" for class names within code comments.
-
-### 0.4.1 (2018-06-17)
-
-- Update Phan from 0.12.13(dev) to 0.12.14(dev)
-- Add support for int/string literal union types (in phpdoc and Phan's internal representation)
-- Fix more crashes when parsing invalid ASTs, detect a few more issue types.
-- See [Phan's NEWS](https://github.com/phan/phan/blob/c70efbe41ba9d5eae9e51bab01e13120b0c3f3c4/NEWS.md) for more details.
-
-### 0.4.0 (2018-06-10)
-
-- Support passing an array of project paths to `phan.analyzedProjectDirectory` to run multiple independent language servers.
-- Increase minimum vscode version to 1.20.0 to fix `npm run build` issue (typescript warning)
-
-### 0.3.9 (2018-06-10)
-
-- Upgrade Phan from 0.12.11(dev) to 0.12.13(dev)
-- Fix some crashes when parsing invalid ASTs, detect a few more issue types
-- See [Phan's NEWS](https://github.com/phan/phan/blob/358d5641e26af21c00180fdd9d7d202913e831ca/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
