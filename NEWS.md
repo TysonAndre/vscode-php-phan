@@ -1,6 +1,13 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.4.3 (2018-07-21)
+
+- Update Phan from 0.12.14 to 0.12.15
+- Add `phan.enableHover` (disabled by default, may be slow)
+- PHP 7.3.0alpha4 compatibility fixes
+- See [Phan's NEWS](https://github.com/phan/phan/blob/0.12.15/NEWS.md) for more details.
+
 ### 0.4.2 (2018-07-08)
 
 - Update Phan from 0.12.14(dev) to 0.12.14

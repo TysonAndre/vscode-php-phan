@@ -17,15 +17,15 @@ async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
     }
 }
 
-// Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
+// Returns true if phan.phpExecutablePath is 7.0.0 or newer, and return false if it isn't (or php can't be found)
 async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
-    // Check path (if PHP is available and version is ^7.1.0)
+    // Check path (if PHP is available and version is ^7.0.0)
     let stdout: string;
     try {
         [stdout] = await execFile(phpExecutablePath, ['--version']);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
+            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.0+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
             vscode.window.showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
@@ -40,12 +40,12 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         return false;
     }
     let version = match[1].split('-')[0];
-    // Convert PHP prerelease format like 7.1.0rc1 to 7.1.0-rc1
+    // Convert PHP prerelease format such as 7.3.0rc1 to 7.3.0-rc1
     if (!/^\d+.\d+.\d+$/.test(version)) {
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
-    if (semver.lt(version, '7.1.0')) {
-        vscode.window.showErrorMessage('Phan 0.10.x needs at least PHP 7.1 installed (and php-language-server needs at least 7.0). Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
+    if (semver.lt(version, '7.0.0')) {
+        vscode.window.showErrorMessage('Phan 0.12.x needs at least PHP 7.0 installed (and php-language-server needs at least 7.0). Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -70,14 +70,14 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
         return false;
     }
 
-    // Parse version and discard OS info like 7.1.14--0ubuntu0.16.04.2
+    // Parse version of php-ast
     const astMatch = stdout.match(/^ext-ast ([^\s]+)/m);
     if (!astMatch) {
         vscode.window.showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`. PHP Path: ' + phpExecutablePath);
         return false;
     }
     let astVersion = astMatch[1].split('-')[0];
-    // Convert PHP prerelease format like 7.1.0rc1 to 7.1.0-rc1
+    // Convert PHP prerelease format such as 7.3.0rc1 to 7.3.0-rc1
     if (!/^\d+.\d+.\d+$/.test(astVersion)) {
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
@@ -197,6 +197,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const additionalCLIFlags = conf.get<string[]>('additionalCLIFlags') || [];
     const forceMissingPcntl = conf.get<boolean>('forceMissingPcntl') || false;
     const enableGoToDefinition = conf.get<boolean>('enableGoToDefinition') || false;
+    const enableHover = conf.get<boolean>('enableHover') || false;
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
@@ -274,6 +275,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (enableGoToDefinition) {
                 // php phan --language-server-enable-go-to-definition
                 args.unshift('--language-server-enable-go-to-definition');
+            }
+            if (enableHover) {
+                // php phan --language-server-enable-hover
+                args.unshift('--language-server-enable-hover');
             }
             if (allowPolyfillParser) {
                 // php phan --allow-polyfill-parser ...

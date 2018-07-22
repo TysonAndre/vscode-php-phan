@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.4.2",
+  "version": "0.4.3",
   "engines": {
     "vscode": "^1.20.0",
     "os": [
@@ -53,15 +53,15 @@
     "@types/mz": "0.0.31",
     "@types/node": "^8.10.21",
     "@types/semver": "^5.5.0",
-    "tslint": "^5.10.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.9.2",
-    "vsce": "^1.43.0",
+    "vsce": "^1.44.0",
     "vscode": "^1.1.18"
   },
   "dependencies": {
     "mz": "^2.4.0",
     "semver": "^5.5.0",
-    "vscode-languageclient": "^4.2.1"
+    "vscode-languageclient": "^4.3.0"
   },
   "contributes": {
     "configuration": {
@@ -100,7 +100,14 @@
             "boolean"
           ],
           "default": false,
-          "description": "Enable this to make Phan support \"Go To Definition\" requests. This is disabled by default, since this is experimental and overlaps with \"PHP IntelliSense\"."
+          "description": "Enable this to make Phan support \"Go To Definition\" requests. This is disabled by default, because this overlaps with \"PHP IntelliSense\"."
+        },
+        "phan.enableHover": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Enable this to make Phan support \"Hover\" requests. This is disabled by default, because this overlaps with \"PHP IntelliSense\"."
         },
         "phan.analyzedFileExtensions": {
           "type": [
