@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bcdd07d19bdaa486d14522e6a386888",
+    "content-hash": "838facc9cb345ba08f3283771b99010c",
     "packages": [
         {
             "name": "composer/semver",
@@ -70,16 +70,16 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "1.1.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "c919dc6c62e221fc6406f861ea13433c0aa24f08"
+                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/c919dc6c62e221fc6406f861ea13433c0aa24f08",
-                "reference": "c919dc6c62e221fc6406f861ea13433c0aa24f08",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/e37cbd80da64afe314c72de8d2d2fec0e40d9373",
+                "reference": "e37cbd80da64afe314c72de8d2d2fec0e40d9373",
                 "shasum": ""
             },
             "require": {
@@ -110,7 +110,7 @@
                 "Xdebug",
                 "performance"
             ],
-            "time": "2018-04-11T15:42:36+00:00"
+            "time": "2018-08-23T12:00:19+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -155,16 +155,16 @@
         },
         {
             "name": "microsoft/tolerant-php-parser",
-            "version": "v0.0.12",
+            "version": "v0.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Microsoft/tolerant-php-parser.git",
-                "reference": "bce97ae2fc06d9259368afdd813fe30e6415b6e5"
+                "reference": "89ade271e639e0612deeccb0555f13c2224ecf84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Microsoft/tolerant-php-parser/zipball/bce97ae2fc06d9259368afdd813fe30e6415b6e5",
-                "reference": "bce97ae2fc06d9259368afdd813fe30e6415b6e5",
+                "url": "https://api.github.com/repos/Microsoft/tolerant-php-parser/zipball/89ade271e639e0612deeccb0555f13c2224ecf84",
+                "reference": "89ade271e639e0612deeccb0555f13c2224ecf84",
                 "shasum": ""
             },
             "require": {
@@ -192,7 +192,7 @@
                 }
             ],
             "description": "Tolerant PHP-to-AST parser designed for IDE usage scenarios",
-            "time": "2018-06-11T23:33:48+00:00"
+            "time": "2018-08-07T04:52:21+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -238,16 +238,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "a4e9af8116f822a5efac1f729cfce8ba92b29e1e"
+                "reference": "47cd6776f746962a1d2ec986bf6fb90d95b2ce7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/a4e9af8116f822a5efac1f729cfce8ba92b29e1e",
-                "reference": "a4e9af8116f822a5efac1f729cfce8ba92b29e1e",
+                "url": "https://api.github.com/repos/phan/phan/zipball/47cd6776f746962a1d2ec986bf6fb90d95b2ce7d",
+                "reference": "47cd6776f746962a1d2ec986bf6fb90d95b2ce7d",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 "composer/xdebug-handler": "^1.1",
                 "ext-ast": "^0.1.5",
                 "felixfbecker/advanced-json-rpc": "^3.0",
-                "microsoft/tolerant-php-parser": "0.0.12",
+                "microsoft/tolerant-php-parser": "0.0.13",
                 "php": "^7.0.0",
                 "sabre/event": "^5.0",
                 "symfony/console": "^2.3|^3.0|~4.0"
@@ -298,7 +298,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-08-14T16:49:38+00:00"
+            "time": "2018-08-27T01:28:15+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -561,7 +561,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.14",
+            "version": "v3.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -630,16 +630,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.14",
+            "version": "v3.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "d5a058ff6ecad26b30c1ba452241306ea34c65cc"
+                "reference": "c4625e75341e4fb309ce0c049cbf7fb84b8897cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/d5a058ff6ecad26b30c1ba452241306ea34c65cc",
-                "reference": "d5a058ff6ecad26b30c1ba452241306ea34c65cc",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/c4625e75341e4fb309ce0c049cbf7fb84b8897cd",
+                "reference": "c4625e75341e4fb309ce0c049cbf7fb84b8897cd",
                 "shasum": ""
             },
             "require": {
@@ -682,7 +682,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-26T11:19:56+00:00"
+            "time": "2018-08-03T10:42:44+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -797,9 +797,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phan/phan": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

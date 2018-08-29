@@ -135,6 +135,11 @@ And then point to that phan installation:
 
 ## Release History
 
+### 0.5.1 (2018-08-28)
+
+- Update Phan from 1.0.1(dev) to 1.0.1
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.1/NEWS.md) for more details.
+
 ### 0.5.0 (2018-08-14)
 
 - Update Phan from 0.12.15 to 1.0.1(dev)
