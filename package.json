@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.5.1",
+  "version": "0.5.2",
   "engines": {
     "vscode": "^1.21.0",
     "os": [
@@ -51,11 +51,11 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.28",
+    "@types/node": "^8.10.29",
     "@types/semver": "^5.5.0",
     "tslint": "^5.11.0",
     "typescript": "^2.9.2",
-    "vsce": "^1.46.0",
+    "vsce": "^1.48.0",
     "vscode": "^1.1.21"
   },
   "dependencies": {
