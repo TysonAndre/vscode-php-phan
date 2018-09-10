@@ -57,16 +57,12 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // On windows, this would be "C:\\path\\to\\php-7.0-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
-    // Useful if you aren't already using another extension. Off by default.
-    // for "Go To Definition" and "Go To Type Definition"
-    "phan.enableGoToDefinition": true,
-
-    // Enable unused variable detection
+    // Optionally, enable unused variable detection
     // (off by default. This can also be enabled in `.phan/config.php`
     // by `"unused_variable_detection" => true,`)
     "phan.unusedVariableDetection": true,
 
-    // Files which this should analyze
+    // Files which this should analyze (e.g. "php", "html", "inc")
     "phan.analyzedFileExtensions": ["php"]
 }
 ```
@@ -134,6 +130,15 @@ And then point to that phan installation:
 **For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
 ## Release History
+
+### 0.5.3 (2018-09-10)
+
+- Update Phan from 1.0.3 to 1.0.4
+- Add hover text for variables.
+- Improve generating hover summaries from phpdoc.
+- Enable hover descriptions and "Go to Definition" support by default.
+  (Controlled by `phan.enableGoToDefinition` and `phan.enableHover`)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.4/NEWS.md) for more details.
 
 ### 0.5.2 (2018-09-08)
 

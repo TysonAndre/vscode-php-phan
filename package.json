@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.5.2",
+  "version": "0.5.3",
   "engines": {
     "vscode": "^1.21.0",
     "os": [
@@ -54,7 +54,7 @@
     "@types/node": "^8.10.29",
     "@types/semver": "^5.5.0",
     "tslint": "^5.11.0",
-    "typescript": "^2.9.2",
+    "typescript": "^3.0.3",
     "vsce": "^1.48.0",
     "vscode": "^1.1.21"
   },
@@ -99,15 +99,15 @@
           "type": [
             "boolean"
           ],
-          "default": false,
-          "description": "Enable this to make Phan support \"Go To Definition\" requests. This is disabled by default, because this overlaps with \"PHP IntelliSense\"."
+          "default": true,
+          "description": "Controls Phan supporting \"Go To Definition\" requests. This may conflict with \"PHP IntelliSense\"."
         },
         "phan.enableHover": {
           "type": [
             "boolean"
           ],
-          "default": false,
-          "description": "Enable this to make Phan support \"Hover\" requests. This is disabled by default, because this overlaps with \"PHP IntelliSense\"."
+          "default": true,
+          "description": "Controls Phan supporting \"Hover\" requests. This may conflict with \"PHP IntelliSense\"."
         },
         "phan.analyzedFileExtensions": {
           "type": [
