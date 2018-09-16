@@ -32,6 +32,8 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
    (It manually backs up, analyzes the requested files, then restores the server's state instead of forking to analyze)
 3. (Optional) For optimal performance and accuracy of analysis,
    [the `php-ast` PECL extension](https://pecl.php.net/package/ast) should be installed and enabled.
+4. For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan),
+   and the article [Getting Started](https://github.com/phan/phan/wiki/Getting-Started).
 
 ### Setup steps
 
@@ -88,47 +90,19 @@ Optional, enabled by the setting `phan.useFallbackParser`
 
 ### Go To Definition
 
-+ Support "Go to definition" for properties, classes, global/class constants, and methods/global functions
-+ Support "Go to type definition" for variables, properties, classes, and methods/global functions
++ Supports "Go to definition" for properties, classes, global/class constants, and methods/global functions
++ Supports "Go to type definition" for variables, properties, classes, and methods/global functions
 
-This is disabled by default. You must set `"phan.enableGoToDefinition": true` in your `config.json` settings to enable this.
+This is enabled by default. To disable this, add `"phan.enableGoToDefinition": false` in your `config.json` settings.
+
+### Hover
+
++ Supports hover text for generating descriptions of references to classes, properties, methods, constants, functions, etc.
++ Supports hover text for the union types of variables.
+
+This is enabled by default. To disable this, add `"phan.enableHover": false` in your `config.json` settings.
 
 ## Contributing
-
-Clone this whole repository and in the root directory execute:
-
-```bash
-composer install
-npm install
-npm run build
-code .
-```
-
-The last command will open the folder in VS Code. Hit `F5` to launch an Extension Development Host with the extension.
-For working on the Phan language server, the easiest way is to override your config for the Phan language server installation from composer to point to the phan script within a git checkout of phan (Must set it up with `composer install` inside that checkout.).
-
-First, checkout and setup a phan installation.
-
-```sh
-# Replace the placeholders /path/to/folder and phan_git_checkout with the folders you plan to use.
-
-cd /path/to/folder/
-git clone git@github.com:phan/phan phan_git_checkout
-# Optionally, check out the branch being developed
-# git checkout master
-cd /path/to/folder/phan_git_checkout
-composer install
-```
-
-And then point to that phan installation:
-
-```javascript
-{
-    "phan.phanScriptPath": "/path/to/folder/phan_git_checkout/phan"
-}
-```
-
-**For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan).**
 
 ## Release History
 
