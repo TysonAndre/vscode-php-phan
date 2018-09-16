@@ -9,7 +9,7 @@
   "preview": false,
   "version": "0.5.3",
   "engines": {
-    "vscode": "^1.21.0",
+    "vscode": "^1.25.0",
     "os": [
       "darwin",
       "linux"
