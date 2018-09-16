@@ -47,7 +47,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // Each project folder must be the root of a Phan project,
     // and contain a .phan/config.php file with a Phan config for that project.
     // (including files to parse and analyze).
-    // On windows, a project folder would be a path such as "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
+    // On windows, a project folder would be a path such as
+    // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Path to a php 7.0+ binary (preferably with the php-ast PECL extension installed and enabled)
