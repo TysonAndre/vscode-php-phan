@@ -25,11 +25,11 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
 
 1. PHP 7.0+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
-2. `pcntl` is recommended. (Available on Unix/Linux)
+2. `pcntl` is recommended, but not absolutely necessary. (Available on Unix/Linux)
    (Phan's Language Server Protocol support depends on `pcntl` module being installed, which is only available on those platforms)
 
-   0.2.0 has experimental support for running the Phan server without `pcntl`
-   (It manually backs up, analyzes the requested files, then restores the server's state instead of forking to analyze)
+   When running the Phan server without `pcntl`,
+   Phan manually backs up, analyzes the requested files, then restores the server's state instead of forking to analyze, which may less reliably restore state than running the analysis in an independent process.
 3. (Optional) For optimal performance and accuracy of analysis,
    [the `php-ast` PECL extension](https://pecl.php.net/package/ast) should be installed and enabled.
 4. For guidance on how to set up a Phan project, please see [phan/phan](https://github.com/phan/phan),
