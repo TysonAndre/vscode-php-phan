@@ -2,7 +2,7 @@
 
 [![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.0-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Supports Unix/Linux, and Windows(experimental).** As of version 0.3.8, the experimental support for Windows was improved.
+**Supports Unix/Linux, and Windows(experimental).**
 
 ## Features
 
@@ -106,6 +106,11 @@ This is enabled by default. To disable this, add `"phan.enableHover": false` in 
 
 ## Release History
 
+### 0.5.4 (2018-09-21)
+
+- Update Phan from 1.0.4 to 1.0.5
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.5/NEWS.md) for more details.
+
 ### 0.5.3 (2018-09-10)
 
 - Update Phan from 1.0.3 to 1.0.4
@@ -119,16 +124,6 @@ This is enabled by default. To disable this, add `"phan.enableHover": false` in 
 
 - Update Phan from 1.0.1 to 1.0.3
 - See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.3/NEWS.md) for more details.
-
-### 0.5.1 (2018-08-28)
-
-- Update Phan from 1.0.1(dev) to 1.0.1
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.1/NEWS.md) for more details.
-
-### 0.5.0 (2018-08-14)
-
-- Update Phan from 0.12.15 to 1.0.1(dev)
-- See [Phan's NEWS](https://github.com/phan/phan/blob/a4e9af8116f822a5efac1f729cfce8ba92b29e1e/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
