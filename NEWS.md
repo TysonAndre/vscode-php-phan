@@ -1,6 +1,12 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.5.5 (2018-09-25)
+
+- Update Phan from 1.0.5 to 1.0.6
+- Add support for code completion (disabled by default)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.6/NEWS.md) for more details.
+
 ### 0.5.4 (2018-09-21)
 
 - Update Phan from 1.0.4 to 1.0.5

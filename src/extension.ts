@@ -198,6 +198,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const forceMissingPcntl = conf.get<boolean>('forceMissingPcntl') || false;
     const enableGoToDefinition = conf.get<boolean>('enableGoToDefinition') || false;
     const enableHover = conf.get<boolean>('enableHover') || false;
+    const enableCompletion = conf.get<boolean>('enableCompletion') || false;
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
@@ -279,6 +280,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (enableHover) {
                 // php phan --language-server-enable-hover
                 args.unshift('--language-server-enable-hover');
+            }
+            if (enableCompletion) {
+                // php phan --language-server-enable-completion
+                args.unshift('--language-server-enable-completion');
             }
             if (allowPolyfillParser) {
                 // php phan --allow-polyfill-parser ...
