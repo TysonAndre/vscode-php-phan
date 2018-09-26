@@ -102,9 +102,25 @@ This is enabled by default. To disable this, add `"phan.enableGoToDefinition": f
 
 This is enabled by default. To disable this, add `"phan.enableHover": false` in your `config.json` settings.
 
+### Completion
+
+This will complete references to the following element types:
+
++ global constants, global functions, and class names.
++ class constants, and instance and static method names.
+
+This is disabled by default. This does not work properly for variables/static properties yet.
+To enable this, add `"phan.enableCompletion": true` in your `config.json` settings.
+
 ## Contributing
 
 ## Release History
+
+### 0.6.0 (2018-10-09)
+
+- Update Phan from 1.0.5 to 1.1.0
+- Add support for code completion (disabled by default)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.0/NEWS.md) for more details.
 
 ### 0.5.4 (2018-09-21)
 
@@ -119,11 +135,6 @@ This is enabled by default. To disable this, add `"phan.enableHover": false` in 
 - Enable hover descriptions and "Go to Definition" support by default.
   (Controlled by `phan.enableGoToDefinition` and `phan.enableHover`)
 - See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.4/NEWS.md) for more details.
-
-### 0.5.2 (2018-09-08)
-
-- Update Phan from 1.0.1 to 1.0.3
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.0.3/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 

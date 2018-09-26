@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.5.4",
+  "version": "0.6.0",
   "engines": {
     "vscode": "^1.25.0",
     "os": [
@@ -51,11 +51,11 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.30",
+    "@types/node": "^8.10.36",
     "@types/semver": "^5.5.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.0.3",
-    "vsce": "^1.49.2",
+    "typescript": "^3.1.2",
+    "vsce": "^1.51.1",
     "vscode": "^1.1.21"
   },
   "dependencies": {
@@ -108,6 +108,13 @@
           ],
           "default": true,
           "description": "Controls Phan supporting \"Hover\" requests. This may conflict with \"PHP IntelliSense\"."
+        },
+        "phan.enableCompletion": {
+          "type": [
+            "boolean"
+          ],
+          "default": false,
+          "description": "Controls Phan supporting \"Completion\" requests. This may conflict with \"PHP IntelliSense\"."
         },
         "phan.analyzedFileExtensions": {
           "type": [
