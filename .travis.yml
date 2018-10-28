@@ -9,12 +9,19 @@ matrix:
   exclude:
   - php: 7.0
     env: NODE_VERSION=6.5.0
+  - php: 7.0
+    env: NODE_VERSION=10
   - php: 7.1
+    env: NODE_VERSION=8
+  - php: 7.1
+    env: NODE_VERSION=10
+  - php: 7.2
     env: NODE_VERSION=8
 
 env:
   - NODE_VERSION=6.5.0
   - NODE_VERSION=8
+  - NODE_VERSION=10
 
 cache:
   directories:

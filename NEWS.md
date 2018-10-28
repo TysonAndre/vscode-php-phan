@@ -1,6 +1,14 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.6.1 (2018-10-28)
+
+- Update Phan from 1.1.0 to 1.1.1
+- Fix a bug in the language server causing it to never use `pcntl` even when available.
+  If this change causes issues, enabling `phan.forceMissingPcntl` is a workaround.
+- Detect more issue types.
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.1/NEWS.md) for more details.
+
 ### 0.6.0 (2018-10-09)
 
 - Update Phan from 1.0.5 to 1.1.0

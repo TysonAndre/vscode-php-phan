@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c13399070780dd5653511422ad8c513",
+    "content-hash": "ae01492f90e5575db177781cea025905",
     "packages": [
         {
             "name": "composer/semver",
@@ -238,16 +238,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "aba95779b350f8b19a86d498c141bec2e105a556"
+                "reference": "d8e38b53093677da1e190663c89bdb1087c14046"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/aba95779b350f8b19a86d498c141bec2e105a556",
-                "reference": "aba95779b350f8b19a86d498c141bec2e105a556",
+                "url": "https://api.github.com/repos/phan/phan/zipball/d8e38b53093677da1e190663c89bdb1087c14046",
+                "reference": "d8e38b53093677da1e190663c89bdb1087c14046",
                 "shasum": ""
             },
             "require": {
@@ -265,8 +265,8 @@
                 "phpunit/phpunit": "^6.3.0"
             },
             "suggest": {
-                "ext-ast": "^0.1.5",
-                "ext-tokenizer": "Needed for non-AST support and file/line-based suppressions"
+                "ext-ast": "Needed for parsing ASTs (unless --use-fallback-parser is used). php-ast ^0.1.5|^1.0.0 is needed.",
+                "ext-tokenizer": "Needed for non-AST support and file/line-based suppressions."
             },
             "bin": [
                 "phan",
@@ -300,7 +300,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-10-08T16:23:47+00:00"
+            "time": "2018-10-23T02:07:02+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
