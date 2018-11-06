@@ -53,7 +53,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
-    // Path to a php 7.0+ binary (preferably with the php-ast PECL extension installed and enabled)
+    // Path to a php 7.0+ binary
+    // (preferably with the php-ast PECL extension installed and enabled)
     // This should be as similar as possible as the php installation used to run Phan
     // (Same php minor version,
     //  same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
@@ -115,6 +116,11 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
 ## Contributing
 
 ## Release History
+
+### 0.6.2 (2018-11-05)
+
+- Update Phan from 1.1.1 to 1.1.2
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.2/NEWS.md) for more details.
 
 ### 0.6.1 (2018-10-28)
 
