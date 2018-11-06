@@ -8,6 +8,6 @@
     },
     "require": {
         "php": "^7.0.0",
-        "phan/phan": "1.1.1"
+        "phan/phan": "1.1.2"
     }
 }
