@@ -117,6 +117,12 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
 
 ## Release History
 
+### 0.6.3 (2018-11-29)
+
+- Update Phan from 1.1.2 to 1.1.5
+- Fix a bug in the language server causing it to fail when `pcntl` was unavailable (e.g. on Windows)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.5/NEWS.md) for more details.
+
 ### 0.6.2 (2018-11-05)
 
 - Update Phan from 1.1.1 to 1.1.2
@@ -129,13 +135,6 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
   If this change causes issues, enabling `phan.forceMissingPcntl` is a workaround.
 - Detect more issue types.
 - See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.1/NEWS.md) for more details.
-
-### 0.6.0 (2018-10-09)
-
-- Update Phan from 1.0.5 to 1.1.0
-- Add support for code completion (disabled by default)
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.0/NEWS.md) for more details.
-
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
