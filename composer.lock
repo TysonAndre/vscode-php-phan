@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "316db655f5870153c61e62a73e5629b4",
+    "content-hash": "26ab1907473f3eef0f7978f845da371d",
     "packages": [
         {
             "name": "composer/semver",
@@ -238,16 +238,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "1.1.5",
+            "version": "1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "f01c35538d0ccf26f33589d5961ea89a2aa1678f"
+                "reference": "11f20480ac0c9b58a6c8859e65559b962c752689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/f01c35538d0ccf26f33589d5961ea89a2aa1678f",
-                "reference": "f01c35538d0ccf26f33589d5961ea89a2aa1678f",
+                "url": "https://api.github.com/repos/phan/phan/zipball/11f20480ac0c9b58a6c8859e65559b962c752689",
+                "reference": "11f20480ac0c9b58a6c8859e65559b962c752689",
                 "shasum": ""
             },
             "require": {
@@ -300,7 +300,7 @@
                 "php",
                 "static"
             ],
-            "time": "2018-11-29T17:34:43+00:00"
+            "time": "2018-12-15T16:22:30+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -563,7 +563,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.19",
+            "version": "v3.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -632,16 +632,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.19",
+            "version": "v3.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "2016b3eec2e49c127dd02d0ef44a35c53181560d"
+                "reference": "a2233f555ddf55e5600f386fba7781cea1cb82d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/2016b3eec2e49c127dd02d0ef44a35c53181560d",
-                "reference": "2016b3eec2e49c127dd02d0ef44a35c53181560d",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/a2233f555ddf55e5600f386fba7781cea1cb82d3",
+                "reference": "a2233f555ddf55e5600f386fba7781cea1cb82d3",
                 "shasum": ""
             },
             "require": {
@@ -684,7 +684,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-11-11T19:48:54+00:00"
+            "time": "2018-11-27T12:43:10+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
