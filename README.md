@@ -117,6 +117,14 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
 
 ## Release History
 
+### 0.7.0 (2019-01-05)
+
+- Update Phan from 1.1.8 to 1.2.0
+- Support [`@template` declarations on functions, methods, and closures](https://github.com/phan/phan/wiki/Generic-Types#function-templates). Support more ways to pass in templates.
+- Add [`@phan-assert*`](https://github.com/phan/phan/wiki/Annotating-Your-Source-Code#assertions) to make Phan aware of effects of user-defined type assertion functions/methods
+- Various other changes. See [Phan's NEWS](https://github.com/phan/phan/blob/1.2.0/NEWS.md) for more details.
+- Some of Phan's boolean settings are now rendered as checkboxes in the user settings menu.
+
 ### 0.6.4 (2018-12-15)
 
 - Update Phan from 1.1.5 to 1.1.8
@@ -127,11 +135,6 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
 - Update Phan from 1.1.2 to 1.1.5
 - Fix a bug in the language server causing it to fail when `pcntl` was unavailable (e.g. on Windows)
 - See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.5/NEWS.md) for more details.
-
-### 0.6.2 (2018-11-05)
-
-- Update Phan from 1.1.1 to 1.1.2
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.2/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
