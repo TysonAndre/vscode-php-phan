@@ -163,7 +163,7 @@ async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionConte
     const phanConfigExists: boolean = isFile(phanConfigPath);
 
     if (!phanConfigExists) {
-        await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not contain .phan/config.php. Check that it is the root of a project set up for phan. directory: ' + analyzedProjectDirectory);
+        await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not contain .phan/config.php. Check that it is the absolute path of the root of a project set up for phan. directory: ' + analyzedProjectDirectory);
         return false;
     }
     return true;

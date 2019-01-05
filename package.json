@@ -51,11 +51,11 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.38",
+    "@types/node": "^8.10.39",
     "@types/semver": "^5.5.0",
-    "tslint": "^5.11.0",
+    "tslint": "^5.12.0",
     "typescript": "^3.2.2",
-    "vsce": "^1.53.2",
+    "vsce": "^1.54.0",
     "vscode": "^1.1.26"
   },
   "dependencies": {
@@ -86,7 +86,7 @@
             "type": "string"
           },
           "default": null,
-          "description": "Required. The path to a project folder which Phan will analyze (or an array of 1 or more folders to independently analyze). `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
+          "description": "Required. The absolute path to a project folder which Phan will analyze (or an array of 1 or more folders to independently analyze). `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
         },
         "phan.enableDebugLog": {
           "type": [
