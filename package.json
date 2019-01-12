@@ -74,7 +74,7 @@
             "null"
           ],
           "default": null,
-          "description": "Optional, defaults to searching for \"php\". The path to a PHP 7.0+ executable to use to execute the Phan server. The PHP 7.0+ installation should preferably include and enable the PHP modules `pcntl`, as well as the third party `ast` (php-ast) module from https://pecl.php.net/ast\nFor the best analysis results, install and enable the same PECL extensions that are used by the project being analyzed. (Modifying requires restart)"
+          "markdownDescription": "Optional, defaults to searching for \"php\". The path to a PHP 7.0+ executable to use to execute the Phan server. The PHP 7.0+ installation should preferably include and enable the PHP modules `pcntl`, as well as the third party `ast` (php-ast) module from https://pecl.php.net/ast\nFor the best analysis results, install and enable the same PECL extensions that are used by the project being analyzed. (Modifying requires restart)"
         },
         "phan.analyzedProjectDirectory": {
           "type": [
@@ -86,72 +86,54 @@
             "type": "string"
           },
           "default": null,
-          "description": "Required. The absolute path to a project folder which Phan will analyze (or an array of 1 or more folders to independently analyze). `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
+          "markdownDescription": "Required. The absolute path to a project folder which Phan will analyze (or an array of 1 or more folders to independently analyze). `.phan/config.php` must contain the Phan config for this project. (See an example config at https://github.com/phan/phan#usage) (In the future, this VS Code extension may support analyzing more than one project) (Modifying requires restart)"
         },
         "phan.enableDebugLog": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires restart)"
+          "markdownDescription": "Enable this to print messages to the debug console when developing or debugging this VS Code extension. (Modifying requires restart)"
         },
         "phan.enableGoToDefinition": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": true,
-          "description": "Controls Phan supporting \"Go To Definition\" requests. This may conflict with \"PHP IntelliSense\"."
+          "markdownDescription": "If enabled, Phan supports \"Go To Definition\" requests. This may conflict with \"PHP IntelliSense\"."
         },
         "phan.enableHover": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": true,
-          "description": "Controls Phan supporting \"Hover\" requests. This may conflict with \"PHP IntelliSense\"."
+          "markdownDescription": "If enabled, Phan supports \"Hover\" requests. This may conflict with \"PHP IntelliSense\"."
         },
         "phan.enableCompletion": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Controls Phan supporting \"Completion\" requests. This may conflict with \"PHP IntelliSense\"."
+          "markdownDescription": "If enabled, Phan supports \"Completion\" requests. This may conflict with \"PHP IntelliSense\". (Disabled by default)."
         },
         "phan.analyzedFileExtensions": {
-          "type": [
-            "array"
-          ],
+          "type": "array",
           "default": [
             "php"
           ],
-          "description": "A list of file extensions to request Phan to analyze. By default, this only includes 'php'. This may need to be synchronized with .phan/config.php's 'analyze_file_extensions' (Modifying requires restart)"
+          "markdownDescription": "A list of file extensions to request Phan to analyze. By default, this only includes `'php'`. This may need to be synchronized with `.phan/config.php`'s `'analyzed_file_extensions'` (Modifying requires restart)"
         },
         "phan.useFallbackParser": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Enable this to make a best effort at analyzing the remaining valid statements of PHP files with syntax errors. (Phan will continue emitting syntax errors). (Modifying requires restart)"
+          "markdownDescription": "Enable this to make a best effort attempt at analyzing the remaining valid statements of PHP files with syntax errors. (Phan will continue emitting syntax errors). (Modifying requires restart)"
         },
         "phan.analyzeOnlyOnSave": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Enable this to run Phan analysis only on file save (Not while editing the file). This greatly reduces CPU usage, but you don't learn about potential issues as promptly."
+          "markdownDescription": "Enable this to run Phan analysis only on file save (Not while editing the file). This greatly reduces CPU usage, but you don't learn about potential issues as promptly."
         },
         "phan.quick": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Enable this to speed up phan analysis by not recursing into function calls. Slightly faster. (Modifying requires restart)"
+          "markdownDescription": "Enable this to speed up phan analysis by not recursing into function calls. Slightly faster. (Modifying requires restart)"
         },
         "phan.unusedVariableDetection": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Enable this to enable unused variable and parameter detection (analyzes the implementations of functions, methods, and closures)"
+          "markdownDescription": "Enable this to enable unused variable and parameter detection (analyzes the implementations of functions, methods, and closures)"
         },
         "phan.memoryLimit": {
           "type": [
@@ -159,7 +141,7 @@
             "null"
           ],
           "default": null,
-          "description": "The memory limit of Phan (the php language server) in bytes. Format: Number[K|M|G] (e.g. \"1G\" or \"200M\"). Set to null for no memory limit (default). (Modifying requires restart)",
+          "markdownDescription": "The memory limit of Phan (the php language server) in bytes. Format: Number[K|M|G] (e.g. `\"1G\"` or `\"200M\"`). Set to `null` for no memory limit (default). (Modifying requires restart)",
           "pattern": "^\\d+[KMG]?$"
         },
         "phan.connectToServerWithStdio": {
@@ -168,14 +150,12 @@
             "null"
           ],
           "default": false,
-          "description": "If this is set to true, this VSCode extension will use stdio instead of the default of TCP to communicate with the Phan server. Enabling this may help if you have issues getting Phan to analyze your project. (Modifying requires restart)"
+          "markdownDescription": "If this is set to true, this VSCode extension will use stdio instead of the default of TCP to communicate with the Phan server. Enabling this may help if you have issues getting Phan to analyze your project. (Modifying requires restart)"
         },
         "phan.additionalCLIFlags": {
-          "type": [
-            "array"
-          ],
+          "type": "array",
           "default": [],
-          "description": "Optional (Advanced). Setting this will provide these additional CLI flags to the Phan server. See https://github.com/phan/phan#usage (e.g. [\"--quick\"]) (Modifying requires restart)"
+          "markdownDescription": "Optional (Advanced). Setting this will provide these additional CLI flags to the Phan server. See https://github.com/phan/phan#usage (e.g. `[\"--quick\"]`) (Modifying requires restart)"
         },
         "phan.phanScriptPath": {
           "type": [
@@ -183,28 +163,22 @@
             "null"
           ],
           "default": null,
-          "description": "Optional (Advanced). If provided, this overrides the Phan script to use, e.g. /path/to/phan_git_checkout/phan. (Modifying requires restart)"
+          "markdownDescription": "Optional (Advanced). If provided, this overrides the Phan script to use, e.g. `/path/to/phan_git_checkout/phan`. (Modifying requires restart)"
         },
         "phan.allowPolyfillParser": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": true,
-          "description": "If set to true, this extension will run even if php-ast is not installed. Installing php-ast is strongly recommended for performance reasons and for consistency with full Phan analysis."
+          "markdownDescription": "If set to true, this extension will run even if php-ast is not installed. Installing php-ast is strongly recommended for performance reasons and for consistency with full Phan analysis."
         },
         "phan.allowMissingPcntl": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": true,
-          "description": "If set to true, this extension will use a substitute for pcntl if pcntl is not installed (New and experimental). This must be set to true on Windows."
+          "markdownDescription": "If set to true, this extension will use a substitute for `pcntl` if `pcntl` is not installed (New and experimental). This must be set to true on Windows."
         },
         "phan.forceMissingPcntl": {
-          "type": [
-            "boolean"
-          ],
+          "type": "boolean",
           "default": false,
-          "description": "Useful for debugging. Forces Phan to manually save and restore the analyzed project's state instead of using pcntl"
+          "markdownDescription": "Useful for debugging. Forces Phan to manually save and restore the analyzed project's state instead of using `pcntl`"
         }
       }
     }
