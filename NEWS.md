@@ -1,6 +1,18 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.8.0 (2019-01-12)
+
+- Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
+
+  Also see [VS Code's documentation for IntelliSense](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
+  for how to control when/how suggestions show up.
+- Enable error tolerant parsing by default.
+- Enable the fallback parser by default (required by code completion)
+- Fix a bug in code completion for variables and static properties.
+- Update Phan from 1.2.0 to 1.2.1 (dev).
+- See [Phan's NEWS](https://github.com/phan/phan/blob/9fd40ca04d49888b51de5dc8045a92789fcd3feb/NEWS.md) for more details.
+
 ### 0.7.0 (2019-01-05)
 
 - Update Phan from 1.1.8 to 1.2.0

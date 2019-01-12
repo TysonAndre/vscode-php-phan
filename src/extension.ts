@@ -189,7 +189,6 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const originalAnalyzedProjectDirectories = conf.get<string|string[]>('analyzedProjectDirectory');
     const analyzedProjectDirectories = normalizeDirsToAnalyze(originalAnalyzedProjectDirectories);
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
-    const useFallbackParser = conf.get<boolean>('useFallbackParser');
     const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
     const allowPolyfillParser = conf.get<boolean>('allowPolyfillParser') || false;
     const memoryLimit = conf.get<string>('memoryLimit') || null;
@@ -199,6 +198,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const enableGoToDefinition = conf.get<boolean>('enableGoToDefinition') || false;
     const enableHover = conf.get<boolean>('enableHover') || false;
     const enableCompletion = conf.get<boolean>('enableCompletion') || false;
+    // completion requires the fallback parser to work properly
+    const useFallbackParser = conf.get<boolean>('useFallbackParser') || enableCompletion;
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
@@ -282,8 +283,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
                 args.unshift('--language-server-enable-hover');
             }
             if (enableCompletion) {
-                // php phan --language-server-enable-completion
                 args.unshift('--language-server-enable-completion');
+                args.unshift('--language-server-completion-vscode');
             }
             if (allowPolyfillParser) {
                 // php phan --allow-polyfill-parser ...
