@@ -2,15 +2,16 @@
 
 [![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.0-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Supports Unix/Linux, and Windows(experimental).**
+**Supports Unix/Linux, and Windows.**
 
 ## Features
 
 + Adds improved [error detection from Phan](https://github.com/phan/phan#features) to Visual Studio Code.
-+ Supports "Go to definition" and "Go to type definition" (requires `"phan.enableGoToDefinition": true`).
++ Analyzes code while you're typing.
++ Supports "Go to definition" and "Go to type definition"
   (Has some bugs when `pcntl` is unavailable)
-+ Analyze code while you're typing.
-+ Optionally analyze code with syntax errors.
++ Supports code completion.
++ Analyzes code while tolerating syntax errors.
 
 ## Issue Tracker
 
@@ -87,7 +88,7 @@ Phan's capabilities are summarized in [Phan's README](https://github.com/phan/ph
 
 ![Phan error tolerant detection demo](https://raw.githubusercontent.com/TysonAndre/vscode-php-phan/master/images/tolerant_parsing.png)
 
-Optional, enabled by the setting `phan.useFallbackParser`
+Enabled by default. To disable this, set the setting `phan.useFallbackParser` to `false` (also requires disabling `phan.enableCompletion`)
 
 ### Go To Definition
 
@@ -109,13 +110,31 @@ This will complete references to the following element types:
 
 + global constants, global functions, and class names.
 + class constants, and instance and static method names.
++ variables.
++ instance and static properties.
 
-This is disabled by default. This does not work properly for variables/static properties yet.
-To enable this, add `"phan.enableCompletion": true` in your `config.json` settings.
+This is enabled by default. To disable this, add `"phan.enableCompletion": false` in your `config.json` settings.
+
+See [VS Code's documentation of Intellisense](https://code.visualstudio.com/docs/editor/intellisense#_intellisense-features) for how completions work in general.
+
+See [VS Code's documentation of IntelliSense configuration](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
+for how to control when/how suggestions show up.
 
 ## Contributing
 
 ## Release History
+
+### 0.8.0 (2019-01-12)
+
+- Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
+
+  Also see [VS Code's documentation for IntelliSense](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
+  for how to control when/how suggestions show up.
+- Enable error tolerant parsing by default.
+- Enable the fallback parser by default (required by code completion)
+- Fix a bug in code completion for variables and static properties.
+- Update Phan from 1.2.0 to 1.2.1 (dev).
+- See [Phan's NEWS](https://github.com/phan/phan/blob/9fd40ca04d49888b51de5dc8045a92789fcd3feb/NEWS.md) for more details.
 
 ### 0.7.0 (2019-01-05)
 
@@ -129,12 +148,6 @@ To enable this, add `"phan.enableCompletion": true` in your `config.json` settin
 
 - Update Phan from 1.1.5 to 1.1.8
 - See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.8/NEWS.md) for more details.
-
-### 0.6.3 (2018-11-29)
-
-- Update Phan from 1.1.2 to 1.1.5
-- Fix a bug in the language server causing it to fail when `pcntl` was unavailable (e.g. on Windows)
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.5/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 

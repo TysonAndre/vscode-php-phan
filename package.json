@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.7.0",
+  "version": "0.8.0",
   "engines": {
     "vscode": "^1.30.0",
     "os": [
@@ -53,7 +53,7 @@
     "@types/mz": "0.0.31",
     "@types/node": "^8.10.39",
     "@types/semver": "^5.5.0",
-    "tslint": "^5.12.0",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.2",
     "vsce": "^1.54.0",
     "vscode": "^1.1.26"
@@ -117,8 +117,8 @@
         },
         "phan.useFallbackParser": {
           "type": "boolean",
-          "default": false,
-          "markdownDescription": "Enable this to make a best effort attempt at analyzing the remaining valid statements of PHP files with syntax errors. (Phan will continue emitting syntax errors). (Modifying requires restart)"
+          "default": true,
+          "markdownDescription": "When enabled, this makes a best effort attempt at analyzing the remaining valid statements of PHP files with syntax errors (Phan will continue emitting syntax errors). This is also enabled by `phan.enableCompletion` (Modifying requires restart)"
         },
         "phan.analyzeOnlyOnSave": {
           "type": "boolean",
