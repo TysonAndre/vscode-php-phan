@@ -120,16 +120,26 @@ See [VS Code's documentation of Intellisense](https://code.visualstudio.com/docs
 See [VS Code's documentation of IntelliSense configuration](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
 for how to control when/how suggestions show up.
 
+You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.suggest.basic` to `false`, to avoid duplicate suggestions.
+
 ## Contributing
 
 ## Release History
 
-### 0.8.0 (2019-01-12)
+### 0.8.1 (2019-01-14)
 
 - Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
 
   Also see [VS Code's documentation for IntelliSense](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
   for how to control when/how suggestions show up.
+- Show type signatures in hover text for internal functions/methods.
+
+  Also use PHPDoc when rendering type signatures for user-defined functions/methods.
+- Fix variable completion of `$` followed by nothing
+- See [Phan's NEWS](https://github.com/phan/phan/blob/a276d601436cc94c62578b3ddad0a88540966ae4/NEWS.md) for more details.
+
+### 0.8.0 (2019-01-12)
+
 - Enable error tolerant parsing by default.
 - Enable the fallback parser by default (required by code completion)
 - Fix a bug in code completion for variables and static properties.
