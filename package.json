@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.8.0",
+  "version": "0.8.1",
   "engines": {
     "vscode": "^1.30.0",
     "os": [
@@ -105,7 +105,7 @@
         },
         "phan.enableCompletion": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "markdownDescription": "If enabled, Phan supports \"Completion\" requests. This may conflict with \"PHP IntelliSense\". (Disabled by default)."
         },
         "phan.analyzedFileExtensions": {
