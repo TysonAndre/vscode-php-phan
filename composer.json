@@ -2,12 +2,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": true,
         "platform": {
             "php": "7.0.24"
         }
     },
     "require": {
         "php": "^7.0.0",
-        "phan/phan": "dev-master#a276d601436cc94c62578b3ddad0a88540966ae4"
+        "phan/phan": "dev-master#ec9d0c1b34894224194c1791345fdc5af7b696d4"
     }
 }

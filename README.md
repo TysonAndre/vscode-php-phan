@@ -126,6 +126,11 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 0.8.2 (2019-01-21)
+
+- Make code completion work more consistently after typing `::` or `->`.
+- Other minor improvements to the language server. See [Phan's NEWS](https://github.com/phan/phan/blob/ec9d0c1b34894224194c1791345fdc5af7b696d4/NEWS.md) for more details.
+
 ### 0.8.1 (2019-01-14)
 
 - Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
@@ -145,19 +150,6 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 - Fix a bug in code completion for variables and static properties.
 - Update Phan from 1.2.0 to 1.2.1 (dev).
 - See [Phan's NEWS](https://github.com/phan/phan/blob/9fd40ca04d49888b51de5dc8045a92789fcd3feb/NEWS.md) for more details.
-
-### 0.7.0 (2019-01-05)
-
-- Update Phan from 1.1.8 to 1.2.0
-- Support [`@template` declarations on functions, methods, and closures](https://github.com/phan/phan/wiki/Generic-Types#function-templates). Support more ways to pass in templates.
-- Add [`@phan-assert*`](https://github.com/phan/phan/wiki/Annotating-Your-Source-Code#assertions) to make Phan aware of effects of user-defined type assertion functions/methods
-- Various other changes. See [Phan's NEWS](https://github.com/phan/phan/blob/1.2.0/NEWS.md) for more details.
-- Some of Phan's boolean settings are now rendered as checkboxes in the user settings menu.
-
-### 0.6.4 (2018-12-15)
-
-- Update Phan from 1.1.5 to 1.1.8
-- See [Phan's NEWS](https://github.com/phan/phan/blob/1.1.8/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 

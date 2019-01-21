@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "0.8.1",
+  "version": "0.8.2",
   "engines": {
     "vscode": "^1.30.0",
     "os": [
@@ -54,9 +54,9 @@
     "@types/node": "^8.10.39",
     "@types/semver": "^5.5.0",
     "tslint": "^5.12.1",
-    "typescript": "^3.2.2",
+    "typescript": "^3.2.4",
     "vsce": "^1.54.0",
-    "vscode": "^1.1.26"
+    "vscode": "^1.1.27"
   },
   "dependencies": {
     "mz": "^2.7.0",

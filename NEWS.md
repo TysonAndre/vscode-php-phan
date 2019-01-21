@@ -1,6 +1,11 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.8.2 (2019-01-21)
+
+- Make code completion work more consistently after typing `::` or `->`.
+- Other minor improvements to the language server. See [Phan's NEWS](https://github.com/phan/phan/blob/ec9d0c1b34894224194c1791345fdc5af7b696d4/NEWS.md) for more details.
+
 ### 0.8.1 (2019-01-14)
 
 - Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
