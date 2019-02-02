@@ -351,10 +351,15 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     }));
 
+    const documentSelectors: {scheme: 'file', language?: string, pattern?: string}[] = [{scheme: 'file', language: 'php'}];
+    if (analyzedFileExtensions.length > 0) {
+        documentSelectors.push({scheme: 'file', pattern: '**/*.{' + analyzedFileExtensions.join(',') + '}'});
+    }
+
     // Options to control the language client
     const clientOptions: LanguageClientOptions = {
         // Register the server for php (and maybe HTML) documents
-        documentSelector: analyzedFileExtensions,
+        documentSelector: documentSelectors,
         uriConverters: {
             // VS Code by default %-encodes even the colon after the drive letter
             // NodeJS handles it much better
