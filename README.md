@@ -126,6 +126,12 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 0.8.3 (2019-02-19)
+
+- Update Phan from 1.2.1(dev) to 1.2.3(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/d39b26e8a7a54cc430cafc2cba3e56493b8c5466/NEWS.md) for more details.
+- Change the way the document filter for this extension is set up to properly be by file extension.
+
 ### 0.8.2 (2019-01-21)
 
 - Make code completion work more consistently after typing `::` or `->`.
