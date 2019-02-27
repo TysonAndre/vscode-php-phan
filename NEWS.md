@@ -1,6 +1,11 @@
 vscode-php-phan NEWS
 ====================
 
+### 0.8.4 (2019-03-02)
+
+- Update Phan from 1.2.3(dev) to 1.2.6(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/e6eb05cd368081dc0058243173ac44c1d54cf724) for more details.
+
 ### 0.8.3 (2019-02-19)
 
 - Update Phan from 1.2.1(dev) to 1.2.3(dev)
