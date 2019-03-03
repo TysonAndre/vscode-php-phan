@@ -10,6 +10,6 @@
     },
     "require": {
         "php": "^7.0.0",
-        "phan/phan": "dev-master#d39b26e8a7a54cc430cafc2cba3e56493b8c5466"
+        "phan/phan": "dev-master#e6eb05cd368081dc0058243173ac44c1d54cf724"
     }
 }

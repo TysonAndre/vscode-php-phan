@@ -126,6 +126,11 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 0.8.4 (2019-03-02)
+
+- Update Phan from 1.2.3(dev) to 1.2.6(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/e6eb05cd368081dc0058243173ac44c1d54cf724) for more details.
+
 ### 0.8.3 (2019-02-19)
 
 - Update Phan from 1.2.1(dev) to 1.2.3(dev)
@@ -148,14 +153,6 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
   Also use PHPDoc when rendering type signatures for user-defined functions/methods.
 - Fix variable completion of `$` followed by nothing
 - See [Phan's NEWS](https://github.com/phan/phan/blob/a276d601436cc94c62578b3ddad0a88540966ae4/NEWS.md) for more details.
-
-### 0.8.0 (2019-01-12)
-
-- Enable error tolerant parsing by default.
-- Enable the fallback parser by default (required by code completion)
-- Fix a bug in code completion for variables and static properties.
-- Update Phan from 1.2.0 to 1.2.1 (dev).
-- See [Phan's NEWS](https://github.com/phan/phan/blob/9fd40ca04d49888b51de5dc8045a92789fcd3feb/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
