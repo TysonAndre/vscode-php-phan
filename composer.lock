@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94c2ac00bd022813dc7e4b8b5ab182ff",
+    "content-hash": "ff6d1736a3b50660fcf8964781168199",
     "packages": [
         {
             "name": "composer/semver",
@@ -242,12 +242,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "e6eb05cd368081dc0058243173ac44c1d54cf724"
+                "reference": "152cba796a0d9c09c9ab158e13c36a55d3a31876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/e6eb05cd368081dc0058243173ac44c1d54cf724",
-                "reference": "e6eb05cd368081dc0058243173ac44c1d54cf724",
+                "url": "https://api.github.com/repos/phan/phan/zipball/152cba796a0d9c09c9ab158e13c36a55d3a31876",
+                "reference": "152cba796a0d9c09c9ab158e13c36a55d3a31876",
                 "shasum": ""
             },
             "require": {
@@ -301,7 +301,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-03-03T01:39:45+00:00"
+            "time": "2019-03-29T14:20:51+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

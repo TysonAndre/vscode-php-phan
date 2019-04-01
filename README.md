@@ -126,6 +126,11 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 0.8.5 (2019-04-01)
+
+- Update Phan from 1.2.6(dev) to 1.2.8(dev)
+- See [Phan's NEWS](https://github.com/phan/phan/blob/152cba796a0d9c09c9ab158e13c36a55d3a31876) for more details.
+
 ### 0.8.4 (2019-03-02)
 
 - Update Phan from 1.2.3(dev) to 1.2.6(dev)
@@ -136,23 +141,6 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 - Update Phan from 1.2.1(dev) to 1.2.3(dev)
 - See [Phan's NEWS](https://github.com/phan/phan/blob/d39b26e8a7a54cc430cafc2cba3e56493b8c5466/NEWS.md) for more details.
 - Change the way the document filter for this extension is set up to properly be by file extension.
-
-### 0.8.2 (2019-01-21)
-
-- Make code completion work more consistently after typing `::` or `->`.
-- Other minor improvements to the language server. See [Phan's NEWS](https://github.com/phan/phan/blob/ec9d0c1b34894224194c1791345fdc5af7b696d4/NEWS.md) for more details.
-
-### 0.8.1 (2019-01-14)
-
-- Enable Code completion support by default. To disable it, set `phan.enableCompletion` to `false`.
-
-  Also see [VS Code's documentation for IntelliSense](https://code.visualstudio.com/docs/editor/intellisense#_customizing-intellisense)
-  for how to control when/how suggestions show up.
-- Show type signatures in hover text for internal functions/methods.
-
-  Also use PHPDoc when rendering type signatures for user-defined functions/methods.
-- Fix variable completion of `$` followed by nothing
-- See [Phan's NEWS](https://github.com/phan/phan/blob/a276d601436cc94c62578b3ddad0a88540966ae4/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
