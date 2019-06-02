@@ -34,7 +34,7 @@ before_install:
 
 install:
   - npm install
-  - pecl install -f ast-0.1.7
+  - pecl install -f ast-1.0.1
   - phpenv config-rm xdebug.ini
   - composer install --prefer-dist
 
