@@ -1,20 +1,18 @@
 language: php
 
 php:
-  - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 matrix:
   exclude:
-  - php: 7.0
+  - php: 7.3
     env: NODE_VERSION=6.5.0
-  - php: 7.0
+  - php: 7.3
     env: NODE_VERSION=10
   - php: 7.1
     env: NODE_VERSION=8
-  - php: 7.1
-    env: NODE_VERSION=10
   - php: 7.2
     env: NODE_VERSION=8
 
@@ -34,9 +32,11 @@ before_install:
 
 install:
   - npm install
-  - pecl install -f ast-1.0.1
+  # Installing ast isn't even necessary because there are no integration tests right now.
+  # - pecl install -f ast-1.0.1
   - phpenv config-rm xdebug.ini
   - composer install --prefer-dist
+  - vendor/bin/phan --help
 
 script:
   - npm run lint
