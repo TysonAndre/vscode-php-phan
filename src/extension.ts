@@ -7,6 +7,7 @@ import * as net from 'net';
 import * as url from 'url';
 import * as fs from 'fs';
 
+// Shows the provided error message as well as a prompt to open the settings page to fix the error.
 async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
     const selected = await vscode.window.showErrorMessage(
         errorMessage,
@@ -17,15 +18,15 @@ async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
     }
 }
 
-// Returns true if phan.phpExecutablePath is 7.0.0 or newer, and return false if it isn't (or php can't be found)
+// Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
 async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
-    // Check path (if PHP is available and version is ^7.0.0)
+    // Check path (if PHP is available and version is ^7.1.0)
     let stdout: string;
     try {
         [stdout] = await execFile(phpExecutablePath, ['--version']);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.0+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
+            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
             vscode.window.showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
@@ -44,13 +45,15 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
     if (!/^\d+.\d+.\d+$/.test(version)) {
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
-    if (semver.lt(version, '7.0.0')) {
-        vscode.window.showErrorMessage('Phan 1.x needs at least PHP 7.0 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
+    if (semver.lt(version, '7.1.0')) {
+        vscode.window.showErrorMessage('Phan 2.x needs at least PHP 7.1 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
 }
 
+// If php-ast is installed but is an unsupported version (or php couldn't run), then open an error message window and return false.
+// Returns true on success.
 async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext, phpExecutablePath: string, allowPolyfillParser: boolean): Promise<boolean> {
     let stdout = '';
     try {
@@ -66,7 +69,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
             // Phan will probably use the polyfill parser based on tolerant-php-parser.
             return true;
         }
-        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 0.1.5 or newer must be installed. PHP Path: ' + phpExecutablePath);
+        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed. PHP Path: ' + phpExecutablePath);
         return false;
     }
 
@@ -81,13 +84,15 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     if (!/^\d+.\d+.\d+$/.test(astVersion)) {
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
-    if (semver.lt(astVersion, '0.1.5')) {
-        vscode.window.showErrorMessage('Phan 0.10.x needs at least ext-ast 0.1.5 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
+    if (semver.lt(astVersion, '1.0.1')) {
+        vscode.window.showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
 }
 
+// Open an error message window and return false if the `pcntl` extension isn't enabled.
+// This is only called if this VS Code extension's configuration requires that pcntl be enabled.
 async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
     let stdout = '';
     try {
@@ -169,6 +174,7 @@ async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionConte
     return true;
 }
 
+// Converts the directory to analyze to an array of directories, if necessary.
 function normalizeDirsToAnalyze(conf: string|string[]|undefined): string[] {
     if (!conf) {
         return [];
@@ -179,6 +185,10 @@ function normalizeDirsToAnalyze(conf: string|string[]|undefined): string[] {
     return [conf];
 }
 
+/**
+ * Activates this extension, starting the language server for the directories
+ * after verifying the configuration and dependencies.
+ */
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
 
     const conf = vscode.workspace.getConfiguration('phan');
@@ -277,14 +287,20 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (enableGoToDefinition) {
                 // php phan --language-server-enable-go-to-definition
                 args.unshift('--language-server-enable-go-to-definition');
+            } else {
+                args.unshift('--language-server-disable-go-to-definition');
             }
             if (enableHover) {
                 // php phan --language-server-enable-hover
                 args.unshift('--language-server-enable-hover');
+            } else {
+                args.unshift('--language-server-disable-hover');
             }
             if (enableCompletion) {
                 args.unshift('--language-server-enable-completion');
                 args.unshift('--language-server-completion-vscode');
+            } else {
+                args.unshift('--language-server-disable-completion');
             }
             if (allowPolyfillParser) {
                 // php phan --allow-polyfill-parser ...
