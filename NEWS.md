@@ -1,6 +1,16 @@
 vscode-php-phan NEWS
 ====================
 
+### 1.0.0 (2019-06-02)
+
+- **Increase the minimum php version requirement (`phan.phpExecutablePath`) for running the server to 7.1+** (Phan supports `--target-php-version` to specify the version of the code being analyzed)
+
+  Increase the minimum `php-ast` version requirement to 1.0.1+ (if that extension is installed)
+
+  The VS code extension version can be [downgraded to 0.8.6](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install a newer php or php-ast version.
+- Update Phan from 1.3.2 to 2.1.0
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.1.0/NEWS.md) for more details.
+
 ### 0.8.6 (2019-04-28)
 
 - Update Phan from 1.2.8(dev) to 1.3.2

@@ -1,6 +1,6 @@
 # PHP Phan (Analyzer)
 
-[![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.0-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.1-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 **Supports Unix/Linux, and Windows.**
 
@@ -24,7 +24,7 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
 
 ### Dependencies:
 
-1. PHP 7.0+ must be installed.
+1. PHP 7.1+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
 2. `pcntl` is recommended, but not absolutely necessary. (Available on Unix/Linux)
    (Phan's Language Server Protocol support depends on `pcntl` module being installed, which is only available on those platforms)
@@ -54,12 +54,12 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
-    // Path to a php 7.0+ binary
+    // Path to a php 7.1+ binary
     // (preferably with the php-ast PECL extension installed and enabled)
     // This should be as similar as possible as the php installation used to run Phan
     // (Same php minor version,
     //  same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
-    // On windows, this would be "C:\\path\\to\\php-7.0-installation\\php.exe"
+    // On windows, this would be "C:\\path\\to\\php-7.1-installation\\php.exe"
     "phan.phpExecutablePath": "/path/to/php7.1",
 
     // Optionally, enable unused variable detection
@@ -125,6 +125,16 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 ## Contributing
 
 ## Release History
+
+### 1.0.0 (2019-06-02)
+
+- **Increase the minimum php version requirement (`phan.phpExecutablePath`) for running the server to 7.1+** (Phan supports `--target-php-version` to specify the version of the code being analyzed)
+
+  Increase the minimum `php-ast` version requirement to 1.0.1+ (if that extension is installed)
+
+  The VS code extension version can be [downgraded to 0.8.6](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install a newer php or php-ast version.
+- Update Phan from 1.3.2 to 2.1.0
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.1.0/NEWS.md) for more details.
 
 ### 0.8.6 (2019-04-28)
 
