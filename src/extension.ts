@@ -213,6 +213,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const allowMissingPcntl = conf.get<boolean>('allowMissingPcntl') || forceMissingPcntl;
     const quick = conf.get<boolean>('quick');
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
+    const redundantConditionDetection = conf.get<boolean>('redundantConditionDetection');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
@@ -322,6 +323,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             if (unusedVariableDetection) {
                 // php phan ----unused-variable-detection ...
                 args.unshift('--unused-variable-detection');
+            }
+            if (redundantConditionDetection) {
+                args.unshift('--redundant-condition-detection');
             }
 
             // The server is implemented in PHP
