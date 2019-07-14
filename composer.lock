@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c09a7b767e3db9640e86764931f0445",
+    "content-hash": "e24c5eedcd803d08dfdc0ee9975f13ca",
     "packages": [
         {
             "name": "composer/semver",
@@ -196,16 +196,16 @@
         },
         {
             "name": "netresearch/jsonmapper",
-            "version": "v1.4.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cweiske/jsonmapper.git",
-                "reference": "3868fe1128ce1169228acdb623359dca74db5ef3"
+                "reference": "047dafe26facbba1e997e9fb3b3c298562d75a0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/3868fe1128ce1169228acdb623359dca74db5ef3",
-                "reference": "3868fe1128ce1169228acdb623359dca74db5ef3",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/047dafe26facbba1e997e9fb3b3c298562d75a0b",
+                "reference": "047dafe26facbba1e997e9fb3b3c298562d75a0b",
                 "shasum": ""
             },
             "require": {
@@ -234,20 +234,20 @@
                 }
             ],
             "description": "Map nested JSON structures onto PHP classes",
-            "time": "2017-11-28T21:30:01+00:00"
+            "time": "2019-07-08T18:46:43+00:00"
         },
         {
             "name": "phan/phan",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "402fa44ba15c3bbca8def92b40fca3218ee306a1"
+                "reference": "e59790fbb50feaea5658203832e8064faffe07d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/402fa44ba15c3bbca8def92b40fca3218ee306a1",
-                "reference": "402fa44ba15c3bbca8def92b40fca3218ee306a1",
+                "url": "https://api.github.com/repos/phan/phan/zipball/e59790fbb50feaea5658203832e8064faffe07d0",
+                "reference": "e59790fbb50feaea5658203832e8064faffe07d0",
                 "shasum": ""
             },
             "require": {
@@ -303,7 +303,7 @@
                 "php",
                 "static"
             ],
-            "time": "2019-07-01T17:07:34+00:00"
+            "time": "2019-07-14T16:28:51+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
