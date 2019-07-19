@@ -1,6 +1,11 @@
 vscode-php-phan NEWS
 ====================
 
+### 1.1.1 (2019-07-14)
+
+- Update Phan from 2.2.4 to 2.2.5
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.5/NEWS.md) for more details.
+
 ### 1.1.0 (2019-07-01)
 
 - Support redundant/impossible condition detection. (Disabled by default. This can be enabled by `phan.redundantConditionDetection`)
