@@ -126,6 +126,11 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 1.1.3 (2019-08-12)
+
+- Update Phan from 2.2.9 to 2.2.10
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.10/NEWS.md) for more details.
+
 ### 1.1.2 (2019-08-11)
 
 - Update Phan from 2.2.5 to 2.2.9
