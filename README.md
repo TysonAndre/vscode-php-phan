@@ -126,6 +126,11 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 1.1.2 (2019-08-11)
+
+- Update Phan from 2.2.5 to 2.2.9
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.9/NEWS.md) for more details.
+
 ### 1.1.1 (2019-07-14)
 
 - Update Phan from 2.2.4 to 2.2.5
@@ -136,16 +141,6 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 - Support redundant/impossible condition detection. (Disabled by default. This can be enabled by `phan.redundantConditionDetection`)
 - Update Phan from 2.1.0 to 2.2.4
 - See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.4/NEWS.md) for more details.
-
-### 1.0.0 (2019-06-02)
-
-- **Increase the minimum php version requirement (`phan.phpExecutablePath`) for running the server to 7.1+** (Phan supports `--target-php-version` to specify the version of the code being analyzed)
-
-  Increase the minimum `php-ast` version requirement to 1.0.1+ (if that extension is installed)
-
-  The VS code extension version can be [downgraded to 0.8.6](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install a newer php or php-ast version.
-- Update Phan from 1.3.2 to 2.1.0
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.1.0/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
