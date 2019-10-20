@@ -4,6 +4,14 @@ out/test/**
 test/**
 src/**
 **/*.map
-.gitignore
-tsconfig.json
-tslint.json
+**/.gitignore
+**/tsconfig.json
+**/tslint.json
+**/.*.swp
+**/.*.swo
+*.vsix
+**/.github/*
+images/error_detection.png
+images/tolerant_parsing.png
+# node typescript definition files
+**/*.d.ts
