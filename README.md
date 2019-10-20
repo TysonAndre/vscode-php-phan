@@ -12,6 +12,7 @@
   (Has some bugs when `pcntl` is unavailable)
 + Supports code completion.
 + Analyzes code while tolerating syntax errors.
++ Suggests alternatives to mistyped elements (variables, constants, classes, class elements, etc.)
 
 ## Issue Tracker
 
@@ -126,20 +127,16 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 1.2.0 (2019-10-20)
+
+- Update Phan from 2.2.12 to 2.3.1
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.3.1/NEWS.md) for more details.
+- Exclude more files from the generated package.
+
 ### 1.1.4 (2019-09-12)
 
 - Update Phan from 2.2.10 to 2.2.12
 - See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.12/NEWS.md) for more details.
-
-### 1.1.3 (2019-08-12)
-
-- Update Phan from 2.2.9 to 2.2.10
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.10/NEWS.md) for more details.
-
-### 1.1.2 (2019-08-11)
-
-- Update Phan from 2.2.5 to 2.2.9
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.2.9/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
