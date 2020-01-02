@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "engines": {
     "vscode": "^1.30.0",
     "os": [
@@ -50,13 +50,13 @@
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/mz": "0.0.31",
-    "@types/node": "^8.10.55",
+    "@types/node": "^8.10.59",
     "@types/semver": "^5.5.0",
     "@types/vscode": "1.30",
-    "tslint": "^5.20.0",
-    "typescript": "^3.6.4",
-    "vscode-test": "^1.2.0",
-    "vsce": "^1.68.0"
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4",
+    "vsce": "^1.71.0",
+    "vscode-test": "^1.3.0"
   },
   "dependencies": {
     "mz": "^2.7.0",
