@@ -7,9 +7,14 @@ import * as net from 'net';
 import * as url from 'url';
 import * as fs from 'fs';
 
+async function showErrorMessage(message: string, ...items: string[]): Promise<string | undefined> {
+    console.log(`Calling vscode.window.showErrorMessage ${message}`, items);
+    return vscode.window.showErrorMessage(message, ...items);
+}
+
 // Shows the provided error message as well as a prompt to open the settings page to fix the error.
 async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
-    const selected = await vscode.window.showErrorMessage(
+    const selected = await showErrorMessage(
         errorMessage,
         'Open settings'
     );
@@ -28,7 +33,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         if (err.code === 'ENOENT') {
             await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
-            vscode.window.showErrorMessage('Error spawning PHP: ' + err.message);
+            await showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
         }
         return false;
@@ -37,7 +42,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
     // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
     const match = stdout.match(/^PHP ([^\s]+)/m);
     if (!match) {
-        vscode.window.showErrorMessage('Error parsing PHP version. Please check the output of php --version. PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Error parsing PHP version. Please check the output of php --version. PHP Path: ' + phpExecutablePath);
         return false;
     }
     let version = match[1].split('-')[0];
@@ -46,7 +51,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(version, '7.1.0')) {
-        vscode.window.showErrorMessage('Phan 2.x needs at least PHP 7.1 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Phan 2.x needs at least PHP 7.1 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -59,7 +64,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + ' PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Error spawning PHP to determine php-ast VERSION: ' + err.message + ' PHP Path: ' + phpExecutablePath);
         console.error(err);
         return false;
     }
@@ -69,14 +74,14 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
             // Phan will probably use the polyfill parser based on tolerant-php-parser.
             return true;
         }
-        vscode.window.showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed. PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed. PHP Path: ' + phpExecutablePath);
         return false;
     }
 
     // Parse version of php-ast
     const astMatch = stdout.match(/^ext-ast ([^\s]+)/m);
     if (!astMatch) {
-        vscode.window.showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`. PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Error parsing php-ast module version. Please check the output of `if (extension_loaded("ast")) { echo "ext-ast " . (new ReflectionExtension("ast"))->getVersion(); } else { echo "None"; }`. PHP Path: ' + phpExecutablePath);
         return false;
     }
     let astVersion = astMatch[1].split('-')[0];
@@ -85,7 +90,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(astVersion, '1.0.1')) {
-        vscode.window.showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -98,13 +103,13 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
     try {
         [stdout] = await execFile(phpExecutablePath, ['-r', 'var_export(extension_loaded("pcntl"));']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning PHP to determine if pcntl is installed: ' + err.message + ' PHP path: ' + phpExecutablePath);
+        await showErrorMessage('Error spawning PHP to determine if pcntl is installed: ' + err.message + ' PHP path: ' + phpExecutablePath);
         console.error(err);
         return false;
     }
 
     if (!stdout.match(/^true/)) {
-        vscode.window.showErrorMessage('pcntl(PHP module) is not installed or not enabled. Either install and enable pcntl (impossible on Windows), or enable phan.allowMissingPcntl. PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('pcntl(PHP module) is not installed or not enabled. Either install and enable pcntl (impossible on Windows), or enable phan.allowMissingPcntl. PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -141,7 +146,7 @@ async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext,
     try {
         [stdout] = await execFile(phpExecutablePath, [phanScriptPath, '--extended-help']);
     } catch (err) {
-        vscode.window.showErrorMessage('Error spawning Phan to check for language server support: ' + err.message);
+        await showErrorMessage('Error spawning Phan to check for language server support: ' + err.message);
         console.error(err);
         return false;
     }
@@ -149,7 +154,7 @@ async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext,
     // Check if phan --help indicates language server support
     const match = stdout.match(/language-server/m);
     if (!match) {
-        vscode.window.showErrorMessage('Language server support was not detected. Please check the output of /path/to/phan --help. phan path: ' + phanScriptPath);
+        await showErrorMessage('Language server support was not detected. Please check the output of /path/to/phan --help. phan path: ' + phanScriptPath);
         return false;
     }
     return true;
