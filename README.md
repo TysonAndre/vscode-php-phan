@@ -163,6 +163,8 @@ node node_modules/.bin/vsce package
 
 The generated VSIX file can be used locally with the steps from https://stackoverflow.com/a/38866913
 
+Local changes can also be run locally by checking out [vscode-php-phan](https://github.com/TysonAndre/vscode-php-phan), running `npm install`, then running your changes in an Extension Development Host with <F5>. See https://code.visualstudio.com/api/get-started/your-first-extension for more details.
+
 ## Credits
 
 This VS Code extension and many parts of the language server protocol implementation are based on [PHP IntelliSense](https://github.com/felixfbecker/vscode-php-intellisense)
