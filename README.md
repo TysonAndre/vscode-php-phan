@@ -105,6 +105,8 @@ This is enabled by default. To disable this, add `"phan.enableGoToDefinition": f
 
 This is enabled by default. To disable this, add `"phan.enableHover": false` in your `config.json` settings.
 
+If hovering flickers (with or without showing hover text), increasing the hover delay may fix this (e.g. set it to `"editor.hover.delay": 2000`)
+
 ### Completion
 
 This will complete references to the following element types:

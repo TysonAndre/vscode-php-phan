@@ -74,7 +74,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
             // Phan will probably use the polyfill parser based on tolerant-php-parser.
             return true;
         }
-        await showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed. PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed (1.0.6+ recommended). PHP Path: ' + phpExecutablePath);
         return false;
     }
 
@@ -90,7 +90,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(astVersion, '1.0.1')) {
-        await showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed. Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed (1.0.6+ recommended). Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -272,7 +272,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     }
 
-    const serverOptionsCallbackForDirectory = (dirToAnalyze: string) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
+    const serverOptionsCallbackForDirectory = (dirToAnalyze: string, getClient: (() => LanguageClient)) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         // Listen on random port
         const spawnServer = (...args: string[]): ChildProcess => {
             if (additionalCLIFlags.length > 0) {
@@ -398,17 +398,18 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     };
 
+    const createClient = (dirToAnalyze: string): LanguageClient => {
+        let client: LanguageClient;
+        const serverOptions = serverOptionsCallbackForDirectory(dirToAnalyze, () => client);
+        client = new LanguageClient('Phan Language Server', serverOptions, clientOptions);
+        return client;
+    };
+
     console.log('starting PHP Phan language server');
     // Create the language client and start the client.
     for (const dirToAnalyze of analyzedProjectDirectories) {
-        const disposable = new LanguageClient(
-            'Phan Language Server',
-            serverOptionsCallbackForDirectory(dirToAnalyze),
-            clientOptions
-        ).start();
-
         // Push the disposable to the context's subscriptions so that the
         // client can be deactivated on extension deactivation
-        context.subscriptions.push(disposable);
+        context.subscriptions.push(createClient(dirToAnalyze).start());
     }
 }
