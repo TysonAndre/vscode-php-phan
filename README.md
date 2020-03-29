@@ -106,6 +106,7 @@ This is enabled by default. To disable this, add `"phan.enableGoToDefinition": f
 This is enabled by default. To disable this, add `"phan.enableHover": false` in your `config.json` settings.
 
 If hovering flickers (with or without showing hover text), increasing the hover delay may fix this (e.g. set it to `"editor.hover.delay": 2000`)
+Also, make sure that the setting `"phan.useRelativePatterns"` is `true` (this is the default), if multiple directories are in `phan.analyzedProjectDirectory`.
 
 ### Completion
 
@@ -129,10 +130,17 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
-### 1.2.3 (2020-03-28)
+### 1.2.3 (2020-03-29)
 
 - Update Phan from 2.5.0 to 2.6.1
 - See [Phan's NEWS](https://github.com/phan/phan/blob/2.6.1/NEWS.md) for more details.
+- By default, limit language client to sending events to files in the corresponding
+  `phan.analyzedProjectDirectory` to the language server(s).
+
+  This may improve performance and avoid flickering of hover text when there is more than one directory in `phan.analyzedProjectDirectory`
+
+  `phan.useRelativePatterns` can be set to `false` to disable this if needed
+  (e.g. if a phan config also analyzes files outside of the directory containing `./.phan/`)
 
 ### 1.2.2 (2020-02-29)
 

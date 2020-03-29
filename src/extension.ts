@@ -1,6 +1,7 @@
 import * as path from 'path';
 import { spawn, execFile, ChildProcess } from 'mz/child_process';
 import * as vscode from 'vscode';
+import { DocumentFilter, RelativePattern } from 'vscode';
 import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
 import * as semver from 'semver';
 import * as net from 'net';
@@ -220,6 +221,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
     const redundantConditionDetection = conf.get<boolean>('redundantConditionDetection');
     let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
+    const useRelativePatterns = conf.get<boolean>('useRelativePatterns');
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
     if (!isValidPHPVersion) {
@@ -272,7 +274,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     }
 
-    const serverOptionsCallbackForDirectory = (dirToAnalyze: string, getClient: (() => LanguageClient)) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
+    const serverOptionsCallbackForDirectory = (dirToAnalyze: string) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         // Listen on random port
         const spawnServer = (...args: string[]): ChildProcess => {
             if (additionalCLIFlags.length > 0) {
@@ -376,33 +378,42 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     }));
 
-    const documentSelectors: {scheme: 'file', language?: string, pattern?: string}[] = [{scheme: 'file', language: 'php'}];
-    if (analyzedFileExtensions.length > 0) {
-        documentSelectors.push({scheme: 'file', pattern: '**/*.{' + analyzedFileExtensions.join(',') + '}'});
-    }
-
-    // Options to control the language client
-    const clientOptions: LanguageClientOptions = {
-        // Register the server for php (and maybe HTML) documents
-        documentSelector: documentSelectors,
-        uriConverters: {
-            // VS Code by default %-encodes even the colon after the drive letter
-            // NodeJS handles it much better
-            code2Protocol: uri => url.format(url.parse(uri.toString(true))),
-            protocol2Code: str => vscode.Uri.parse(str)
-        },
-        synchronize: {
-            // Synchronize the setting section 'phan' to the server (TODO: server side support)
-            configurationSection: 'phan',
-            fileEvents: vscode.workspace.createFileSystemWatcher('**/.phan/config.php')
-        }
-    };
-
     const createClient = (dirToAnalyze: string): LanguageClient => {
-        let client: LanguageClient;
-        const serverOptions = serverOptionsCallbackForDirectory(dirToAnalyze, () => client);
-        client = new LanguageClient('Phan Language Server', serverOptions, clientOptions);
-        return client;
+        const defaultDocumentSelector: DocumentFilter = {scheme: 'file', language: 'php'};
+        if (useRelativePatterns) {
+            defaultDocumentSelector.pattern = new RelativePattern(dirToAnalyze, '*');
+        }
+        const documentSelectors: DocumentFilter[] = [ defaultDocumentSelector ];
+        if (analyzedFileExtensions.length > 0) {
+            let extPattern: RelativePattern|string;
+            if (useRelativePatterns) {
+                extPattern = new RelativePattern(dirToAnalyze, '**/*.{' + analyzedFileExtensions.join(',') + '}');
+            } else {
+                extPattern = '**/*.{' + analyzedFileExtensions.join(',') + '}';
+            }
+            documentSelectors.push({scheme: 'file', pattern: extPattern});
+        }
+
+        // Options to control the language client
+        const clientOptions: LanguageClientOptions = {
+            // Register the server for php (and maybe HTML) documents
+            // @ts-ignore DocumentSelector has conflicting type definitions
+            documentSelector: documentSelectors,
+            uriConverters: {
+                // VS Code by default %-encodes even the colon after the drive letter
+                // NodeJS handles it much better
+                code2Protocol: uri => url.format(url.parse(uri.toString(true))),
+                protocol2Code: str => vscode.Uri.parse(str)
+            },
+            synchronize: {
+                // Synchronize the setting section 'phan' to the server (TODO: server side support)
+                configurationSection: 'phan',
+                fileEvents: vscode.workspace.createFileSystemWatcher('**/.phan/config.php')
+            }
+        };
+
+        const serverOptions = serverOptionsCallbackForDirectory(dirToAnalyze);
+        return new LanguageClient('Phan Language Server', serverOptions, clientOptions);
     };
 
     console.log('starting PHP Phan language server');

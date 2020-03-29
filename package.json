@@ -185,6 +185,11 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Useful for debugging. Forces Phan to manually save and restore the analyzed project's state instead of using `pcntl`"
+        },
+        "phan.useRelativePatterns": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Limit events sent to the language server to those within `phan.analyzedProjectDirectory` where possible. Useful when multiple directories are analyzed."
         }
       }
     }
