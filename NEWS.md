@@ -1,6 +1,18 @@
 vscode-php-phan NEWS
 ====================
 
+### 1.2.3 (2020-03-28)
+
+- Update Phan from 2.5.0 to 2.6.1
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.6.1/NEWS.md) for more details.
+- By default, limit language client to sending events to files in the corresponding
+  `phan.analyzedProjectDirectory` to the language server(s).
+
+  This may improve performance and avoid flickering of hover text when there is more than one directory in `phan.analyzedProjectDirectory`
+
+  `phan.useRelativePatterns` can be set to `false` to disable this if needed
+  (e.g. if a phan config also analyzes files outside of the directory containing `./.phan/`)
+
 ### 1.2.2 (2020-02-29)
 
 - Update Phan from 2.4.6 to 2.5.0

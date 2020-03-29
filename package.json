@@ -7,9 +7,10 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "1.2.2",
+  "version": "1.2.3",
   "engines": {
-    "vscode": "^1.30.0",
+    "node": "8.9.3",
+    "vscode": "^1.35.0",
     "os": [
       "darwin",
       "linux"
@@ -52,8 +53,8 @@
     "@types/mz": "0.0.31",
     "@types/node": "^8.10.59",
     "@types/semver": "^5.5.0",
-    "@types/vscode": "1.30",
-    "tslint": "^5.20.1",
+    "@types/vscode": "^1.35.0",
+    "tslint": "^6.1.0",
     "typescript": "^3.8.3",
     "vsce": "^1.74.0",
     "vscode-test": "^1.3.0"
@@ -61,7 +62,7 @@
   "dependencies": {
     "mz": "^2.7.0",
     "semver": "^5.7.1",
-    "vscode-languageclient": "^5.2.1"
+    "vscode-languageclient": "^6.1.3"
   },
   "contributes": {
     "configuration": {
@@ -184,6 +185,11 @@
           "type": "boolean",
           "default": false,
           "markdownDescription": "Useful for debugging. Forces Phan to manually save and restore the analyzed project's state instead of using `pcntl`"
+        },
+        "phan.useRelativePatterns": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Limit events sent to the language server to those within `phan.analyzedProjectDirectory` where possible. Useful when multiple directories are analyzed."
         }
       }
     }
