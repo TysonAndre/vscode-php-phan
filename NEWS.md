@@ -1,6 +1,12 @@
 vscode-php-phan NEWS
 ====================
 
+### 1.2.4 (2020-04-06)
+
+- Update Phan from 2.6.1 to 2.7.0
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.7.0/NEWS.md) for more details.
+- Disable `phan.useRelativePatterns` by default.
+
 ### 1.2.3 (2020-03-28)
 
 - Update Phan from 2.5.0 to 2.6.1
