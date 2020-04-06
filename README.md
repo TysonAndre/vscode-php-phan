@@ -55,6 +55,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
+    // Limit events sent to the language server to those within `phan.analyzedProjectDirectory` where possible.
+    // Useful when multiple directories are analyzed (e.g. fixes issues with hover flickering).
+    // "phan.useRelativePatterns": true,
+
     // Path to a php 7.1+ binary
     // (preferably with the php-ast PECL extension installed and enabled)
     // This should be as similar as possible as the php installation used to run Phan
@@ -69,7 +73,7 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     "phan.unusedVariableDetection": true,
 
     // Files which this should analyze (e.g. "php", "html", "inc")
-    "phan.analyzedFileExtensions": ["php"]
+    "phan.analyzedFileExtensions": ["php"],
 }
 ```
 
@@ -129,6 +133,12 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 ## Contributing
 
 ## Release History
+
+### 1.2.4 (2020-04-06)
+
+- Update Phan from 2.6.1 to 2.7.0
+- See [Phan's NEWS](https://github.com/phan/phan/blob/2.7.0/NEWS.md) for more details.
+- Disable `phan.useRelativePatterns` by default.
 
 ### 1.2.3 (2020-03-29)
 
