@@ -163,17 +163,12 @@ async function checkPhanSupportsLanguageServer(context: vscode.ExtensionContext,
 
 // Returns true if phan.phanScriptPath supports the language server protocol.
 async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionContext, analyzedProjectDirectory: string): Promise<boolean> {
-    const exists: boolean = isDirectory(analyzedProjectDirectory);
-
-    if (!exists) {
+    if (!isDirectory(analyzedProjectDirectory)) {
         await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not exist. directory: ' + analyzedProjectDirectory);
         return false;
     }
 
-    const phanConfigPath = path.join(analyzedProjectDirectory, '.phan', 'config.php');
-    const phanConfigExists: boolean = isFile(phanConfigPath);
-
-    if (!phanConfigExists) {
+    if (!pathContainsPhanFolderAndConfig(analyzedProjectDirectory)) {
         await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectory refers to a directory that does not contain .phan/config.php. Check that it is the absolute path of the root of a project set up for phan. directory: ' + analyzedProjectDirectory);
         return false;
     }
@@ -203,7 +198,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const phanScriptPath = conf.get<string>('phanScriptPath') || defaultPhanScriptPath;
     // Support analyzing more than one project the simplest way (always start every server).
     const originalAnalyzedProjectDirectories = conf.get<string|string[]>('analyzedProjectDirectory');
-    const analyzedProjectDirectories = normalizeDirsToAnalyze(originalAnalyzedProjectDirectories);
+    let analyzedProjectDirectories = normalizeDirsToAnalyze(originalAnalyzedProjectDirectories);
     const enableDebugLog = conf.get<boolean>('enableDebugLog');
     const analyzeOnlyOnSave = conf.get<boolean>('analyzeOnlyOnSave');
     const allowPolyfillParser = conf.get<boolean>('allowPolyfillParser') || false;
@@ -255,13 +250,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const phanScriptPathValidated = phanScriptPath;  // work around typescript complaint.
 
     // Check if the analyzedProjectDirectories setting was provided.
-    if (!analyzedProjectDirectories) {
-        if (originalAnalyzedProjectDirectories instanceof Array) {
-            await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectories must be a path or a non-empty array of paths (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
-        } else {
-            await showOpenSettingsPrompt('The setting phan.analyzedProjectDirectories must be provided (e.g. /path/to/some/project_folder). `.phan` must be a folder within that directory.');
+    if (!analyzedProjectDirectories.length) {
+        analyzedProjectDirectories = findValidProjectDirectories();
+
+        if (!analyzedProjectDirectories.length) {
+            const cantFindWorkspaceDirectoryMessage =
+            'No workspace directory contain a folder named ".phan" with a config.php file. ' +
+            'You can add custom directories via phan.analyzedProjectDirectories setting.';
+            await showOpenSettingsPrompt(cantFindWorkspaceDirectoryMessage);
+            return;
         }
-        return;
     }
 
     for (const dir of analyzedProjectDirectories) {
@@ -423,4 +421,39 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         // client can be deactivated on extension deactivation
         context.subscriptions.push(createClient(dirToAnalyze).start());
     }
+}
+
+// Search all the workspace folders and return the first that contains .phan/config.php
+// This will return the folder name in an array as required, and just only one folder,
+// the first met. We can easy modify the function to add all valid workspace folders to the array.
+function findValidProjectDirectories(): string[] {
+    // Get the fsPath(file system path) of all workspace folders.
+    const VSCodeFolders = vscode.workspace.workspaceFolders;
+
+    if (!VSCodeFolders) {
+        return [];
+    }
+
+    let workingFolders = VSCodeFolders.map( function(obj) {
+        if ( ('uri' in obj) && ('fsPath' in obj.uri)) {
+            return obj.uri.fsPath;
+        }
+        return '';
+    } );
+
+    // Return the first workspace folder that satisfy our criteria.
+    for (let i = 0; i < workingFolders.length; i++) {
+        if ( pathContainsPhanFolderAndConfig( workingFolders[i] ) ) {
+            return [ workingFolders[i] ];
+        }
+    }
+
+    return [];
+}
+
+// Whether or not a path contains the ".phan" folder alongside with a config.php file.
+// Returns bool
+function pathContainsPhanFolderAndConfig(folderPath: string): boolean {
+    let phanConfigPath = path.join(folderPath, '.phan', 'config.php');
+    return isFile(phanConfigPath);
 }
