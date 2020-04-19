@@ -254,10 +254,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         analyzedProjectDirectories = findValidProjectDirectories();
 
         if (!analyzedProjectDirectories.length) {
+            // Do not send an error to the interface, this is frustrating.
             const cantFindWorkspaceDirectoryMessage =
             'No workspace directory contain a folder named ".phan" with a config.php file. ' +
             'You can add custom directories via phan.analyzedProjectDirectories setting.';
-            await showOpenSettingsPrompt(cantFindWorkspaceDirectoryMessage);
+            console.warn(cantFindWorkspaceDirectoryMessage);
             return;
         }
     }
@@ -429,26 +430,21 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 function findValidProjectDirectories(): string[] {
     // Get the fsPath(file system path) of all workspace folders.
     const VSCodeFolders = vscode.workspace.workspaceFolders;
-
     if (!VSCodeFolders) {
         return [];
     }
-
-    let workingFolders = VSCodeFolders.map( function(obj) {
-        if ( ('uri' in obj) && ('fsPath' in obj.uri)) {
+    let workingFolders = VSCodeFolders.map(function (obj) {
+        if (('uri' in obj) && ('fsPath' in obj.uri)) {
             return obj.uri.fsPath;
         }
         return '';
-    } );
+    });
 
-    // Return the first workspace folder that satisfy our criteria.
-    for (let i = 0; i < workingFolders.length; i++) {
-        if ( pathContainsPhanFolderAndConfig( workingFolders[i] ) ) {
-            return [ workingFolders[i] ];
-        }
-    }
+    workingFolders = workingFolders.filter(function (folderPath) {
+        return pathContainsPhanFolderAndConfig(folderPath);
+    });
 
-    return [];
+    return workingFolders;
 }
 
 // Whether or not a path contains the ".phan" folder alongside with a config.php file.
