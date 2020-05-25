@@ -74,6 +74,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
 
     // Files which this should analyze (e.g. "php", "html", "inc")
     "phan.analyzedFileExtensions": ["php"],
+
+    // Optional. Setting this will provide these additional CLI flags to the Phan server.
+    // See https://github.com/phan/phan#usage (e.g. `["--quick"]`)
+    // "phan.additionalCLIFlags": []
 }
 ```
 
