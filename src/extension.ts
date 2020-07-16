@@ -24,15 +24,15 @@ async function showOpenSettingsPrompt(errorMessage: string): Promise<void> {
     }
 }
 
-// Returns true if phan.phpExecutablePath is 7.1.0 or newer, and return false if it isn't (or php can't be found)
+// Returns true if phan.phpExecutablePath is 7.2.0 or newer, and return false if it isn't (or php can't be found)
 async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePath: string): Promise<boolean> {
-    // Check path (if PHP is available and version is ^7.1.0)
+    // Check path (if PHP is available and version is ^7.2.0)
     let stdout: string;
     try {
         [stdout] = await execFile(phpExecutablePath, ['--version']);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.1+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
+            await showOpenSettingsPrompt('PHP executable not found. Install PHP 7.2+ and add it to your PATH or set the phan.phpExecutablePath setting. Current PHP Path: ' + phpExecutablePath);
         } else {
             await showErrorMessage('Error spawning PHP: ' + err.message);
             console.error(err);
@@ -40,7 +40,7 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
         return false;
     }
 
-    // Parse version and discard OS info like 7.1.8--0ubuntu0.16.04.2
+    // Parse version and discard OS info like 7.2.8--0ubuntu0.16.04.2
     const match = stdout.match(/^PHP ([^\s]+)/m);
     if (!match) {
         await showErrorMessage('Error parsing PHP version. Please check the output of php --version. PHP Path: ' + phpExecutablePath);
@@ -51,8 +51,8 @@ async function checkPHPVersion(context: vscode.ExtensionContext, phpExecutablePa
     if (!/^\d+.\d+.\d+$/.test(version)) {
         version = version.replace(/(\d+.\d+.\d+)/, '$1-');
     }
-    if (semver.lt(version, '7.1.0')) {
-        await showErrorMessage('Phan 2.x needs at least PHP 7.1 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
+    if (semver.lt(version, '7.2.0')) {
+        await showErrorMessage('Phan 3.x needs at least PHP 7.2 installed. Version found: ' + version + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;
@@ -75,7 +75,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
             // Phan will probably use the polyfill parser based on tolerant-php-parser.
             return true;
         }
-        await showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed (1.0.6+ recommended). PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('php-ast is not installed or not enabled. php-ast 1.0.1 or newer must be installed (1.0.7+ recommended). PHP Path: ' + phpExecutablePath);
         return false;
     }
 
@@ -91,7 +91,7 @@ async function checkPHPAstInstalledAndSupported(context: vscode.ExtensionContext
         astVersion = astVersion.replace(/(\d+.\d+.\d+)/, '$1-');
     }
     if (semver.lt(astVersion, '1.0.1')) {
-        await showErrorMessage('Phan 2.x needs at least ext-ast 1.0.1 installed (1.0.6+ recommended). Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
+        await showErrorMessage('Phan 3.x needs at least ext-ast 1.0.1 installed (1.0.7+ recommended). Version found: ' + astVersion + ' PHP Path: ' + phpExecutablePath);
         return false;
     }
     return true;

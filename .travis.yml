@@ -1,14 +1,14 @@
 language: php
 
 php:
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 matrix:
   exclude:
-  - php: 7.3
-    env: NODE_VERSION=6.5.0
+  - php: 7.4
+    env: NODE_VERSION=12
   - php: 7.3
     env: NODE_VERSION=10
   - php: 7.1

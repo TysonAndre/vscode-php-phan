@@ -1,6 +1,6 @@
 # PHP Phan (Analyzer)
 
-[![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.1-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.2-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 **Supports Unix/Linux, and Windows.**
 
@@ -25,7 +25,7 @@ However, bugs in this VS code extension (crashes, etc) or related to the languag
 
 ### Dependencies:
 
-1. PHP 7.1+ must be installed.
+1. PHP 7.2+ must be installed.
    You can either add it to your PATH or set the `phan.executablePath` setting.
 2. `pcntl` is recommended, but not absolutely necessary. (Available on Unix/Linux)
    (Phan's Language Server Protocol support depends on `pcntl` module being installed, which is only available on those platforms)
@@ -59,13 +59,13 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // Useful when multiple directories are analyzed (e.g. fixes issues with hover flickering).
     // "phan.useRelativePatterns": true,
 
-    // Path to a php 7.1+ binary
+    // Path to a php 7.2+ binary
     // (preferably with the php-ast PECL extension installed and enabled)
     // This should be as similar as possible as the php installation used to run Phan
     // (Same php minor version,
     //  same extensions or phan internal stubs for extensions (excluding xdebug), etc.)
-    // On windows, this would be "C:\\path\\to\\php-7.1-installation\\php.exe"
-    "phan.phpExecutablePath": "/path/to/php7.1",
+    // On windows, this would be "C:\\path\\to\\php-7.2-installation\\php.exe"
+    "phan.phpExecutablePath": "/path/to/php7.2",
 
     // Optionally, enable unused variable detection
     // (off by default. This can also be enabled in `.phan/config.php`
@@ -138,33 +138,19 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 2.0.0 (2020-07-15)
+
+- Bump the minimum required php version from 7.1 to 7.2 (because of the Phan version update)
+
+  The VS code extension version can be [downgraded to 1.2.4](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install a newer php version.
+- Update Phan from 2.7.0 to 3.0.5
+- See [Phan's NEWS](https://github.com/phan/phan/blob/3.0.5/NEWS.md) for more details.
+
 ### 1.2.4 (2020-04-06)
 
 - Update Phan from 2.6.1 to 2.7.0
 - See [Phan's NEWS](https://github.com/phan/phan/blob/2.7.0/NEWS.md) for more details.
 - Disable `phan.useRelativePatterns` by default.
-
-### 1.2.3 (2020-03-29)
-
-- Update Phan from 2.5.0 to 2.6.1
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.6.1/NEWS.md) for more details.
-- By default, limit language client to sending events to files in the corresponding
-  `phan.analyzedProjectDirectory` to the language server(s).
-
-  This may improve performance and avoid flickering of hover text when there is more than one directory in `phan.analyzedProjectDirectory`
-
-  `phan.useRelativePatterns` can be set to `false` to disable this if needed
-  (e.g. if a phan config also analyzes files outside of the directory containing `./.phan/`)
-
-### 1.2.2 (2020-02-29)
-
-- Update Phan from 2.4.6 to 2.5.0
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.5.0/NEWS.md) for more details.
-
-### 1.2.1 (2020-01-01)
-
-- Update Phan from 2.3.1 to 2.4.6
-- See [Phan's NEWS](https://github.com/phan/phan/blob/2.4.6/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 
