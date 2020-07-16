@@ -1,13 +1,18 @@
 vscode-php-phan NEWS
 ====================
 
-### 2.0.0 (2020-07-15)
+### 2.0.1 (2020-07-15)
+
+- Update Phan from 3.0.2 to 3.0.5
+- See [Phan's NEWS](https://github.com/phan/phan/blob/3.0.5/NEWS.md) for more details.
+
+### 2.0.0 (2020-06-10)
 
 - Bump the minimum required php version from 7.1 to 7.2 (because of the Phan version update)
 
   The VS code extension version can be [downgraded to 1.2.4](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install a newer php version.
-- Update Phan from 2.7.0 to 3.0.5
-- See [Phan's NEWS](https://github.com/phan/phan/blob/3.0.5/NEWS.md) for more details.
+- Update Phan from 2.7.0 to 3.0.2
+- See [Phan's NEWS](https://github.com/phan/phan/blob/3.0.2/NEWS.md) for more details.
 
 ### 1.2.4 (2020-04-06)
 
