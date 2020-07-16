@@ -55,7 +55,8 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
-    // Limit events sent to the language server to those within `phan.analyzedProjectDirectory` where possible.
+    // Limit events sent to the language server to those within `phan.analyzedProjectDirectory`
+    // where possible.
     // Useful when multiple directories are analyzed (e.g. fixes issues with hover flickering).
     // "phan.useRelativePatterns": true,
 
