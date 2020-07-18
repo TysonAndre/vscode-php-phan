@@ -180,15 +180,30 @@ async function checkValidAnalyzedProjectDirectory(context: vscode.ExtensionConte
     return true;
 }
 
-// Converts the directory to analyze to an array of directories, if necessary.
+// Converts the directory to analyze to an array of directories if necessary,
+// and replace ${workspaceFolder} with the root workspace vscode directory.
 function normalizeDirsToAnalyze(conf: string|string[]|undefined): string[] {
     if (!conf) {
         return [];
     }
-    if (conf instanceof Array) {
+
+    if (!(conf instanceof Array)) {
+        conf = [conf];
+    }
+
+    if (!vscode.workspace.workspaceFolders) {
         return conf;
     }
-    return [conf];
+
+    if (typeof vscode.workspace.workspaceFolders[0].uri.fsPath !== 'string') {
+        return conf;
+    }
+
+    for (let i = 0; i < conf.length; i++) {
+        conf[i] = conf[i].replace(/\$\{workspaceFolder\}/gi, vscode.workspace.workspaceFolders[0].uri.fsPath).replace(/\\/gi, '/');
+    }
+
+    return conf;
 }
 
 /**
