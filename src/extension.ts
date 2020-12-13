@@ -379,9 +379,20 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     }));
 
     const createClient = (dirToAnalyze: string): LanguageClient => {
-        const defaultDocumentSelector: DocumentFilter = {scheme: 'file', language: 'php'};
+        let defaultDocumentSelector: DocumentFilter;
         if (useRelativePatterns) {
-            defaultDocumentSelector.pattern = new RelativePattern(dirToAnalyze, '*');
+            // workaround for error TS2540: Cannot assign to 'pattern' because it is a read-only property.
+            // (maintains ability to check types)
+            defaultDocumentSelector = {
+                scheme: 'file',
+                language: 'php',
+                pattern: new RelativePattern(dirToAnalyze, '*')
+            };
+        } else {
+            defaultDocumentSelector = {
+                scheme: 'file',
+                language: 'php'
+            };
         }
         const documentSelectors: DocumentFilter[] = [ defaultDocumentSelector ];
         if (analyzedFileExtensions.length > 0) {
