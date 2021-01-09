@@ -139,15 +139,17 @@ You may want to disable VS Code's built-in IntelliSense for PHP by setting `php.
 
 ## Release History
 
+### 3.0.0 (2021-01-09)
+
+- Increase the minimum php-ast version to 1.0.7+ if php-ast is installed.
+  The VS code extension version can be [downgraded to 2.2.0](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install/use a newer php-ast or Phan version.
+- Update Phan from 3.2.7 to 4.0.2
+- See [Phan's NEWS](https://github.com/phan/phan/blob/4.0.2/NEWS.md) for more details.
+
 ### 2.2.0 (2020-12-13)
 
 - Update Phan from 3.2.3 to 3.2.7
 - See [Phan's NEWS](https://github.com/phan/phan/blob/3.2.7/NEWS.md) for more details.
-
-### 2.1.0 (2020-10-24)
-
-- Update Phan from 3.0.5 to 3.2.3
-- See [Phan's NEWS](https://github.com/phan/phan/blob/3.2.3/NEWS.md) for more details.
 
 The full changelog can be found at [NEWS.md](https://github.com/TysonAndre/vscode-php-phan/blob/master/NEWS.md)
 

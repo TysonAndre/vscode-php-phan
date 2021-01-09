@@ -1,6 +1,13 @@
 vscode-php-phan NEWS
 ====================
 
+### 3.0.0 (2021-01-09)
+
+- Increase the minimum php-ast version to 1.0.7+ if php-ast is installed.
+  The VS code extension version can be [downgraded to 2.2.0](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you are unable to install/use a newer php-ast or Phan version.
+- Update Phan from 3.2.7 to 4.0.2
+- See [Phan's NEWS](https://github.com/phan/phan/blob/4.0.2/NEWS.md) for more details.
+
 ### 2.2.0 (2020-12-13)
 
 - Update Phan from 3.2.3 to 3.2.7
