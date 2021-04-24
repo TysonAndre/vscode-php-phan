@@ -53,6 +53,10 @@ Add these entries to your VSCode config (Open the menu at File > Preferences > S
     // (including files to parse and analyze).
     // On windows, a project folder would be a path such as
     // "C:\\Users\\MyUser\\path\\to\\analyzed\\folder"
+    //
+    // Additionally ${workspaceFolder} can be used or prefixed to a path, as in
+    // launch.json or tasks.json:
+    // "phan.analyzedProjectDirectory": "${workspaceFolder}",
     "phan.analyzedProjectDirectory": "/path/to/folder/to/analyze",
 
     // Limit events sent to the language server to those within `phan.analyzedProjectDirectory`
