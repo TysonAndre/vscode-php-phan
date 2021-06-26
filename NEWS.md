@@ -4,6 +4,7 @@ vscode-php-phan NEWS
 ### 4.0.1 (2021-06-26)
 
 - Update Phan from 4.0.4 to 4.0.7
+- See [Phan's NEWS](https://github.com/phan/phan/blob/4.0.7/NEWS.md) for more details.
 
 ### 4.0.0 (2021-04-17)
 
