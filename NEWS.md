@@ -1,6 +1,10 @@
 vscode-php-phan NEWS
 ====================
 
+### 4.0.1 (2021-06-26)
+
+- Update Phan from 4.0.4 to 4.0.7
+
 ### 4.0.0 (2021-04-17)
 
 - Prevent the settings `phan.phpExecutablePath`, `phan.phanScriptPath`, `phan.analyzedProjectDirectory`, `phan.additionalCLIFlags`, and `phan.connectToServerWithStdio` from being overridden in VS Code workspace or folder settings. (i.e. configure them with `"scope": "machine"` for https://github.com/microsoft/vscode/blob/1.55.2/src/vs/workbench/api/common/configurationExtensionPoint.ts#L50-L55) (CVE-2021-31416)
@@ -9,7 +13,7 @@ vscode-php-phan NEWS
 
   The VS code extension version can be [downgraded to 3.0.0](https://code.visualstudio.com/updates/v1_30#_install-previous-versions) if you rely on those workspace settings.
 - Update Phan from 4.0.2 to 4.0.4
-- See [Phan's NEWS](https://github.com/phan/phan/blob/4.0.2/NEWS.md) for more details.
+- See [Phan's NEWS](https://github.com/phan/phan/blob/4.0.4/NEWS.md) for more details.
 
 ### 3.0.0 (2021-01-09)
 
