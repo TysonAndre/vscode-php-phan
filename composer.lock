@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3fb7f286b4ae3c362439ec2c74f0620",
+    "content-hash": "160544945e4c2b5fdd37df77b27e5466",
     "packages": [
         {
             "name": "composer/semver",
@@ -89,21 +89,21 @@
         },
         {
             "name": "composer/xdebug-handler",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/xdebug-handler.git",
-                "reference": "964adcdd3a28bf9ed5d9ac6450064e0d71ed7496"
+                "reference": "84674dd3a7575ba617f5a76d7e9e29a7d3891339"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/964adcdd3a28bf9ed5d9ac6450064e0d71ed7496",
-                "reference": "964adcdd3a28bf9ed5d9ac6450064e0d71ed7496",
+                "url": "https://api.github.com/repos/composer/xdebug-handler/zipball/84674dd3a7575ba617f5a76d7e9e29a7d3891339",
+                "reference": "84674dd3a7575ba617f5a76d7e9e29a7d3891339",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0 || ^8.0",
-                "psr/log": "^1.0"
+                "psr/log": "^1 || ^2 || ^3"
             },
             "require-dev": {
                 "phpstan/phpstan": "^0.12.55",
@@ -133,7 +133,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/xdebug-handler/issues",
-                "source": "https://github.com/composer/xdebug-handler/tree/2.0.1"
+                "source": "https://github.com/composer/xdebug-handler/tree/2.0.2"
             },
             "funding": [
                 {
@@ -149,7 +149,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-05T19:37:51+00:00"
+            "time": "2021-07-31T17:03:58+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
@@ -198,23 +198,23 @@
         },
         {
             "name": "microsoft/tolerant-php-parser",
-            "version": "v0.0.23",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/microsoft/tolerant-php-parser.git",
-                "reference": "1d76657e3271754515ace52501d3e427eca42ad0"
+                "reference": "6a965617cf484355048ac6d2d3de7b6ec93abb16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/microsoft/tolerant-php-parser/zipball/1d76657e3271754515ace52501d3e427eca42ad0",
-                "reference": "1d76657e3271754515ace52501d3e427eca42ad0",
+                "url": "https://api.github.com/repos/microsoft/tolerant-php-parser/zipball/6a965617cf484355048ac6d2d3de7b6ec93abb16",
+                "reference": "6a965617cf484355048ac6d2d3de7b6ec93abb16",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.4"
+                "phpunit/phpunit": "^8.5.15"
             },
             "type": "library",
             "autoload": {
@@ -237,9 +237,9 @@
             "description": "Tolerant PHP-to-AST parser designed for IDE usage scenarios",
             "support": {
                 "issues": "https://github.com/microsoft/tolerant-php-parser/issues",
-                "source": "https://github.com/microsoft/tolerant-php-parser/tree/v0.0.23"
+                "source": "https://github.com/microsoft/tolerant-php-parser/tree/v0.1.1"
             },
-            "time": "2020-09-13T17:29:12+00:00"
+            "time": "2021-07-16T21:28:12+00:00"
         },
         {
             "name": "netresearch/jsonmapper",
@@ -294,16 +294,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "4.0.7",
+            "version": "5.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "2c9bb22823dd1dcaee62adefa2826db8a9e79302"
+                "reference": "561be81e281acbba75780c4f5392d56dfa5028ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/2c9bb22823dd1dcaee62adefa2826db8a9e79302",
-                "reference": "2c9bb22823dd1dcaee62adefa2826db8a9e79302",
+                "url": "https://api.github.com/repos/phan/phan/zipball/561be81e281acbba75780c4f5392d56dfa5028ab",
+                "reference": "561be81e281acbba75780c4f5392d56dfa5028ab",
                 "shasum": ""
             },
             "require": {
@@ -313,23 +313,25 @@
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "felixfbecker/advanced-json-rpc": "^3.0.4",
-                "microsoft/tolerant-php-parser": "0.0.23",
+                "microsoft/tolerant-php-parser": "^0.1.0",
                 "netresearch/jsonmapper": "^1.6.0|^2.0|^3.0|^4.0",
                 "php": "^7.2.0|^8.0.0",
                 "sabre/event": "^5.0.3",
                 "symfony/console": "^3.2|^4.0|^5.0",
                 "symfony/polyfill-mbstring": "^1.11.0",
-                "symfony/polyfill-php80": "^1.20.0"
+                "symfony/polyfill-php80": "^1.20.0",
+                "tysonandre/var_representation_polyfill": "^0.0.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.5.0"
             },
             "suggest": {
-                "ext-ast": "Needed for parsing ASTs (unless --use-fallback-parser is used). 1.0.1+ is needed, 1.0.10+ is recommended.",
+                "ext-ast": "Needed for parsing ASTs (unless --use-fallback-parser is used). 1.0.1+ is needed, 1.0.14+ is recommended.",
                 "ext-iconv": "Either iconv or mbstring is needed to ensure issue messages are valid utf-8",
                 "ext-igbinary": "Improves performance of polyfill when ext-ast is unavailable",
                 "ext-mbstring": "Either iconv or mbstring is needed to ensure issue messages are valid utf-8",
-                "ext-tokenizer": "Needed for fallback/polyfill parser support and file/line-based suppressions."
+                "ext-tokenizer": "Needed for fallback/polyfill parser support and file/line-based suppressions.",
+                "ext-var_representation": "Suggested for converting values to strings in issue messages"
             },
             "bin": [
                 "phan",
@@ -365,9 +367,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phan/phan/issues",
-                "source": "https://github.com/phan/phan/tree/4.0.7"
+                "source": "https://github.com/phan/phan/tree/5.1.0"
             },
-            "time": "2021-06-26T23:07:14+00:00"
+            "time": "2021-08-07T14:06:08+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -693,16 +695,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.3.2",
+            "version": "v5.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "649730483885ff2ca99ca0560ef0e5f6b03f2ac1"
+                "reference": "51b71afd6d2dc8f5063199357b9880cea8d8bfe2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/649730483885ff2ca99ca0560ef0e5f6b03f2ac1",
-                "reference": "649730483885ff2ca99ca0560ef0e5f6b03f2ac1",
+                "url": "https://api.github.com/repos/symfony/console/zipball/51b71afd6d2dc8f5063199357b9880cea8d8bfe2",
+                "reference": "51b71afd6d2dc8f5063199357b9880cea8d8bfe2",
                 "shasum": ""
             },
             "require": {
@@ -710,11 +712,12 @@
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/polyfill-php73": "^1.8",
-                "symfony/polyfill-php80": "^1.15",
+                "symfony/polyfill-php80": "^1.16",
                 "symfony/service-contracts": "^1.1|^2",
                 "symfony/string": "^5.1"
             },
             "conflict": {
+                "psr/log": ">=3",
                 "symfony/dependency-injection": "<4.4",
                 "symfony/dotenv": "<5.1",
                 "symfony/event-dispatcher": "<4.4",
@@ -722,10 +725,10 @@
                 "symfony/process": "<4.4"
             },
             "provide": {
-                "psr/log-implementation": "1.0"
+                "psr/log-implementation": "1.0|2.0"
             },
             "require-dev": {
-                "psr/log": "~1.0",
+                "psr/log": "^1|^2",
                 "symfony/config": "^4.4|^5.0",
                 "symfony/dependency-injection": "^4.4|^5.0",
                 "symfony/event-dispatcher": "^4.4|^5.0",
@@ -771,7 +774,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.3.2"
+                "source": "https://github.com/symfony/console/tree/v5.3.6"
             },
             "funding": [
                 {
@@ -787,7 +790,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-12T09:42:48+00:00"
+            "time": "2021-07-27T19:10:22+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -937,16 +940,16 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "24b72c6baa32c746a4d0840147c9715e42bb68ab"
+                "reference": "16880ba9c5ebe3642d1995ab866db29270b36535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/24b72c6baa32c746a4d0840147c9715e42bb68ab",
-                "reference": "24b72c6baa32c746a4d0840147c9715e42bb68ab",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/16880ba9c5ebe3642d1995ab866db29270b36535",
+                "reference": "16880ba9c5ebe3642d1995ab866db29270b36535",
                 "shasum": ""
             },
             "require": {
@@ -998,7 +1001,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.23.1"
             },
             "funding": [
                 {
@@ -1014,7 +1017,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T09:17:38+00:00"
+            "time": "2021-05-27T12:26:48+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -1102,16 +1105,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1"
+                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9174a3d80210dca8daa7f31fec659150bbeabfc6",
+                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6",
                 "shasum": ""
             },
             "require": {
@@ -1162,7 +1165,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.1"
             },
             "funding": [
                 {
@@ -1178,7 +1181,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T09:27:20+00:00"
+            "time": "2021-05-27T12:26:48+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -1261,16 +1264,16 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "eca0bf41ed421bed1b57c4958bab16aa86b757d0"
+                "reference": "1100343ed1a92e3a38f9ae122fc0eb21602547be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/eca0bf41ed421bed1b57c4958bab16aa86b757d0",
-                "reference": "eca0bf41ed421bed1b57c4958bab16aa86b757d0",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/1100343ed1a92e3a38f9ae122fc0eb21602547be",
+                "reference": "1100343ed1a92e3a38f9ae122fc0eb21602547be",
                 "shasum": ""
             },
             "require": {
@@ -1324,7 +1327,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.23.1"
             },
             "funding": [
                 {
@@ -1340,7 +1343,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-19T12:13:01+00:00"
+            "time": "2021-07-28T13:41:28+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -1423,16 +1426,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.2",
+            "version": "v5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0"
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/0732e97e41c0a590f77e231afc16a327375d50b0",
-                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0",
+                "url": "https://api.github.com/repos/symfony/string/zipball/bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
+                "reference": "bd53358e3eccec6a670b5f33ab680d8dbe1d4ae1",
                 "shasum": ""
             },
             "require": {
@@ -1486,7 +1489,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.2"
+                "source": "https://github.com/symfony/string/tree/v5.3.3"
             },
             "funding": [
                 {
@@ -1502,7 +1505,58 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-06-06T09:51:56+00:00"
+            "time": "2021-06-27T11:44:38+00:00"
+        },
+        {
+            "name": "tysonandre/var_representation_polyfill",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TysonAndre/var_representation_polyfill.git",
+                "reference": "3f17999ee1f257319ddc6721dd26ebbc5d175f33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TysonAndre/var_representation_polyfill/zipball/3f17999ee1f257319ddc6721dd26ebbc5d175f33",
+                "reference": "3f17999ee1f257319ddc6721dd26ebbc5d175f33",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": "^7.2.0|^8.0.0"
+            },
+            "require-dev": {
+                "phan/phan": "^4.0",
+                "phpunit/phpunit": "^8.5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VarRepresentation\\": "src/VarRepresentation"
+                },
+                "files": [
+                    "src/var_representation.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tyson Andre"
+                }
+            ],
+            "description": "Polyfill for var_representation",
+            "keywords": [
+                "var_export",
+                "var_representation"
+            ],
+            "support": {
+                "issues": "https://github.com/TysonAndre/var_representation_polyfill/issues",
+                "source": "https://github.com/TysonAndre/var_representation_polyfill/tree/0.0.2"
+            },
+            "time": "2021-06-26T18:55:02+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -1576,5 +1630,5 @@
     "platform-overrides": {
         "php": "7.2.24"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

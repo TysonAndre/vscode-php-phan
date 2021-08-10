@@ -118,7 +118,7 @@ async function checkPHPPcntlInstalled(context: vscode.ExtensionContext, phpExecu
 
 function isFile(path: string): boolean {
     try {
-        let stat = fs.statSync(path);
+        const stat = fs.statSync(path);
         return stat.isFile();
     } catch (e) {
         return false;
@@ -127,7 +127,7 @@ function isFile(path: string): boolean {
 
 function isDirectory(path: string): boolean {
     try {
-        let stat = fs.statSync(path);
+        const stat = fs.statSync(path);
         return stat.isDirectory();
     } catch (e) {
         return false;
@@ -220,7 +220,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     const quick = conf.get<boolean>('quick');
     const unusedVariableDetection = conf.get<boolean>('unusedVariableDetection');
     const redundantConditionDetection = conf.get<boolean>('redundantConditionDetection');
-    let analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
+    const analyzedFileExtensions: string[] = conf.get<string[]>('analyzedFileExtensions') || ['php'];
     const useRelativePatterns = conf.get<boolean>('useRelativePatterns');
 
     const isValidPHPVersion: boolean = await checkPHPVersion(context, phpExecutablePath);
@@ -274,7 +274,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         }
     }
 
-    const serverOptionsCallbackForDirectory = (dirToAnalyze: string) => (() => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
+    const serverOptionsCallbackForDirectory = (dirToAnalyze: string) => (() => new Promise<ChildProcess | StreamInfo>((resolve) => {
         // Listen on random port
         const spawnServer = (...args: string[]): ChildProcess => {
             if (additionalCLIFlags.length > 0) {
@@ -337,7 +337,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
             // The server is implemented in PHP
             args.unshift(phanScriptPathValidated);
-            console.log('starting Phan Language Server', phpExecutablePath, args);
+            console.log('starting Phan Language Server in ' + dirToAnalyze, phpExecutablePath, args);
             // Phan searches for .phan/config.php within dirToAnalyze,
             // and bases the settings on that.
             // TODO: add mode which will determine path from current working directory
@@ -369,7 +369,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
             });
             server.listen(0, '127.0.0.1', () => {
                 // Start the language server and make the language server connect to the client listening on <addr> (e.g. 127.0.0.1:<port>)
-                spawnServer('--language-server-tcp-connect=127.0.0.1:' + server.address().port);
+                // TODO: What about failing to listen? That should be exceedingly unlikely in practice.
+                // @ts-expect-error TCP should always have a port
+                const port = server.address().port;
+                spawnServer('--language-server-tcp-connect=127.0.0.1:' + port);
             });
         } else {
             // Use STDIO on Linux / Mac if the user set
@@ -408,7 +411,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         // Options to control the language client
         const clientOptions: LanguageClientOptions = {
             // Register the server for php (and maybe HTML) documents
-            // @ts-ignore DocumentSelector has conflicting type definitions
+            // @ts-expect-error DocumentSelector has conflicting type definitions
             documentSelector: documentSelectors,
             uriConverters: {
                 // VS Code by default %-encodes even the colon after the drive letter
