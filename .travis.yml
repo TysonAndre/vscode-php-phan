@@ -1,26 +1,15 @@
 language: php
 
-php:
-  - 7.2
-  - 7.3
-  - 7.4
-  - 8.0
-
 matrix:
-  exclude:
+  include:
   - php: 7.4
     env: NODE_VERSION=14
   - php: 7.3
     env: NODE_VERSION=10
-  - php: 7.1
-    env: NODE_VERSION=8
   - php: 7.2
-    env: NODE_VERSION=8
-
-env:
-  - NODE_VERSION=8
-  - NODE_VERSION=10
-  - NODE_VERSION=14
+    env: NODE_VERSION=14
+  - php: 8.0
+    env: NODE_VERSION=12
 
 cache:
   directories:
