@@ -2,14 +2,16 @@ language: php
 
 matrix:
   include:
-  - php: 7.4
+  - php: '7.4'
     env: NODE_VERSION=14
-  - php: 7.3
+  - php: '7.3'
     env: NODE_VERSION=10
-  - php: 7.2
+  - php: '7.2'
     env: NODE_VERSION=14
-  - php: 8.0
+  - php: '8.0'
     env: NODE_VERSION=12
+  - php: '8.1'
+    env: NODE_VERSION=16
 
 cache:
   directories:
