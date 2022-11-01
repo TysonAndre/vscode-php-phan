@@ -2,10 +2,10 @@
 
 [![Latest Release](https://vsmarketplacebadge.apphb.com/version-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Installs](https://vsmarketplacebadge.apphb.com/installs/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Rating](https://vsmarketplacebadge.apphb.com/rating-short/TysonAndre.php-phan.svg)](https://marketplace.visualstudio.com/items?itemName=TysonAndre.php-phan) [![Build Status](https://travis-ci.org/TysonAndre/vscode-php-phan.svg?branch=master)](https://travis-ci.org/TysonAndre/vscode-php-phan) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E=7.2-8892BF.svg)](https://php.net/) [![Gitter](https://badges.gitter.im/phan/phan.svg)](https://gitter.im/phan/phan?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-### 5.1.0 (2021-11-14)
+### 5.1.0 (2022-11-01)
 
-- Update Phan from 5.1.0 to 5.3.0
-- See [Phan's NEWS](https://github.com/phan/phan/blob/5.3.0/NEWS.md) for more details.
+- Update Phan from 5.1.0 to 5.4.1
+- See [Phan's NEWS](https://github.com/phan/phan/blob/5.4.1/NEWS.md) for more details.
 
 ### 5.0.0 (2021-08-10)
 
