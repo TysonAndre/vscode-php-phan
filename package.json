@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": true,
   "preview": false,
-  "version": "5.0.0",
+  "version": "5.1.0",
   "engines": {
-    "node": "10.24.0",
+    "node": ">=14",
     "vscode": "^1.43.0",
     "os": [
       "darwin",
@@ -49,21 +49,21 @@
     "lint": "eslint 'src/**/*.ts'"
   },
   "devDependencies": {
-    "@types/mocha": "^9.0.0",
-    "@types/mz": "0.0.31",
-    "@types/node": "^10.17.60",
-    "@types/semver": "^7.3.8",
+    "@types/mocha": "^9.1.1",
+    "@types/mz": "^2.7.4",
+    "@types/node": "^12.20.55",
+    "@types/semver": "^7.3.13",
     "@types/vscode": "^1.43.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
-    "eslint": "^7.32.0",
-    "typescript": "^4.3.5",
-    "vsce": "^1.96.1",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "eslint": "^8.26.0",
+    "typescript": "^4.8.4",
+    "vsce": "^2.13.0",
     "vscode-test": "^1.6.1"
   },
   "dependencies": {
     "mz": "^2.7.0",
-    "semver": "^7.2.5",
+    "semver": "^7.3.8",
     "vscode-languageclient": "^6.1.4"
   },
   "contributes": {
