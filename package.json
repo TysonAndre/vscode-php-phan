@@ -67,6 +67,13 @@
     "vscode-languageclient": "^6.1.4"
   },
   "contributes": {
+    "commands": [
+      {
+        "command": "phan.restartLanguageServer",
+        "title": "Restart Phan Language Server",
+        "category": "Phan"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "PHP - Phan Analyzer",

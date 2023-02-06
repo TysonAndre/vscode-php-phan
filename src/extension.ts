@@ -430,11 +430,17 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         return new LanguageClient('Phan Language Server', serverOptions, clientOptions);
     };
 
+    const languageClients = analyzedProjectDirectories.map(createClient);
+
+    function restartLanguageClients() {
+        return Promise.all(languageClients.map((c: LanguageClient) => c.stop().then(() => c.start())));
+    }
+    context.subscriptions.push(vscode.commands.registerCommand('phan.restartLanguageServer', restartLanguageClients));
+
     console.log('starting PHP Phan language server');
-    // Create the language client and start the client.
-    for (const dirToAnalyze of analyzedProjectDirectories) {
+    for (const client of languageClients) {
         // Push the disposable to the context's subscriptions so that the
         // client can be deactivated on extension deactivation
-        context.subscriptions.push(createClient(dirToAnalyze).start());
+        context.subscriptions.push(client.start());
     }
 }
